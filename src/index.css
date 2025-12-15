@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode Tokens */
+    --bg: #ffffff;
+    --fg: #111827;
+    --muted: #6b7280;
+    --muted2: #f3f4f6;
+    --card: #f9fafb;
+    --border: #e5e7eb;
+    --surface: #ffffff;
+    --accent: #10b981; /* Mint Green */
+    --accent2: #111827; /* Dark Button */
+    
+    --shadow-soft: 0 4px 24px rgba(0,0,0,0.04);
+  }
+
+  .dark {
+    /* Dark Mode Tokens */
+    --bg: #030712; /* Deep Black/Blue */
+    --fg: #f9fafb;
+    --muted: #9ca3af;
+    --muted2: #1f2937;
+    --card: #111827;
+    --border: #1f2937;
+    --surface: #0b0f19;
+    --accent: #34d399;
+    --accent2: #ffffff; /* White Button in dark mode */
+    
+    --shadow-soft: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .glass {
+    background: rgba(var(--bg), 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg);
+}
