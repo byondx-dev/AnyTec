@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
               Bereit für das nächste Level deiner IT? Fülle das Formular aus und wir melden uns innerhalb von 24 Stunden.
             </p>
             <div className="flex flex-wrap gap-6 text-sm font-medium text-fg">
-              <span className="flex items-center gap-2"><Clock size={16} className="text-accent"/> Antwort < 24h</span>
+              <span className="flex items-center gap-2"><Clock size={16} className="text-accent"/> Antwort {'< 24h'}</span>
               <span className="flex items-center gap-2"><CheckCircle size={16} className="text-accent"/> Unverbindliches Erstgespräch</span>
             </div>
           </Reveal>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, Cloud, Globe, Lock, ShieldCheck, Store, CreditCard, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight } from 'lucide-react';
+import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 import { PixelVisual } from '@/components/visuals/PixelVisual';
@@ -268,65 +268,6 @@ const Home: React.FC = () => {
                Wir bieten Plug-and-Play Lösungen für moderne Unternehmen. Von der POS-Integration im Café bis zur sicheren Netzwerk-Architektur für internationale Büros.
              </p>
           </Reveal>
-        </div>
-      </section>
-
-      {/* 4. Benefits Grid */}
-      <section id="features" className="py-32 bg-bg">
-        <div className="container mx-auto px-6">
-           <Reveal>
-             <div className="mb-16 md:mb-24 max-w-2xl">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Warum Any Tec <span className="text-muted/40">wählen?</span></h2>
-                <p className="text-muted text-lg">Unsere Infrastruktur wächst mit deinem Business. Keine Kompromisse bei Sicherheit und Geschwindigkeit.</p>
-             </div>
-           </Reveal>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              <Reveal delay={0.1}>
-                <FeatureCard 
-                  title="Cloud Foundation" 
-                  desc="Solide Microsoft Cloud Basis für moderne Zusammenarbeit, egal von wo. Teams, Exchange und SharePoint perfekt konfiguriert." 
-                  icon={Cloud} 
-                />
-              </Reveal>
-              <Reveal delay={0.2}>
-                <FeatureCard 
-                  title="Multi-Location Rollouts" 
-                  desc="Standardisierte Setups für Franchise & Filialen. Einmal planen, in Lichtgeschwindigkeit überall ausrollen." 
-                  icon={Globe} 
-                  image={true}
-                />
-              </Reveal>
-              <Reveal delay={0.3}>
-                <FeatureCard 
-                  title="Branchen-Blueprints" 
-                  desc="Vorkonfigurierte Pakete für Retail, Gastro, Yoga-Studios und Open Workspaces. Best Practices inklusive." 
-                  icon={Store} 
-                />
-              </Reveal>
-              <Reveal delay={0.4}>
-                <FeatureCard 
-                  title="POS & Payment" 
-                  desc="Nahtlose Integration moderner Kassensysteme. Getrennte VLANs für maximale Transaktions-Sicherheit." 
-                  icon={CreditCard} 
-                />
-              </Reveal>
-              <Reveal delay={0.5}>
-                <FeatureCard 
-                  title="Security & Compliance" 
-                  desc="Datenschutz nach DSGVO. Wir kümmern uns um Updates, Firewalls und Access Management." 
-                  icon={ShieldCheck} 
-                />
-              </Reveal>
-              <Reveal delay={0.6}>
-                <FeatureCard 
-                  title="Privacy-First Spaces" 
-                  desc="Spezielle Netzwerktrennung für Women-Only Spaces und sensible Bereiche. Physische und digitale Sicherheit." 
-                  icon={Lock} 
-                  image={true}
-                />
-              </Reveal>
-           </div>
         </div>
       </section>
 
