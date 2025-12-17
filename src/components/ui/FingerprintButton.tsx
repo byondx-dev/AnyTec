@@ -30,8 +30,8 @@ const FingerprintButton = ({ onPressChange }: { onPressChange?: (pressed: boolea
             <div className="relative">
                 <motion.div
                     className={cn(
-                        "w-16 h-16 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 text-accent transition-colors duration-300",
-                        isPressed ? "bg-accent text-black border-transparent shadow-[0_0_30px_rgba(34,211,238,0.6)]" : "group-hover:bg-accent/20 group-hover:border-accent/50"
+                        "w-16 h-16 rounded-full border border-accent/30 flex items-center justify-center bg-accent/10 text-accent transition-colors duration-300 relative overflow-hidden",
+                        isPressed ? "border-transparent text-white" : "group-hover:bg-accent/20 group-hover:border-accent/50"
                     )}
                     animate={!isPressed ? {
                         boxShadow: [
@@ -39,14 +39,39 @@ const FingerprintButton = ({ onPressChange }: { onPressChange?: (pressed: boolea
                             "0 0 15px rgba(34,211,238,0.3)",
                             "0 0 0px rgba(34,211,238,0)"
                         ]
-                    } : {}}
+                    } : {
+                        boxShadow: "0 0 30px rgba(34,211,238,0.6)"
+                    }}
                     transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
+                        boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
                     }}
                 >
-                    <Fingerprint size={32} strokeWidth={1.5} />
+                    {/* Aurora Background Effect */}
+                    <motion.div
+                        className="absolute inset-0 opacity-0"
+                        initial={{ opacity: 0 }}
+                        animate={{
+                            opacity: isPressed ? 1 : 0,
+                            rotate: isPressed ? 360 : 0
+                        }}
+                        transition={{
+                            opacity: { duration: 0.5, ease: "easeInOut" },
+                            rotate: { duration: 4, repeat: Infinity, ease: "linear" }
+                        }}
+                        style={{
+                            background: "conic-gradient(from 0deg, transparent 0deg, #0ea5e9 180deg, transparent 360deg)",
+                            filter: "blur(8px)"
+                        }}
+                    />
+
+                    {/* Inner Aurora - more intense blue/cyan mix */}
+                    <motion.div
+                        className="absolute inset-0 bg-gradient-to-tr from-cyan-500 via-blue-500 to-purple-500 opacity-0"
+                        animate={{ opacity: isPressed ? 0.8 : 0 }}
+                        transition={{ duration: 0.8 }}
+                    />
+
+                    <Fingerprint size={32} strokeWidth={1.5} className="relative z-10" />
                 </motion.div>
 
                 {/* Ripple Effect Ring (behind) */}
