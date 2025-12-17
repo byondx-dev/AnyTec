@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight } from 'lucide-react';
@@ -10,8 +10,57 @@ import { ReadyToWorkSection } from '@/components/home/ReadyToWorkSection';
 import RotatingText from '@/components/text/RotatingText';
 import Hyperspeed from '@/components/Hyperspeed/Hyperspeed';
 import { hyperspeedPresets } from '@/components/Hyperspeed/hyperspeedPresets';
+import { useTheme } from '@/context/ThemeContext';
+import LogoLoop from '@/components/ui/LogoLoop';
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiVite, SiPostgresql, SiDocker, SiLinux,
+  SiPython, SiAtlassian,
+  SiVmware, SiAmazon, SiKubernetes, SiAnsible, SiTerraform, SiWireshark,
+  SiOracle, SiMysql, SiMongodb, SiRedis, SiSlack, SiGithub, SiGitlab, SiJenkins, SiGrafana, SiPrometheus,
+  SiNginx, SiSalesforce, SiSap, SiAdobe, SiIntel, SiNvidia, SiCloudflare, SiVercel, SiStripe, SiFigma
+} from 'react-icons/si';
+import FingerprintButton from '@/components/ui/FingerprintButton';
 
 const NOISE_SVG = `data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E`;
+
+const techLogos = [
+  { node: <SiReact className="text-[#61DAFB]" />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs className="text-fg dark:text-white" />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript className="text-[#3178C6]" />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss className="text-[#06B6D4]" />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiVite className="text-[#646CFF]" />, title: "Vite", href: "https://vitejs.dev" },
+  { node: <SiPostgresql className="text-[#4169E1]" />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+  { node: <SiDocker className="text-[#2496ED]" />, title: "Docker", href: "https://www.docker.com" },
+  { node: <SiLinux className="text-fg dark:text-white" />, title: "Linux", href: "https://www.linux.org" },
+  { node: <SiPython className="text-[#3776AB]" />, title: "Python", href: "https://www.python.org" },
+  { node: <SiAtlassian className="text-[#0052CC]" />, title: "Atlassian", href: "https://www.atlassian.com" },
+  { node: <SiVmware className="text-[#607078]" />, title: "VMware", href: "https://www.vmware.com" },
+  { node: <SiAmazon className="text-[#FF9900]" />, title: "AWS", href: "https://aws.amazon.com" },
+  { node: <SiKubernetes className="text-[#326CE5]" />, title: "Kubernetes", href: "https://kubernetes.io" },
+  { node: <SiAnsible className="text-[#EE0000]" />, title: "Ansible", href: "https://www.ansible.com" },
+  { node: <SiTerraform className="text-[#7B42BC]" />, title: "Terraform", href: "https://www.terraform.io" },
+  { node: <SiWireshark className="text-[#1679A7]" />, title: "Wireshark", href: "https://www.wireshark.org" },
+  { node: <SiOracle className="text-[#F80000]" />, title: "Oracle", href: "https://www.oracle.com" },
+  { node: <SiMysql className="text-[#4479A1]" />, title: "MySQL", href: "https://www.mysql.com" },
+  { node: <SiMongodb className="text-[#47A248]" />, title: "MongoDB", href: "https://www.mongodb.com" },
+  { node: <SiRedis className="text-[#DC382D]" />, title: "Redis", href: "https://redis.io" },
+  { node: <SiSlack className="text-[#4A154B]" />, title: "Slack", href: "https://slack.com" },
+  { node: <SiGithub className="text-fg dark:text-white" />, title: "GitHub", href: "https://github.com" },
+  { node: <SiGitlab className="text-[#FC6D26]" />, title: "GitLab", href: "https://about.gitlab.com" },
+  { node: <SiJenkins className="text-[#D24939]" />, title: "Jenkins", href: "https://www.jenkins.io" },
+  { node: <SiGrafana className="text-[#F46800]" />, title: "Grafana", href: "https://grafana.com" },
+  { node: <SiPrometheus className="text-[#E6522C]" />, title: "Prometheus", href: "https://prometheus.io" },
+  { node: <SiNginx className="text-[#009639]" />, title: "Nginx", href: "https://nginx.org" },
+  { node: <SiSalesforce className="text-[#00A1E0]" />, title: "Salesforce", href: "https://www.salesforce.com" },
+  { node: <SiSap className="text-[#0FABCC]" />, title: "SAP", href: "https://www.sap.com" },
+  { node: <SiAdobe className="text-[#FF0000]" />, title: "Adobe", href: "https://www.adobe.com" },
+  { node: <SiIntel className="text-[#0068B5]" />, title: "Intel", href: "https://www.intel.com" },
+  { node: <SiNvidia className="text-[#76B900]" />, title: "Nvidia", href: "https://www.nvidia.com" },
+  { node: <SiCloudflare className="text-[#F38020]" />, title: "Cloudflare", href: "https://www.cloudflare.com" },
+  { node: <SiVercel className="text-fg dark:text-white" />, title: "Vercel", href: "https://vercel.com" },
+  { node: <SiStripe className="text-[#008CDD]" />, title: "Stripe", href: "https://stripe.com" },
+  { node: <SiFigma className="text-[#F24E1E]" />, title: "Figma", href: "https://www.figma.com" },
+];
 
 // --- Sub-components for Home Sections ---
 
@@ -132,7 +181,7 @@ const InteractiveModule = () => {
               {activeStep === step.id && (
                 <motion.div
                   layoutId="active-pill"
-                  className="absolute left-0 top-0 bottom-0 w-1 bg-accent shadow-[0_0_10px_currentColor]"
+                  className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-accent shadow-[0_0_10px_currentColor]"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -169,10 +218,10 @@ const AccordionItem = ({ question, answer }: { question: string, answer: string 
         className="w-full py-6 flex items-center justify-between text-left group outline-none"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className={cn("text-lg font-medium transition-colors duration-300 pr-8", isOpen ? "text-accent" : "text-fg group-hover:text-muted")}>{question}</span>
+        <span className={cn("text-lg font-medium transition-colors duration-300 pr-8", isOpen ? "text-gradient-accent" : "text-fg group-hover:text-muted")}>{question}</span>
         <div className={cn(
           "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-          isOpen ? "bg-accent text-white rotate-180" : "bg-muted2 text-muted group-hover:bg-muted"
+          isOpen ? "bg-gradient-accent text-white rotate-180" : "bg-muted2 text-muted group-hover:bg-muted"
         )}>
           <ChevronDown size={16} />
         </div>
@@ -190,47 +239,99 @@ const AccordionItem = ({ question, answer }: { question: string, answer: string 
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const [isFingerprintPressed, setIsFingerprintPressed] = useState(false);
+
+  // Custom colors for Light Mode to match white background
+  const currentEffectOptions = useMemo(() => {
+    const lightModeColors = {
+      roadColor: 0xffffff,
+      islandColor: 0xffffff,
+      background: 0xffffff,
+      shoulderLines: 0xe5e7eb,
+      brokenLines: 0xe5e7eb,
+      leftCars: [0xff0080, 0x7928ca, 0xff0080],
+      rightCars: [0x00C6FF, 0x0072FF, 0x00C6FF],
+      sticks: 0x00C6FF
+    };
+
+    return {
+      ...hyperspeedPresets.one,
+      colors: theme === 'light' ? lightModeColors : hyperspeedPresets.one.colors
+    };
+  }, [theme]);
 
   return (
     <div className="overflow-hidden">
-
-      {/* 2. Hero Section */}
-      {/* 2. Hero Section */}
-      <section className="relative min-h-[85vh] lg:min-h-[92vh] flex items-center pt-12 lg:pt-20">
+      {/* 2. Hero Section - With Overflow Hidden */}
+      <section className="relative min-h-[85vh] lg:min-h-[92vh] flex items-center pt-12 lg:pt-20 overflow-hidden">
         {/* Hyperspeed Background */}
-        <div className="absolute inset-0 z-0">
-          <Hyperspeed effectOptions={hyperspeedPresets.one} />
-        </div>
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 4.0, ease: "easeInOut" }}
+          key={theme} // Force re-render when theme changes
+        >
+          <Hyperspeed effectOptions={currentEffectOptions} isSpeedingUp={isFingerprintPressed} />
+        </motion.div>
 
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="order-2 lg:order-1 relative z-20">
-            <Reveal>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-wider mb-8">
-                Any Tec
-              </div>
-            </Reveal>
+        <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+          <div className="max-w-4xl relative z-20 flex flex-col items-center">
             <Reveal delay={0.1}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-8 text-balance -tracking-wide">
-                Cloud-Services <br />& IT-Setups, die <br />einfach <span className="text-muted/40">laufen.</span>
+                Any Tec <br /> kümmert sich um <br />Any <span className="text-muted/40">Tec.</span>
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="text-lg md:text-xl text-muted mb-10 max-w-lg leading-relaxed">
+              <p className="text-lg md:text-xl text-muted mb-10 max-w-2xl mx-auto leading-relaxed">
                 Maßgeschneiderte IT-Infrastruktur für Einzelstandorte und Franchise-Ketten. Skalierbar, sicher und sofort einsatzbereit.
               </p>
             </Reveal>
             <Reveal delay={0.3}>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="h-14 px-8 text-base shadow-lg shadow-accent/20" onClick={() => navigate('/kontakt')}>Erstgespräch buchen</Button>
-                <Button size="lg" variant="secondary" className="h-14 px-8 text-base" onClick={() => navigate('/kontakt')}>Mit Expert:in sprechen</Button>
+              <div className="flex flex-col items-center gap-10">
+                <div className="flex flex-wrap gap-4 justify-center">
+                  <Button size="lg" className="h-14 px-8 text-base shadow-lg shadow-accent/20" onClick={() => navigate('/kontakt')}>Erstgespräch buchen</Button>
+                  <Button size="lg" variant="secondary" className="h-14 px-8 text-base" onClick={() => navigate('/kontakt')}>Mit Expert:in sprechen</Button>
+                </div>
+
+                {/* Fingerprint Button */}
+                <div className="md:hidden">
+                  <FingerprintButton onPressChange={setIsFingerprintPressed} />
+                </div>
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
 
-          {/* Abstract Visual */}
-          <div className="hidden lg:flex order-1 lg:order-2 lg:h-[650px] relative items-center justify-center">
-            {/* Removed PixelVisual for Hyperspeed visibility */}
-          </div>
+      {/* 2.5 Logo Loop Section */}
+      <section className="py-10 border-b border-border/40 bg-background/50 backdrop-blur-sm overflow-hidden flex flex-col items-center gap-6 text-center">
+        <div className="container mx-auto px-6">
+          <span className="text-sm font-semibold text-muted uppercase tracking-widest opacity-70">Wir arbeiten mit</span>
+        </div>
+
+        <div className="w-full">
+          <Reveal delay={0.1} width="100%">
+            <div className="w-full opacity-80 hover:opacity-100 transition-opacity">
+              <LogoLoop
+                logos={techLogos}
+                speed={60}
+                direction="left"
+                logoHeight={38}
+                gap={60}
+                hoverSpeed={30}
+                scaleOnHover
+                fadeOut
+                fadeOutColor={theme === 'light' ? "#ffffff" : "#030712"}
+                ariaLabel="Technology partners"
+              />
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="container mx-auto px-6">
+          <span className="text-xs font-bold text-transparent select-none opacity-1">Tools</span>
         </div>
       </section>
 
@@ -265,7 +366,7 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-6 text-center max-w-4xl relative z-10">
           <Reveal>
             <div className="w-16 h-16 mx-auto bg-surface rounded-2xl shadow-soft flex items-center justify-center mb-10 border border-border">
-              <span className="font-bold text-accent text-xl">IT</span>
+              <span className="font-bold text-gradient-accent text-xl">IT</span>
             </div>
             <div className="inline-block px-4 py-1.5 rounded-full border border-border bg-bg/50 backdrop-blur text-xs font-semibold text-muted mb-8 tracking-wide uppercase">
               Über Any Tec
@@ -401,13 +502,13 @@ const Home: React.FC = () => {
                 <div className="absolute top-0 right-0 p-6 opacity-[0.03] text-accent group-hover:opacity-10 transition-opacity duration-500 scale-150 origin-top-right">
                   <Cpu size={120} />
                 </div>
-                <h3 className="font-bold text-xl mb-4 text-accent">Any Tec Blueprint</h3>
+                <h3 className="font-bold text-xl mb-4 text-gradient-accent">Any Tec Blueprint</h3>
                 <p className="text-sm text-muted mb-8 leading-relaxed">Ganzheitliche Architektur. Proaktives Monitoring und skalierbare Standard-Prozesse.</p>
 
                 {/* Visual Nodes */}
                 <div className="relative h-40 flex items-center justify-center">
                   {/* Central Node */}
-                  <div className="absolute w-14 h-14 bg-accent rounded-2xl shadow-lg shadow-accent/40 z-10 flex items-center justify-center text-white">
+                  <div className="absolute w-14 h-14 bg-gradient-accent rounded-2xl shadow-lg shadow-accent/40 z-10 flex items-center justify-center text-white">
                     <Check size={28} strokeWidth={3} />
                   </div>
                   {/* Satellite Nodes */}
@@ -501,7 +602,7 @@ const Home: React.FC = () => {
           <Reveal>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">Sprich mit uns über dein Projekt</h2>
             <p className="text-gray-400 mb-12 text-lg md:text-xl">Keine Warteschleifen. Echte Experten. Sofortige Lösungen.</p>
-            <Button size="lg" className="h-16 px-10 text-lg bg-accent text-black hover:bg-accent/90 shadow-[0_0_40px_rgba(59,130,246,0.35)] transition-all hover:scale-105" onClick={() => navigate('/kontakt')}>
+            <Button size="lg" className="h-16 px-10 text-lg bg-gradient-accent text-white hover:opacity-90 shadow-[0_0_40px_rgba(59,130,246,0.35)] transition-all hover:scale-105" onClick={() => navigate('/kontakt')}>
               Erstgespräch buchen
             </Button>
           </Reveal>

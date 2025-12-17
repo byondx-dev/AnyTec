@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
     )}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold tracking-tight">
+        <Link to="/" className="text-xl font-bold tracking-tight animate-shine">
           Any Tec
         </Link>
 

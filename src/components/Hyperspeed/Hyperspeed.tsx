@@ -270,7 +270,7 @@ const distortions: Distortions = {
                 0
             );
             const lookAtAmp = new THREE.Vector3(-2, -5, 0);
-            const lookAtOffset = new THREE.Vector3(0, -3, -10);
+            const lookAtOffset = new THREE.Vector3(0, -6, -10); // Pitched down more (was -3)
             return distortion.multiply(lookAtAmp).add(lookAtOffset);
         }
     },
@@ -1232,7 +1232,7 @@ class App {
     }
 }
 
-const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {} }) => {
+const Hyperspeed: FC<HyperspeedProps & { isSpeedingUp?: boolean }> = ({ effectOptions = {}, isSpeedingUp = false }) => {
     const mergedOptions: HyperspeedOptions = useMemo(() => ({
         ...defaultOptions,
         ...effectOptions
@@ -1240,6 +1240,20 @@ const Hyperspeed: FC<HyperspeedProps> = ({ effectOptions = {} }) => {
 
     const hyperspeed = useRef<HTMLDivElement>(null);
     const appRef = useRef<App | null>(null);
+
+    // Watch external speedup trigger
+    useEffect(() => {
+        if (!appRef.current) return;
+
+        const app = appRef.current;
+        if (isSpeedingUp) {
+            app.fovTarget = app.options.fovSpeedUp;
+            app.speedUpTarget = app.options.speedUp;
+        } else {
+            app.fovTarget = app.options.fov;
+            app.speedUpTarget = 0;
+        }
+    }, [isSpeedingUp]);
 
     useEffect(() => {
         const container = hyperspeed.current;

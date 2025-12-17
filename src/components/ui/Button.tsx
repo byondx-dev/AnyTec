@@ -6,15 +6,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Button: React.FC<ButtonProps> = ({ 
-  className, 
-  variant = 'primary', 
-  size = 'md', 
-  children, 
-  ...props 
+export const Button: React.FC<ButtonProps> = ({
+  className,
+  variant = 'primary',
+  size = 'md',
+  children,
+  ...props
 }) => {
   const variants = {
-    primary: 'bg-accent text-white hover:opacity-90 dark:bg-accent dark:text-black',
+    primary: 'bg-gradient-accent text-white hover:opacity-90 dark:text-white',
     secondary: 'bg-accent2 text-white hover:opacity-90 dark:bg-white dark:text-black',
     ghost: 'bg-transparent text-fg hover:bg-muted2',
   };

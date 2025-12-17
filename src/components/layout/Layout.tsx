@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { ScrollToTopButton } from '../ui/ScrollToTopButton';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { SetupSelectionProvider } from '@/context/SetupSelectionContext';
 
@@ -13,6 +14,7 @@ export const Layout: React.FC = () => {
           <Outlet />
         </main>
         <Footer />
+        <ScrollToTopButton />
         <ScrollRestoration />
       </div>
     </SetupSelectionProvider>
