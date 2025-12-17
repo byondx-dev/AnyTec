@@ -20,6 +20,8 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Startseite', to: '/' },
+    { name: 'Setups', to: '/setups' },
+    { name: 'Artikel', to: '/artikel' },
     { name: 'Kontakt', to: '/kontakt' },
   ];
 
