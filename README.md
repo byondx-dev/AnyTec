@@ -1,4 +1,4 @@
-# Any Tec Marketing Website
+# Any Tec 
 
 A production-ready React marketing website for "Any Tec" IT Services.
 
