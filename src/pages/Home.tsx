@@ -21,7 +21,7 @@ import {
 } from 'react-icons/si';
 import FingerprintButton from '@/components/ui/FingerprintButton';
 
-const NOISE_SVG = `data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E`;
+
 
 const techLogos = [
   { node: <SiReact className="text-[#61DAFB]" />, title: "React", href: "https://react.dev" },
@@ -64,42 +64,7 @@ const techLogos = [
 
 // --- Sub-components for Home Sections ---
 
-const FeatureCard = ({ title, desc, icon: Icon, image }: { title: string, desc: string, icon?: any, image?: boolean }) => (
-  <motion.div
-    whileHover={{ y: -5 }}
-    className={cn(
-      "rounded-[28px] overflow-hidden relative border border-border p-8 h-[320px] flex flex-col justify-between group bg-card transition-all duration-300",
-      image ? "text-white" : "text-fg hover:shadow-soft hover:border-accent/30"
-    )}
-  >
-    {image && (
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
-        {/* Abstract pattern placeholder */}
-        <div className="w-full h-full bg-neutral-900 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-[80px] translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] -translate-x-1/2 translate-y-1/2"></div>
-          {/* Grid overlay for image cards */}
-          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `url("${NOISE_SVG}")` }}></div>
-        </div>
-      </div>
-    )}
 
-    <div className="relative z-10">
-      {Icon && <div className={cn(
-        "w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-colors",
-        image ? "bg-white/10 text-white backdrop-blur-md" : "bg-muted2 dark:bg-white/5 text-fg group-hover:bg-accent/10 group-hover:text-accent"
-      )}>
-        <Icon size={24} />
-      </div>}
-    </div>
-
-    <div className="relative z-10">
-      <h3 className="text-xl font-bold mb-3 tracking-tight group-hover:text-accent transition-colors duration-300">{title}</h3>
-      <p className={cn("text-sm leading-relaxed", image ? "text-gray-300" : "text-muted")}>{desc}</p>
-    </div>
-  </motion.div>
-);
 
 const AnimateHeight = ({ isVisible, children }: { isVisible: boolean, children?: React.ReactNode }) => (
   <motion.div
@@ -257,7 +222,8 @@ const Home: React.FC = () => {
 
     return {
       ...hyperspeedPresets.one,
-      colors: theme === 'light' ? lightModeColors : hyperspeedPresets.one.colors
+      colors: theme === 'light' ? lightModeColors : hyperspeedPresets.one.colors,
+      roadOpacity: theme === 'light' ? 0.3 : 1.0,
     };
   }, [theme]);
 
@@ -336,7 +302,8 @@ const Home: React.FC = () => {
       </section>
 
       {/* 3. Statement Section */}
-      <section className="py-32 relative bg-card/50">
+      {/* 3. Statement / Services Link Services */}
+      <section className="py-32 relative bg-card/50 overflow-hidden">
         {/* Animated Circuit Lines */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none text-border">
           <svg className="w-full h-full absolute inset-0" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -350,16 +317,6 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 2.5, ease: "easeInOut" }}
             />
-            <motion.path
-              d="M100 30 Q 70 30 50 50 T 0 70"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="0.2"
-              initial={{ pathLength: 0, opacity: 0, rotate: 0 }}
-              whileInView={{ pathLength: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 2.5, ease: "easeInOut", delay: 0.2 }}
-            />
           </svg>
         </div>
 
@@ -369,14 +326,17 @@ const Home: React.FC = () => {
               <span className="font-bold text-gradient-accent text-xl">IT</span>
             </div>
             <div className="inline-block px-4 py-1.5 rounded-full border border-border bg-bg/50 backdrop-blur text-xs font-semibold text-muted mb-8 tracking-wide uppercase">
-              Über Any Tec
+              Unsere Services
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-              High-Performance IT. <br />Sicher & <span className="text-muted/40">skalierbar.</span>
+              Cloud, On-Prem & <br /><span className="text-muted/40">alles dazwischen.</span>
             </h2>
-            <p className="text-muted text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-              Wir bieten Plug-and-Play Lösungen für moderne Unternehmen. Von der POS-Integration im Café bis zur sicheren Netzwerk-Architektur für internationale Büros.
+            <p className="text-muted text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
+              Wir bieten das volle Spektrum: Von Azure und M365 bis zum physischen Server-Rack vor Ort. Alles aus einer Hand.
             </p>
+            <Button variant="ghost" size="lg" className="rounded-full px-8 border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent" onClick={() => navigate('/services')}>
+              Alle Services ansehen <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
           </Reveal>
         </div>
       </section>

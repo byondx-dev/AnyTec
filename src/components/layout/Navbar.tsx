@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Search } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '../ui/Button';
 import { cn } from '@/utils/cn';
+import { NAV_LINKS } from '@/config/navigation';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,13 +19,6 @@ export const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Startseite', to: '/' },
-    { name: 'Setups', to: '/setups' },
-    { name: 'Artikel', to: '/artikel' },
-    { name: 'Kontakt', to: '/kontakt' },
-  ];
 
   return (
     <nav className={cn(
@@ -38,11 +33,21 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link key={link.name} to={link.to} className="text-sm font-medium text-muted hover:text-fg transition-colors">
-              {link.name}
-            </Link>
-          ))}
+          {NAV_LINKS.filter(link => link.name !== 'Kontakt').map((link) => {
+            const isActive = location.pathname === link.to;
+            return (
+              <Link
+                key={link.name}
+                to={link.to}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-fg",
+                  isActive ? "text-fg font-semibold" : "text-muted"
+                )}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Desktop Actions */}
@@ -51,7 +56,6 @@ export const Navbar: React.FC = () => {
             <Search size={20} />
           </button>
           <ThemeToggle />
-          <Button variant="ghost" onClick={() => navigate('/kontakt')}>Kontakt</Button>
           <Button onClick={() => navigate('/kontakt')}>Erstgespräch buchen</Button>
         </div>
 
@@ -65,22 +69,24 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-bg border-b border-border p-6 shadow-xl animate-in slide-in-from-top-5">
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link key={link.name} to={link.to} className="text-lg font-medium text-fg py-2" onClick={() => setIsOpen(false)}>
-                {link.name}
-              </Link>
-            ))}
-            <div className="h-px bg-border my-2" />
-            <Button className="w-full" onClick={() => {
-              navigate('/kontakt');
-              setIsOpen(false);
-            }}>Erstgespräch buchen</Button>
+      {
+        isOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-bg border-b border-border p-6 shadow-xl animate-in slide-in-from-top-5">
+            <div className="flex flex-col gap-4">
+              {NAV_LINKS.filter(link => link.name !== 'Kontakt').map((link) => (
+                <Link key={link.name} to={link.to} className="text-lg font-medium text-fg py-2" onClick={() => setIsOpen(false)}>
+                  {link.name}
+                </Link>
+              ))}
+              <div className="h-px bg-border my-2" />
+              <Button className="w-full" onClick={() => {
+                navigate('/kontakt');
+                setIsOpen(false);
+              }}>Erstgespräch buchen</Button>
+            </div>
           </div>
-        </div>
-      )}
-    </nav>
+        )
+      }
+    </nav >
   );
 };

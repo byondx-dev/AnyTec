@@ -51,6 +51,7 @@ export interface HyperspeedOptions {
     carFloorSeparation: [number, number];
     colors: Colors;
     isHyper?: boolean;
+    roadOpacity?: number;
 }
 
 export interface HyperspeedProps {
@@ -92,7 +93,8 @@ const defaultOptions: HyperspeedOptions = {
         leftCars: [0xd856bf, 0x6750a2, 0xc247ac],
         rightCars: [0x03b3c3, 0x0e5ea5, 0x324555],
         sticks: 0x03b3c3
-    }
+    },
+    roadOpacity: 1.0,
 };
 
 function nsin(val: number) {
@@ -538,6 +540,7 @@ const sideSticksFragment = `
 const roadBaseFragment = `
   varying vec2 vUv; 
   uniform vec3 uColor;
+  uniform float uOpacity;
   uniform float uTime;
   #include <roadMarkings_vars>
   ${fogParsF}
@@ -545,7 +548,7 @@ const roadBaseFragment = `
     vec2 uv = vUv;
     vec3 color = vec3(uColor);
     #include <roadMarkings_fragment>
-    gl_FragColor = vec4(color, 1.);
+    gl_FragColor = vec4(color, uOpacity);
     ${fogF}
   }
 `;
@@ -854,6 +857,9 @@ class Road {
             uColor: {
                 value: new THREE.Color(isRoad ? options.colors.roadColor : options.colors.islandColor)
             },
+            uOpacity: {
+                value: (options as any).roadOpacity !== undefined ? (options as any).roadOpacity : 1.0
+            },
             uTime: this.uTime
         };
 
@@ -889,6 +895,7 @@ class Road {
             vertexShader: vertexShader,
             side: THREE.DoubleSide,
             fog: true,
+            transparent: true,
             uniforms: Object.assign(
                 uniforms,
                 this.webgl.fogUniforms,
@@ -983,7 +990,7 @@ class App {
         this.camera.position.x = 0;
 
         this.scene = new THREE.Scene();
-        this.scene.background = null;
+        this.scene.background = new THREE.Color(options.colors.background);
 
         const fog = new THREE.Fog(options.colors.background, options.length * 0.2, options.length * 500);
         this.scene.fog = fog;

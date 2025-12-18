@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import {
+  Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  Utensils,
+  ShoppingBag,
+  Flower2,
+  Briefcase,
+  Clapperboard,
+  Scissors,
+  Globe
+} from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import ColorBends from '@/components/visuals/ColorBends';
 import { Button } from '@/components/ui/Button';
 import { useSetupSelection } from '@/context/SetupSelectionContext';
+import { useTheme } from '@/context/ThemeContext';
+import gastroImg from '@/assets/gastro_setup.png';
+import wellnessImg from '@/assets/wellness_setup.png';
+import retailImg from '@/assets/retail_setup.png';
+import workspaceImg from '@/assets/workspace_setup.png';
+import salonImg from '@/assets/salon_setup.png';
+import entertainmentImg from '@/assets/entertainment_setup.png';
+import onlineStoreImg from '@/assets/onlinestore_setup.png';
+
+type GalleryItem = string | { type: 'image'; src: string };
 
 type ReadyCard = {
   title: string;
   subtitle: string;
   bullets: string[];
   backBullets: string[];
+  images: GalleryItem[];
+  icon: React.ElementType;
 };
 
 const setups: ReadyCard[] = [
@@ -19,42 +42,56 @@ const setups: ReadyCard[] = [
     subtitle: 'Restaurant + Café',
     bullets: ['POS + Payment VLAN', 'Gast-WLAN & Kamera-Ready'],
     backBullets: ['Rollout in 72h', 'HACCP konform', '24/7 Monitoring'],
+    images: [{ type: 'image', src: gastroImg }, 'Gast-Netzwerk'],
+    icon: Utensils,
   },
   {
     title: 'Retail Setup',
     subtitle: 'Kleidung & Supermarkt',
     bullets: ['Scanner + Kassen', 'Zentrale Updates'],
     backBullets: ['Inventur-Ready', 'Kassen-Segmentierung', 'Bondrucker angebunden'],
+    images: [{ type: 'image', src: retailImg }, 'Lager & Logistik'],
+    icon: ShoppingBag,
   },
   {
     title: 'Wellness Setup',
     subtitle: 'Sport & Yoga',
     bullets: ['Wearables-Ready WLAN', 'Privacy-Zonen'],
     backBullets: ['Self-Check-in', 'Kameras sicher getrennt', 'App-Integration'],
+    images: [{ type: 'image', src: wellnessImg }, 'Trainingsfläche'],
+    icon: Flower2,
   },
   {
     title: 'Workspace Setup',
     subtitle: 'Open Workspace',
     bullets: ['Zero Trust light', 'Sichere Gästennetze'],
     backBullets: ['Hotdesk-Management', 'Drucker isoliert', 'Onboarding Journeys'],
+    images: [{ type: 'image', src: workspaceImg }, 'Meeting Rooms'],
+    icon: Briefcase,
   },
   {
     title: 'Entertainment Setup',
     subtitle: 'Cinema',
     bullets: ['Ticketing + POS getrennt', 'Public WiFi stabil'],
     backBullets: ['Fallback LTE', 'Content Filter', 'Operator Dashboard'],
+    images: [{ type: 'image', src: entertainmentImg }, 'Foyer & Ticket'],
+    icon: Clapperboard,
   },
   {
     title: 'Salon Setup',
     subtitle: 'Friseur',
     bullets: ['Kalender + Kassensystem', 'Zonen für Gäste'],
     backBullets: ['Schneller Support', 'Geräteverwaltung', 'Termin-App Connect'],
+    images: [{ type: 'image', src: salonImg }, 'Waschplätze', 'Rezeption'],
+    icon: Scissors,
   },
   {
     title: 'Online Store Setup',
     subtitle: 'Dropshipper/Shop',
     bullets: ['Headless-ready', 'Monitoring & Alerts'],
     backBullets: ['CDN Tuning', 'Payment Routing', 'Backup & Restore'],
+    images: [{ type: 'image', src: onlineStoreImg }, 'Analytics'],
+    icon: Globe,
   },
 ];
 
@@ -68,9 +105,23 @@ const ReadyCardItem = ({
   flipped: boolean;
 }) => {
   const reduceMotion = useReducedMotion();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % item.images.length);
+  };
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + item.images.length) % item.images.length);
+  };
+
+  const currentItem = item.images[currentImageIndex];
+  const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-[380px] mx-auto snap-center">
+    <div className="w-full max-w-[380px] mx-auto snap-center group/card">
       <div
         className="relative"
         style={{ perspective: '1200px' }}
@@ -91,63 +142,141 @@ const ReadyCardItem = ({
           transition={{ duration: 0.6, ease: [0.22, 0.68, 0, 1] }}
           style={{ transformStyle: 'preserve-3d' }}
         >
-          <div className="absolute inset-0 rounded-2xl border border-white/5 bg-white/[0.04] dark:bg-white/[0.02] backdrop-blur-md" />
+          {/* Front Side */}
           <div
-            className="relative p-6 rounded-2xl border border-border/60 bg-card/80 shadow-soft overflow-hidden min-h-[320px] sm:min-h-[360px]"
+            className="relative h-[480px] rounded-3xl overflow-hidden bg-black/95 dark:bg-white text-white dark:text-black shadow-xl"
             style={{
               backfaceVisibility: 'hidden',
               display: reduceMotion && flipped ? 'none' : 'block',
             }}
           >
-            <div className="absolute right-4 top-4 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold">
-              <span className="relative flex items-center">
-                <span className="absolute inset-0 rounded-full animate-ping bg-accent/50" aria-hidden />
-                <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-accent" />
-              </span>
-              Klick mich
+            {/* 1. Background Content (Slider) */}
+            <div className="absolute inset-0 z-0 h-full group/slider">
+              {typeof currentItem === 'string' ? (
+                <div className="w-full h-full bg-gradient-to-br from-gray-800 via-gray-900 to-black dark:from-gray-100 dark:via-gray-50 dark:to-white flex items-center justify-center">
+                  <span className="text-white/20 dark:text-black/10 text-4xl font-bold uppercase tracking-widest absolute top-1/3 transform -translate-y-1/2">
+                    {currentItem}
+                  </span>
+                </div>
+              ) : (
+                <img
+                  src={currentItem.src}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+              )}
+
+              {/* Slider Controls */}
+              {item.images.length > 1 && (
+                <>
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 text-white hover:bg-black/80 transition-all backdrop-blur-md opacity-0 group-hover/slider:opacity-100 shadow-md"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/40 text-white hover:bg-black/80 transition-all backdrop-blur-md opacity-0 group-hover/slider:opacity-100 shadow-md"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                  {/* Dots */}
+                  <div className="absolute top-1/2 mt-8 left-0 right-0 flex justify-center gap-1.5 z-20 opacity-0 group-hover/slider:opacity-100 transition-opacity">
+                    {item.images.map((_, idx) => (
+                      <div
+                        key={idx}
+                        className={`w-2 h-2 rounded-full transition-all shadow-sm ${idx === currentImageIndex ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/70'}`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent">
-                <Sparkles size={18} />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-wide text-muted font-semibold">{item.subtitle}</p>
-                <h3 className="text-lg font-bold">{item.title}</h3>
+
+            {/* 2. Gradient Overlay */}
+            <div className="absolute inset-x-0 bottom-0 h-[70%] z-10 pointer-events-none bg-gradient-to-t from-black via-black/80 to-transparent dark:from-white dark:via-white/90 dark:to-transparent" />
+
+            {/* 3. Top Content */}
+            <div className="absolute top-4 left-4 z-20">
+              <div className="w-10 h-10 rounded-full bg-white dark:bg-black flex items-center justify-center shadow-lg hover:scale-105 transition-transform">
+                <item.icon size={20} className="text-black dark:text-white" />
               </div>
             </div>
-            <ul className="space-y-2 text-sm text-muted">
-              {item.bullets.map((b) => (
-                <li key={b} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                  {b}
-                </li>
-              ))}
-            </ul>
+
+            <div className="absolute top-4 right-4 z-20">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-black text-black dark:text-white text-xs font-bold shadow-lg hover:scale-105 transition-transform">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                </span>
+                Klick mich
+              </div>
+            </div>
+
+            {/* 4. Bottom Content */}
+            <div className="absolute bottom-0 left-0 right-0 p-8 z-20 flex flex-col items-center text-center">
+              <p className="text-xs font-bold tracking-[0.2em] uppercase text-accent mb-2">{item.subtitle}</p>
+              <h3 className="text-2xl font-bold mb-6 text-white dark:text-black">{item.title}</h3>
+
+              <Link
+                to="/setups"
+                onClick={(e) => e.stopPropagation()}
+                className="group/btn relative inline-block px-8 py-3 rounded-full bg-white text-black dark:bg-black dark:text-white text-sm font-bold tracking-wide transition-all hover:scale-105 active:scale-95 shadow-lg shadow-white/10 dark:shadow-black/10"
+              >
+                Zu dem Angebot
+              </Link>
+            </div>
           </div>
 
+          {/* Back Side (Details) */}
           <div
-            className="absolute inset-0 p-6 rounded-2xl border border-border/60 bg-card/90 shadow-soft min-h-[320px] sm:min-h-[360px] overflow-hidden"
+            className="absolute inset-0 h-[480px] rounded-3xl overflow-hidden bg-black/95 dark:bg-white text-white dark:text-black p-8 shadow-xl"
             style={{
               transform: 'rotateY(180deg)',
               backfaceVisibility: 'hidden',
               display: reduceMotion && !flipped ? 'none' : 'block',
             }}
           >
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-lg font-bold">Details</h4>
-              <div className="px-3 py-1 rounded-full bg-muted2 text-xs font-semibold text-muted">
+            {/* Backplate for texture consistency */}
+            <div className="absolute inset-0 border border-white/10 dark:border-black/10 rounded-3xl pointer-events-none" />
+
+            <div className="flex items-center justify-between mb-6">
+              <h4 className="text-xl font-bold">Details</h4>
+              <div className="px-3 py-1 rounded-full bg-white/10 dark:bg-black/10 text-xs font-bold text-white/80 dark:text-black/80 uppercase tracking-wider">
                 Inklusive
               </div>
             </div>
-            <ul className="space-y-2 text-sm text-muted">
-              {item.backBullets.map((b) => (
-                <li key={b} className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                  {b}
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs text-muted mt-4">Enter oder Space drücken, um wieder umzudrehen.</p>
+
+            <div className="space-y-4">
+              <div>
+                <h5 className="text-xs font-bold uppercase tracking-wider text-white/40 dark:text-black/40 mb-2">Features</h5>
+                <ul className="space-y-3 text-sm font-medium text-white/90 dark:text-black/80">
+                  {item.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h5 className="text-xs font-bold uppercase tracking-wider text-white/40 dark:text-black/40 mb-2">Service</h5>
+                <ul className="space-y-3 text-sm font-medium text-white/90 dark:text-black/80">
+                  {item.backBullets.map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <p className="absolute bottom-8 left-0 right-0 text-center text-xs text-white/30 dark:text-black/30 font-medium">
+              Klicken zum Umdrehen
+            </p>
           </div>
         </motion.div>
       </div>
@@ -159,25 +288,58 @@ export const ReadyToWorkSection: React.FC = () => {
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
   const navigate = useNavigate();
   const { toggleSetup, selectedSetups } = useSetupSelection();
+  const { theme } = useTheme();
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const config = {
+    scale: isMobile ? 0.3 : 1, // Desktop: 1 (from screenshot)
+    speed: isMobile ? 0.2 : 0.2, // Desktop: 0.2
+    warpStrength: isMobile ? 1.0 : 1, // Desktop: 1
+    parallax: isMobile ? 0.2 : 0.5, // Desktop: 0.5
+    noise: isMobile ? 0.05 : 0.1 // Desktop: 0.1
+  };
 
   return (
-    <section className="relative py-24">
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    <section className="relative py-24 isolate">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Static fallback if WebGL fails */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,92,122,0.25),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(138,92,255,0.22),transparent_40%),radial-gradient(circle_at_50%_90%,rgba(0,255,209,0.22),transparent_40%)]" />
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(92, 203, 255, 0.25),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(7, 235, 235, 0.93),transparent_40%),radial-gradient(circle_at_50%_90%,rgba(0, 183, 255, 0.89),transparent_40%)]" />
+
+        {/* Theme-aware background - White in Light Mode */}
+        <div className={`absolute inset-0 transition-colors duration-500 ${theme === 'light' ? 'bg-white' : 'bg-transparent'}`} />
+
+        <div
+          className="absolute inset-0"
+          style={{
+            maskImage: isMobile
+              ? 'radial-gradient(circle at center, black 60%, transparent 100%)' // Circle for mobile (narrow aspect)
+              : 'radial-gradient(ellipse at center, black 50%, transparent 100%)',
+            WebkitMaskImage: isMobile
+              ? 'radial-gradient(circle at center, black 60%, transparent 100%)'
+              : 'radial-gradient(ellipse at center, black 50%, transparent 100%)',
+            mixBlendMode: theme === 'light' ? 'normal' : 'screen'
+          }}
+        >
           <ColorBends
-            colors={['#ff5c7a', '#8a5cff', '#00ffd1']}
-            rotation={30}
-            speed={0.3}
-            scale={1.2}
-            frequency={1.4}
-            warpStrength={1.2}
-            mouseInfluence={0.8}
-            parallax={0.6}
-            noise={0.08}
-            transparent={false}
-            className="opacity-100"
+            colors={['#37d7ff02', '#0062d1ff', '#0affd2']}
+            rotation={0}
+            speed={config.speed}
+            scale={config.scale}
+            frequency={1}
+            warpStrength={config.warpStrength}
+            mouseInfluence={1}
+            parallax={config.parallax}
+            noise={config.noise}
+            transparent={theme === 'light'}
+            className="opacity-50"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-bg/10 via-bg/20 to-bg/40" />
