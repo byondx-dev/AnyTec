@@ -109,6 +109,10 @@
   animation: shine 4s linear infinite;
 }
 
+.animate-pulse-slow {
+  animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 @keyframes aurora-spin {
   from {
     transform: rotate(0deg);
