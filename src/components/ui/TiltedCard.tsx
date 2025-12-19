@@ -87,7 +87,7 @@ export default function TiltedCard({
     return (
         <figure
             ref={ref}
-            className={`relative w-full h-full [perspective:800px] flex flex-col items-center justify-center ${className}`}
+            className={`relative w-full h-full ${rotateAmplitude === 0 ? '' : '[perspective:800px]'} flex flex-col items-center justify-center ${className}`}
             style={{
                 height: containerHeight,
                 width: containerWidth
