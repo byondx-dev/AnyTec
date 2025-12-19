@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Search } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
@@ -69,10 +70,16 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      {
-        isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-bg border-b border-border p-6 shadow-xl animate-in slide-in-from-top-5">
-            <div className="flex flex-col gap-4">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden absolute top-full left-0 right-0 bg-bg border-b border-border px-6 py-2 shadow-xl overflow-hidden"
+          >
+            <div className="flex flex-col gap-4 py-4">
               {NAV_LINKS.filter(link => link.name !== 'Kontakt').map((link) => (
                 <Link key={link.name} to={link.to} className="text-lg font-medium text-fg py-2" onClick={() => setIsOpen(false)}>
                   {link.name}
@@ -84,9 +91,9 @@ export const Navbar: React.FC = () => {
                 setIsOpen(false);
               }}>Erstgespräch buchen</Button>
             </div>
-          </div>
-        )
-      }
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav >
   );
 };

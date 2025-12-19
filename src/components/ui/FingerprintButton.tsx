@@ -3,7 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Fingerprint } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
-const FingerprintButton = ({ onPressChange }: { onPressChange?: (pressed: boolean) => void }) => {
+interface FingerprintButtonProps {
+    onPressChange?: (pressed: boolean) => void;
+    idleText?: string;
+    activeText?: string;
+}
+
+const FingerprintButton = ({
+    onPressChange,
+    idleText = "Press me",
+    activeText = "Woaoaoaw"
+}: FingerprintButtonProps) => {
     const [isPressed, setIsPressed] = useState(false);
 
     const handlePressStart = () => {
@@ -95,7 +105,7 @@ const FingerprintButton = ({ onPressChange }: { onPressChange?: (pressed: boolea
                             exit={{ y: -20, opacity: 0 }}
                             className="text-sm font-bold text-accent tracking-widest uppercase"
                         >
-                            Woaoaoaw
+                            {activeText}
                         </motion.span>
                     ) : (
                         <motion.span
@@ -105,7 +115,7 @@ const FingerprintButton = ({ onPressChange }: { onPressChange?: (pressed: boolea
                             exit={{ y: -20, opacity: 0 }}
                             className="text-xs font-medium text-muted/70 tracking-widest uppercase group-hover:text-accent transition-colors"
                         >
-                            Press me
+                            {idleText}
                         </motion.span>
                     )}
                 </AnimatePresence>

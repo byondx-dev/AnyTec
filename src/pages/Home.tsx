@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight } from 'lucide-react';
+import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight, Store } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 import { PixelVisual } from '@/components/visuals/PixelVisual';
@@ -252,19 +252,33 @@ const Home: React.FC = () => {
             </Reveal>
             <Reveal delay={0.3}>
               <div className="flex flex-col items-center gap-10">
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <Button size="lg" className="h-14 px-8 text-base shadow-lg shadow-accent/20" onClick={() => navigate('/kontakt')}>Erstgespräch buchen</Button>
-                  <Button size="lg" variant="secondary" className="h-14 px-8 text-base" onClick={() => navigate('/kontakt')}>Mit Expert:in sprechen</Button>
-                </div>
-
-                {/* Fingerprint Button */}
-                <div className="md:hidden">
-                  <FingerprintButton onPressChange={setIsFingerprintPressed} />
+                {/* Fingerprint Button - replaces old hero buttons */}
+                <div className="mt-2">
+                  <FingerprintButton
+                    onPressChange={setIsFingerprintPressed}
+                    idleText="Click & Hold"
+                    activeText="Woaoaoaaw"
+                  />
                 </div>
               </div>
             </Reveal>
           </div>
         </div>
+
+        {/* Scroll Down Indicator */}
+        <motion.div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-muted/30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown size={32} strokeWidth={1.5} />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* 2.5 Logo Loop Section */}
@@ -402,9 +416,66 @@ const Home: React.FC = () => {
             <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-medium text-sm mb-8 border border-accent/20">Heute starten</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">Bla Bla Bla du willst keinen langweiligen Text.<span className="text-muted/50">Sieh dir direkt unsere Angebote an</span></h2>
             <p className="text-muted text-lg mb-10 max-w-2xl mx-auto">Konzentriere dich auf dein Geschäft, während wir sicherstellen, dass deine Technik im Hintergrund reibungslos funktioniert.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" className="h-12 px-8" onClick={() => navigate('/kontakt')}>Starten</Button>
-              <Button variant="ghost" size="lg" className="h-12 px-8" onClick={() => navigate('/kontakt')}>Pakete ansehen <ArrowRight size={16} className="ml-2" /></Button>
+            <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
+              {/* Card 1: Setups */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                onClick={() => navigate('/setups')}
+                className="group relative w-full sm:w-72 h-[22rem] text-left rounded-[2.5rem] bg-[#0f1420] border border-white/10 p-8 cursor-pointer overflow-hidden hover:border-accent/50 transition-all duration-500 hover:shadow-[0_0_50px_rgba(34,211,238,0.15)] flex flex-col justify-between"
+              >
+                {/* Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -right-10 -top-10 w-40 h-40 bg-accent/10 blur-[80px] rounded-full pointer-events-none" />
+
+                {/* Icon */}
+                <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:scale-110 transition-transform duration-500 group-hover:bg-accent group-hover:text-black shadow-lg shadow-black/20">
+                  <Store className="w-8 h-8" />
+                </div>
+
+                {/* Text */}
+                <div className="relative z-10">
+                  <h3 className="text-3xl font-bold text-white mb-2 leading-none tracking-tight">Ready to<br />Work</h3>
+                  <p className="text-sm text-gray-400 font-medium mb-6">Betriebsfertige<br />IT-Setups.</p>
+
+                  {/* Button */}
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-600 text-black font-bold text-sm shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 group-hover:scale-105 transition-all duration-300">
+                    Ansehen <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 2: Services */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                onClick={() => navigate('/services')}
+                className="group relative w-full sm:w-72 h-[22rem] text-left rounded-[2.5rem] bg-[#0f1420] border border-white/10 p-8 cursor-pointer overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:shadow-[0_0_50px_rgba(59,130,246,0.15)] flex flex-col justify-between"
+              >
+                {/* Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
+
+                {/* Icon */}
+                <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform duration-500 group-hover:bg-blue-500 group-hover:text-white shadow-lg shadow-black/20">
+                  <Cloud className="w-8 h-8" />
+                </div>
+
+                {/* Text */}
+                <div className="relative z-10">
+                  <h3 className="text-3xl font-bold text-white mb-2 leading-none tracking-tight">Enterprise<br />Services</h3>
+                  <p className="text-sm text-gray-400 font-medium mb-6">Individuelle<br />Cloud & Network.</p>
+
+                  {/* Button */}
+                  <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 group-hover:scale-105 transition-all duration-300">
+                    Lösungen <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </Reveal>
         </div>

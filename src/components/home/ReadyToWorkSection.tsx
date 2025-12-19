@@ -345,7 +345,7 @@ const ReadyCardItem = ({
   );
 };
 
-const MobileScrollLoop = ({
+const MobileSlider = ({
   items,
   flippedIndex,
   onToggleFlip
@@ -355,92 +355,80 @@ const MobileScrollLoop = ({
   onToggleFlip: (index: number) => void;
 }) => {
   const scrollRef = React.useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  React.useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let animationFrameId: number;
-
-    const animate = () => {
-      // Logic for infinite wrapping (works for both auto and manual)
-      // We assume content is Tripled: [A, B, C] where A=B=C.
-      // We scroll within B. If we hit end of B (start of C), we jump to start of B.
-      // If we hit start of B (end of A), we jump to end of B.
-
-      const singleSetWidth = scrollContainer.scrollWidth / 3;
-
-      // Forward Wrap
-      if (scrollContainer.scrollLeft >= singleSetWidth * 2) {
-        scrollContainer.scrollLeft -= singleSetWidth;
-      }
-      // Backward Wrap (if user swipes left)
-      else if (scrollContainer.scrollLeft <= 0) {
-        scrollContainer.scrollLeft += singleSetWidth;
-      }
-
-      // Auto-Scroll
-      if (!isPaused) {
-        scrollContainer.scrollLeft += 0.5;
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isPaused]);
-
-  // Initial center position (start of middle set)
-  React.useLayoutEffect(() => {
+  const handleScroll = () => {
     if (scrollRef.current) {
-      const singleSetWidth = scrollRef.current.scrollWidth / 3;
-      scrollRef.current.scrollLeft = singleSetWidth;
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const containerWidth = scrollRef.current.clientWidth;
+      const center = scrollLeft + containerWidth / 2;
+
+      const children = scrollRef.current.children;
+      let closestIdx = 0;
+      let minDistance = Infinity;
+
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i] as HTMLElement;
+        const childCenter = child.offsetLeft + child.offsetWidth / 2;
+        const distance = Math.abs(center - childCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIdx = i;
+        }
+      }
+      setActiveIndex(closestIdx);
     }
-  }, []);
+  };
 
   return (
-    <div
-      className="relative w-full h-[600px] flex items-center"
-      style={{
-        maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
-        WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
-      }}
-    >
+    <div className="flex flex-col gap-8 w-full">
       <div
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto no-scrollbar w-full px-8 py-4 snap-x snap-mandatory touch-pan-x"
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setTimeout(() => setIsPaused(false), 3000)} // longer pause
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onScroll={handleScroll}
+        className="flex gap-6 overflow-x-auto no-scrollbar w-full px-6 py-4 snap-x snap-mandatory touch-pan-x"
+        style={{
+          scrollBehavior: 'smooth',
+          // Simple mask for fading edges slightly
+          maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+        }}
       >
-        {/* Triple items for seamless bidirectional loop */}
-        {[...items, ...items, ...items].map((item, rawIdx) => {
-          const originalIdx = rawIdx % items.length;
-          const uniqueKey = `loop-${item.title}-${rawIdx}`;
-
+        {items.map((item, idx) => {
           return (
             <div
-              key={uniqueKey}
+              key={item.title}
               className="flex-shrink-0 w-[85vw] max-w-[320px] snap-center"
             >
               <div className="w-full h-full">
                 <ReadyCardItem
                   item={item}
-                  flipped={flippedIndex === originalIdx}
+                  flipped={flippedIndex === idx}
                   isMobile={true}
-                  onToggle={() => onToggleFlip(originalIdx)}
+                  onToggle={() => onToggleFlip(idx)}
                 />
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center items-center gap-2">
+        {items.map((_, idx) => (
+          <div
+            key={idx}
+            className={`rounded-full transition-all duration-300 ${idx === activeIndex
+              ? 'w-8 h-2 bg-accent shadow-[0_0_10px_rgba(34,211,238,0.5)]'
+              : 'w-2 h-2 bg-muted/30'
+              }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
+
+
 
 
 export const ReadyToWorkSection: React.FC = () => {
@@ -518,7 +506,7 @@ export const ReadyToWorkSection: React.FC = () => {
         </div>
 
         {isMobile ? (
-          <MobileScrollLoop
+          <MobileSlider
             items={setups}
             flippedIndex={flippedIndex}
             onToggleFlip={(idx) => {
