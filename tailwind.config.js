@@ -19,7 +19,7 @@ export default {
         surface: 'var(--surface)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
       },
       borderRadius: {
         'xl': '1.25rem',
@@ -34,8 +34,22 @@ export default {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
-        }
-      }
+        },
+        shine: {
+          '0%': { 'background-position': '100%' },
+          '100%': { 'background-position': '-100%' },
+        },
+        'shine-silver': {
+          '0%': { transform: 'translateX(-100%) skewX(-12deg)' },
+          '100%': { transform: 'translateX(200%) skewX(-12deg)' },
+        },
+      },
+      animation: {
+        'spin-slow': 'spin 12s linear infinite',
+        'float': 'float 6s ease-in-out infinite',
+        shine: 'shine 5s linear infinite',
+        'shine-silver': 'shine-silver 3s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

@@ -94,12 +94,8 @@ const InteractiveModule = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center relative z-10">
         {/* Left */}
         <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-accent backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_currentColor]" />
-            Live Demo
-          </div>
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-            Rollout über Standorte: <br /><span className="text-gray-500">Cloud, Hybrid oder On-Prem.</span>
+            Wir nutzen die : <br /><span className="text-gray-500">Cloud, Hybrid oder On-Prem.</span>
           </h2>
         </div>
 
@@ -334,9 +330,11 @@ const Home: React.FC = () => {
             <p className="text-muted text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
               Wir bieten das volle Spektrum: Von Azure und M365 bis zum physischen Server-Rack vor Ort. Alles aus einer Hand.
             </p>
-            <Button variant="ghost" size="lg" className="rounded-full px-8 border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent" onClick={() => navigate('/services')}>
-              Alle Services ansehen <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <div className="flex justify-center">
+              <Button variant="ghost" size="lg" className="rounded-full px-8 border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent" onClick={() => navigate('/services')}>
+                Alle Services ansehen <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </div>
           </Reveal>
         </div>
       </section>
