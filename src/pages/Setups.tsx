@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
-import { Button } from '@/components/ui/Button';
+
 import { Reveal } from '@/components/animations/Reveal';
 import { useSetupSelection } from '@/context/SetupSelectionContext';
 import { cn } from '@/utils/cn';
@@ -76,7 +76,7 @@ export const Setups: React.FC = () => {
                   onClick={() => toggleSetup(item.name)}
                   className={cn(
                     'text-left p-6 rounded-2xl border transition-all relative bg-card overflow-hidden focus-visible:ring-2 focus-visible:ring-accent/40',
-                  isSelected ? 'border-accent shadow-[0_10px_40px_-20px_rgba(59,130,246,0.45)]' : 'border-border hover:border-accent/40'
+                    isSelected ? 'border-accent shadow-[0_10px_40px_-20px_rgba(59,130,246,0.45)]' : 'border-border hover:border-accent/40'
                   )}
                   whileHover={reduceMotion ? undefined : { y: -4 }}
                 >

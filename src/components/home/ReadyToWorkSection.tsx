@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ShinyText from '@/components/ui/ShinyText';
-import { motion, useReducedMotion, useMotionValue, useAnimationFrame } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   ChevronLeft,
   ChevronRight,
