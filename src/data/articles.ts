@@ -87,16 +87,127 @@ export const articles: Article[] = [
     toc: [
       { id: 'intro', title: 'Intro: Kasse ist heilig' },
       { id: 'segmentation', title: 'Netzwerk-Segmentierung' },
-      { id: 'firewall', title: 'Firewall Regeln' }
+      { id: 'firewall', title: 'Firewall-Regeln' },
+      { id: 'payment', title: 'Payment: So bleibt es sauber' },
+      { id: 'conclusion', title: 'Fazit' }
     ],
     content: `
       <p class="lead text-xl text-muted mb-8">
-        Das Kassensystem (POS) ist das Herzstück des Retail. Fällt es aus oder werden Daten geklaut, ist der Schaden immens.
+        Das Kassensystem (POS) ist das Herzstück im Retail und in vielen Gastro-Setups. Wenn es ausfällt, steht der Betrieb. Wenn Daten abfließen, wird es richtig teuer: Umsatzverlust, Imageschaden, möglicher Ärger mit Dienstleistern und Audits.
       </p>
-      <h2 id="intro" class="text-3xl font-bold mt-12 mb-6">Intro: Kasse ist heilig</h2>
-      <p class="mb-6">Niemals, wirklich niemals, sollte das Kassensystem im gleichen WLAN hängen wie das Gäste-WLAN oder die Sonos-Speaker.</p>
-       <h2 id="segmentation" class="text-3xl font-bold mt-12 mb-6">Netzwerk-Segmentierung</h2>
-      <p class="mb-6">Wir nutzen VLANs (Virtual Local Area Networks), um den Datenverkehr strikt zu trennen.</p>
+      
+      <div class="bg-accent/5 border-l-4 border-accent p-6 mb-8 rounded-r-xl">
+        <p class="font-medium text-fg">
+          Darum gilt eine Regel ohne Ausnahmen: <strong>Niemals, wirklich niemals, sollte das Kassensystem im gleichen WLAN hängen wie Gäste-WLAN, Sonos-Speaker, Smart-TVs oder sonstige „Bequemlichkeitsgeräte“.</strong>
+        </p>
+      </div>
+
+      <h2 id="intro" class="text-3xl font-bold mt-12 mb-6">Intro: Kasse ist Prio 1</h2>
+      <p class="mb-6">
+        Genau an dieser Stelle scheitern viele Setups: Alles hängt „irgendwie“ zusammen – bis ein Gerät kompromittiert wird und plötzlich der Weg Richtung POS offen ist.
+      </p>
+      <p class="mb-6">
+        Any Tec plant POS-Netze deshalb grundsätzlich nach dem Prinzip: Trennen, minimieren, überwachen. Du bekommst ein Setup, das im Alltag läuft – und nicht nur „auf dem Papier sicher“ ist.
+      </p>
+
+      <h2 id="segmentation" class="text-3xl font-bold mt-12 mb-6">Netzwerk-Segmentierung</h2>
+      <p class="mb-4">
+        Der wichtigste POS-Schutz ist nicht „ein gutes Passwort“, sondern saubere Trennung.
+      </p>
+      <h3 class="text-xl font-bold mb-2">Warum Segmentierung so effektiv ist</h3>
+      <p class="mb-4 text-muted-foreground">
+        Wenn ein Gerät im Gäste-WLAN kompromittiert wird (kommt vor), soll es nicht das POS erreichen können. Segmentierung sorgt dafür, dass Angriffe nicht „seitlich“ wandern.
+      </p>
+
+      <h3 class="text-xl font-bold mb-4">VLANs: Virtuelle Netztrennung</h3>
+      <p class="mb-4">
+        Wir nutzen VLANs (Virtual Local Area Networks), um den Datenverkehr strikt zu trennen. Ein VLAN ist vereinfacht gesagt ein eigenes Netzwerk innerhalb deiner Infrastruktur – mit eigenen Regeln.
+      </p>
+      <div class="bg-card/50 p-6 rounded-xl border border-border mb-6">
+        <strong class="block mb-4 text-fg">Ein sicheres Netzwerk-Design trennt diese Bereiche:</strong>
+        <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+                <span class="px-2 py-1 rounded bg-red-500/20 text-red-400 text-xs font-mono font-bold">POS/Payment</span>
+                <span>Kassen, Payment-Terminal, POS-Server</span>
+            </li>
+            <li class="flex items-center gap-3">
+                <span class="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs font-mono font-bold">Staff</span>
+                <span>Mitarbeitergeräte, Backoffice</span>
+            </li>
+            <li class="flex items-center gap-3">
+                <span class="px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs font-mono font-bold">Guest</span>
+                <span>Kunden/Gäste</span>
+            </li>
+            <li class="flex items-center gap-3">
+                <span class="px-2 py-1 rounded bg-purple-500/20 text-purple-400 text-xs font-mono font-bold">IoT/Media</span>
+                <span>Sonos, Screens, Kameras</span>
+            </li>
+            <li class="flex items-center gap-3">
+                <span class="px-2 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-mono font-bold">Management</span>
+                <span>Netzwerkgeräte (nur Admins)</span>
+            </li>
+        </ul>
+      </div>
+      <p class="text-sm text-muted">
+        Wichtig: Segmentierung ist erst dann wirklich sinnvoll, wenn auch das WLAN sauber getrennt ist (eigene SSIDs oder Enterprise-WLAN) und nicht nur „alles auf einem Namen“.
+      </p>
+
+      <h2 id="firewall" class="text-3xl font-bold mt-12 mb-6">Firewall-Regeln</h2>
+      <p class="mb-6">
+        Segmentierung ohne Firewall-Regeln ist wie Türen ohne Schlösser: Nett, aber wirkungslos.
+      </p>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-8">
+        <div>
+            <h3 class="text-xl font-bold mb-4">Grundprinzip: Default Deny</h3>
+            <p class="text-muted-foreground mb-4">
+                Für POS gilt: standardmäßig alles blocken, nur das erlauben, was wirklich nötig ist.
+            </p>
+            <ul class="space-y-2 text-sm">
+                <li class="flex items-center gap-2 text-green-400"><span class="font-mono">POS → Cloud/Payment</span> ✓ Erlaubt (Ports only)</li>
+                <li class="flex items-center gap-2 text-green-400"><span class="font-mono">POS → Updates/DNS</span> ✓ Erlaubt (Targeted)</li>
+                <li class="flex items-center gap-2 text-red-400"><span class="font-mono">Guest → POS</span> ✗ BLOCK</li>
+                <li class="flex items-center gap-2 text-red-400"><span class="font-mono">IoT → POS</span> ✗ BLOCK</li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-4">Warum „Any/Any“ gefährlich ist</h3>
+            <p class="text-muted-foreground">
+                Viele Installationen laufen „stabil“, weil alles offen ist. Das ist bequem – bis es knallt. Ein gutes POS-Setup ist nicht das, das am schnellsten „online“ ist, sondern das, das mit minimaler Angriffsfläche stabil bleibt.
+            </p>
+        </div>
+      </div>
+
+      <h2 id="payment" class="text-3xl font-bold mt-12 mb-6">Payment: So bleibt es sauber</h2>
+      <p class="mb-6">
+        Payment ist ein eigenes Risiko-Universum. Ohne zu tief ins Detail zu gehen: Du willst, dass Payment-Daten so wenig Berührungspunkte wie möglich mit dem restlichen Netz haben.
+      </p>
+      <div class="bg-muted2/30 p-6 rounded-xl border border-border/50">
+        <h4 class="font-bold mb-4">Praktische Leitlinien</h4>
+        <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+            <li><strong>Isolierung:</strong> Payment-Terminals gehören ins POS/Payment VLAN, nicht ins Staff- oder Guest-WLAN.</li>
+            <li><strong>Fernzugriff:</strong> Remote-Zugriff nur über sichere Wege (nicht „TeamViewer auf der Kasse“ als Standard).</li>
+            <li><strong>Wartung:</strong> Updates und Fernwartung müssen geplant sein – „wir machen das später“ endet oft in Dauer-Ausnahmen.</li>
+        </ul>
+      </div>
+
+      <h2 id="conclusion" class="text-3xl font-bold mt-12 mb-6">Fazit</h2>
+      <p class="mb-6">
+        POS-Sicherheit ist keine Luxus-Option. Sie ist Betriebsgrundlage.
+      </p>
+      <p class="mb-4 font-bold">Wenn du nur drei Dinge mitnimmst:</p>
+      <ul class="list-check pl-6 mb-8 text-muted-foreground space-y-2">
+        <li>POS/Payment strikt trennen (VLANs + eigene WLANs)</li>
+        <li>Firewall: default deny (nur erlauben, was nötig ist)</li>
+        <li>Payment sauber isolieren (keine Misch-Netze, keine Bastellösungen)</li>
+      </ul>
+      
+      <div class="p-6 rounded-xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20">
+        <h4 class="font-bold text-lg mb-2">Ready-to-Work Setup</h4>
+        <p class="text-muted-foreground mb-4">
+            Wenn du möchtest, baut Any Tec dir das komplett auf: Netzwerk-Blueprint, VLANs, Firewall-Regeln, Tests – und so dokumentiert, dass du es in weiteren Standorten 1:1 ausrollen kannst.
+        </p>
+      </div>
     `
   },
   {
@@ -108,7 +219,161 @@ export const articles: Article[] = [
     readTime: '9 Min',
     date: '05. Sep 2024',
     badge: 'Guide',
-    toc: [{ id: 'intro', title: 'Intro' }], content: '<p>Content placeholder...</p>'
+    toc: [
+      { id: 'intro', title: 'Intro' },
+      { id: 'difference', title: 'Retail vs. Office' },
+      { id: 'failures', title: 'Warum es scheitert' },
+      { id: 'meaning', title: 'Was skalierbar heißt' },
+      { id: 'blocks', title: 'Die 6 Bausteine' },
+      { id: 'check', title: 'Ist dein WLAN fit?' },
+      { id: 'conclusion', title: 'Fazit' }
+    ],
+    content: `
+      <p class="lead text-xl text-muted mb-8">
+        Ein WLAN kann in einem kleinen Shop “irgendwie funktionieren” – bis es nicht mehr tut. Sobald mehr Geräte dazukommen (Kasse, Tablets, Scanner, Digital Signage, Musik, Lagergeräte, Gäste), zeigt sich schnell, ob das WLAN professionell geplant ist oder nur improvisiert wurde.
+      </p>
+
+      <div class="bg-accent/5 border-l-4 border-accent p-6 mb-8 rounded-r-xl">
+        <p class="font-medium text-fg">
+          Dieser Artikel erklärt, worauf es bei skalierbarem Retail-WLAN wirklich ankommt, welche Fehler du vermeiden solltest und wie du ein Setup bekommst, das auch bei mehreren Standorten stabil bleibt – ohne technische Details preiszugeben, die man missbrauchen könnte.
+        </p>
+      </div>
+
+      <h2 id="difference" class="text-3xl font-bold mt-12 mb-6">Warum Retail-WLAN anders ist als „Büro-WLAN“</h2>
+      <p class="mb-4">Retail-Flächen sind ein Spezialfall, weil hier viele Dinge gleichzeitig passieren:</p>
+      <ul class="list-disc pl-6 mb-6 text-muted-foreground space-y-2">
+        <li>Viele Geräte mit unterschiedlichen Anforderungen (POS, Scanner, Tablets, Backoffice, Media)</li>
+        <li>Wechselnde Nutzer (Mitarbeiter-Schichten, Gäste)</li>
+        <li>Hohe Störquellen (Kühlgeräte, Glasflächen, Metallregale, Nachbar-WLANs)</li>
+        <li>Harte Anforderungen an Verfügbarkeit: Wenn WLAN wackelt, wackelt der Umsatz</li>
+      </ul>
+      <p class="mb-8 text-muted">
+        Kurz: Ein Retail-WLAN muss belastbar, vorhersehbar und wartbar sein – nicht nur schnell.
+      </p>
+
+      <h2 id="failures" class="text-3xl font-bold mt-12 mb-6">Die häufigsten Gründe, warum Retail-WLAN „nicht skaliert“</h2>
+      
+      <div class="space-y-6 mb-8">
+        <div>
+            <h3 class="text-xl font-bold mb-2">1) „Ein Router reicht“ (Der Klassiker)</h3>
+            <p class="text-muted-foreground">Ein einzelnes Gerät im falschen Winkel kann in einem kleinen Raum ok sein – in einer Verkaufsfläche mit Lager/Backoffice fast nie. Sobald Wände, Regale und Kundenfrequenz dazu kommen, entstehen Funklöcher und instabile Übergänge.</p>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">2) Falsche Platzierung statt fehlender Hardware</h3>
+            <p class="text-muted-foreground">Oft ist nicht “zu wenig Hardware” das Problem, sondern “falsch platziert”. Ein Access Point hinter einem Metallregal kann mehr kaputt machen als helfen.</p>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">3) Keine Standardisierung über Standorte</h3>
+            <p class="text-muted-foreground">Wenn jeder Standort “anders” konfiguriert ist, wird Support zum Albtraum. Skalierung heißt: gleiches Muster, gleiche Regeln, gleiche Erwartungen.</p>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">4) Zu viele Geräte im selben Funkbereich</h3>
+            <p class="text-muted-foreground mb-2">Wenn alles auf denselben Funkparametern läuft, werden Störungen und Paketverluste normal. Das merkt man nicht als “kein Internet”, sondern subtiler:</p>
+            <ul class="list-check pl-6 text-sm text-muted-foreground font-medium">
+                <li>POS reagiert langsam</li>
+                <li>Zahlung dauert “manchmal” länger</li>
+                <li>Scanner hängen “sporadisch”</li>
+                <li>Meeting/Call im Backoffice bricht ab</li>
+            </ul>
+        </div>
+      </div>
+
+      <h2 id="meaning" class="text-3xl font-bold mt-12 mb-6">Was „WLAN, das skaliert“ eigentlich bedeutet</h2>
+      <p class="mb-4">Skalierbar heißt nicht nur: “mehr Geräte gehen auch noch”. Es heißt:</p>
+      <ul class="grid sm:grid-cols-2 gap-4 mb-8">
+        <li class="bg-muted2/50 p-3 rounded-lg border border-border/50">Stabile Performance bei hoher Last</li>
+        <li class="bg-muted2/50 p-3 rounded-lg border border-border/50">Saubere Abdeckung ohne Funklöcher</li>
+        <li class="bg-muted2/50 p-3 rounded-lg border border-border/50">Vorhersehbares Verhalten (kein Zufalls-Glück)</li>
+        <li class="bg-muted2/50 p-3 rounded-lg border border-border/50">Schneller Rollout neuer Geräte/Standorte</li>
+        <li class="bg-muted2/50 p-3 rounded-lg border border-border/50">Monitoring & Supportfähigkeit</li>
+      </ul>
+      <p class="mb-8 text-muted">
+        Genau daran arbeiten wir bei Any Tec: nicht nur WLAN installieren, sondern WLAN als Betriebsgrundlage bauen.
+      </p>
+
+      <h2 id="blocks" class="text-3xl font-bold mt-12 mb-8">Die 6 Bausteine eines professionellen Retail-WLANs</h2>
+      
+      <div class="space-y-8">
+         <div>
+            <h3 class="text-lg font-bold text-accent mb-1">1) Planung nach Fläche, Nutzung und Störprofil</h3>
+            <p class="text-muted-foreground">
+                Ein gutes Setup startet nicht mit “welcher Router ist gut?”, sondern mit Grundriss, Zonen (Kasse/Verkauf/Lager), Nutzerprofilen und Störquellen. Any Tec übernimmt diese Vorarbeit, weil das später 80% der Stabilität ausmacht.
+            </p>
+         </div>
+         <div>
+            <h3 class="text-lg font-bold text-accent mb-1">2) Abdeckung & Übergänge, die man nicht merkt</h3>
+            <p class="text-muted-foreground">
+                In Retail soll niemand darüber nachdenken, wo “das WLAN besser ist”. Geräte müssen sich unauffällig bewegen können (Roaming). Das erreichst du nur mit einem Setup, das auf Zonenlogik ausgelegt ist.
+            </p>
+         </div>
+         <div>
+            <h3 class="text-lg font-bold text-accent mb-1">3) Geräte- und Nutzerrollen ohne Chaos</h3>
+            <p class="text-muted-foreground">
+                Kasse, Mitarbeiter, IoT, Gäste – wenn alles gleich behandelt wird, leidet die Performance oder Sicherheit. Any Tec liefert fertige “Retail-Blueprints”, die Rollen sauber trennen.
+            </p>
+         </div>
+         <div>
+            <h3 class="text-lg font-bold text-accent mb-1">4) Stabilität unter Last (Peak Hours)</h3>
+            <p class="text-muted-foreground">
+                Dein WLAN muss dann stabil sein, wenn es zählt: Samstag, Sale, Events. Skalierbarkeit bedeutet hier: kein Einbruch, nur weil 30 Leute gleichzeitig im Laden sind.
+            </p>
+         </div>
+         <div>
+            <h3 class="text-lg font-bold text-accent mb-1">5) Betrieb: Monitoring statt „Wenn was kaputt ist…“</h3>
+            <p class="text-muted-foreground">
+                Viele Probleme sind schleichend (Fehlerquoten, Interferenzen). Ein skalierbares Setup hat Überwachung. Any Tec kann das als Managed-Betrieb übernehmen – damit Probleme sichtbar werden, bevor sie Umsatz kosten.
+            </p>
+         </div>
+         <div>
+            <h3 class="text-lg font-bold text-accent mb-1">6) Multi-Standort: Standardisieren</h3>
+            <p class="text-muted-foreground">
+                Kann ich Standort 2 so schnell ausrollen wie Standort 1? Ein gutes System liefert einheitliche Logik und wiederholbare Rollouts. Any Tec setzt Retail-WLAN so auf, dass es pro Standort kein „neues Projekt“ ist.
+            </p>
+         </div>
+      </div>
+
+      <h2 id="check" class="text-3xl font-bold mt-12 mb-6">Wie du erkennst, ob dein WLAN-Setup skalierfähig ist</h2>
+      <div class="bg-card/50 p-6 rounded-xl border border-border mb-8">
+        <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+                <span class="text-accent mt-1">?</span>
+                <span class="text-fg">Läuft POS/Payment stabil auch bei Peak?</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="text-accent mt-1">?</span>
+                <span class="text-fg">Kannst du neue Geräte schnell hinzufügen – ohne „Sonderfälle“?</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="text-accent mt-1">?</span>
+                <span class="text-fg">Gibt es klare Trennung zwischen internen Geräten und Gästen?</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="text-accent mt-1">?</span>
+                <span class="text-fg">Kannst du Probleme messen/sehen – oder erst, wenn Kunden warten?</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="text-accent mt-1">?</span>
+                <span class="text-fg">Könnte ein zweiter Standort mit denselben Standards schnell live gehen?</span>
+            </li>
+        </ul>
+        <p class="mt-4 text-sm text-muted italic">Wenn du bei 2–3 Punkten unsicher bist, ist es Zeit für ein professionelles Setup.</p>
+      </div>
+
+      <h2 id="conclusion" class="text-3xl font-bold mt-12 mb-6">Fazit</h2>
+      <p class="mb-6">
+        Retail-WLAN ist kein “Nice to have”, sondern eine Umsatzkomponente. Wenn du wachsen willst – mehr Geräte, mehr Fläche, mehr Standorte – brauchst du ein WLAN, das planbar skaliert.
+      </p>
+      
+      <div class="p-6 rounded-xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20">
+        <h4 class="font-bold text-lg mb-2">Unser Angebot</h4>
+        <p class="text-muted-foreground mb-4">
+            Any Tec übernimmt die Planung, den Aufbau und auf Wunsch den Betrieb – mit einem Setup, das zuverlässig läuft, sauber dokumentiert ist und sich auf weitere Standorte übertragen lässt.
+        </p>
+        <p class="font-medium text-accent">
+            Wenn du möchtest, starten wir mit einem kurzen Check: Fläche, Geräte, Ziele – und du bekommst einen klaren Vorschlag.
+        </p>
+      </div>
+    `
   },
   {
     id: 4,
@@ -118,7 +383,178 @@ export const articles: Article[] = [
     category: 'Security',
     readTime: '5 Min',
     date: '22. Aug 2024',
-    toc: [{ id: 'intro', title: 'Intro' }], content: '<p>Content placeholder...</p>'
+    toc: [
+      { id: 'intro', title: 'Intro: Zero Trust light' },
+      { id: 'why', title: 'Warum „light“ statt „komplett“?' },
+      { id: 'mfa', title: '1) MFA – sinnvoll' },
+      { id: 'conditional', title: '2) Conditional Access' },
+      { id: 'compliance', title: '3) Device Compliance' },
+      { id: 'rollout', title: 'Der 5-Schritte-Rollout' },
+      { id: 'pitfalls', title: 'Stolpersteine' },
+      { id: 'benefit', title: 'Was du bekommst' },
+      { id: 'conclusion', title: 'Fazit' }
+    ],
+    content: `
+      <p class="lead text-xl text-muted mb-8">
+        Zero Trust klingt nach „Enterprise-Projekt“. In der Praxis geht’s aber um etwas sehr Einfaches: Vertrauen wird nicht vorausgesetzt – es wird jedes Mal geprüft. Für KMU ist das besonders wichtig, weil Angriffe heute selten „Hightech“ sind, sondern meist über gestohlene Passwörter, Phishing und unsichere Endgeräte laufen.
+      </p>
+
+      <div class="bg-accent/5 border-l-4 border-accent p-6 mb-8 rounded-r-xl">
+        <p class="font-medium text-fg">
+          Dieser Artikel zeigt, wie du Zero Trust light umsetzt: pragmatisch, schnell und ohne dass dein Team im Admin-Chaos versinkt.
+        </p>
+      </div>
+
+      <h2 id="why" class="text-3xl font-bold mt-12 mb-6">Warum „Zero Trust light“ statt „Zero Trust komplett“?</h2>
+      <p class="mb-4">
+        Viele KMU scheitern, weil sie zu groß starten: zig Tools, zu viele Policies, zu viel Komplexität. Das Ergebnis: Frust – und am Ende bleibt es beim alten Setup.
+      </p>
+      <p class="mb-4"><strong>Zero Trust light setzt auf die 20%, die 80% bringen:</strong></p>
+      <ul class="list-disc pl-6 mb-6 text-muted-foreground space-y-2">
+        <li><strong>MFA überall</strong> (richtig gemacht)</li>
+        <li><strong>Conditional Access</strong> (klare Regeln, wenig Ausnahmen)</li>
+        <li><strong>Device Compliance</strong> (nur „gesund“ = Zugriff)</li>
+      </ul>
+      <p class="mb-8 text-muted">
+        Wenn du damit startest, reduzierst du Risiko massiv – ohne monatelanges Projekt.
+      </p>
+
+      <h2 class="text-3xl font-bold mt-12 mb-8">Die drei Bausteine</h2>
+
+      <div class="space-y-12">
+
+        <div id="mfa">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">1</span>
+                MFA (Multi-Factor Authentication) – aber sinnvoll
+            </h3>
+            <p class="mb-4 text-muted-foreground">MFA ist Pflicht, aber falsch umgesetzt nervt es oder wird umgangen.</p>
+            <div class="bg-card/50 p-4 rounded-lg border border-border mb-4">
+                <strong class="block mb-2 text-fg">Zero Trust light Ansatz:</strong>
+                <ul class="list-check pl-6 space-y-1 text-sm text-muted-foreground">
+                    <li>MFA für alle Benutzer, besonders Admins</li>
+                    <li>Keine “SMS-only” Denke, sondern moderne Faktoren</li>
+                    <li>Ausnahmen vermeiden, Break-Glass Accounts sauber absichern</li>
+                </ul>
+            </div>
+            <p class="text-sm text-muted">Was Any Tec übernimmt: saubere MFA-Strategie, Rollout-Kommunikation, Ausnahme-Handling, Notfallzugänge – damit es nicht am ersten Tag eskaliert.</p>
+        </div>
+
+        <div id="conditional">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">2</span>
+                Conditional Access – „wer darf wann wo“
+            </h3>
+            <p class="mb-4 text-muted-foreground">
+                Conditional Access ist der Hebel, der MFA und Geräte-Status intelligent verknüpft. Statt „jeder darf überall“ gilt: Zugriff nur, wenn Kontext passt.
+            </p>
+            <ul class="list-disc pl-6 mb-4 text-muted-foreground space-y-2">
+                <li>Blockiere Logins aus ungewöhnlichen Regionen</li>
+                <li>Admin-Aktionen nur mit stärkeren Bedingungen</li>
+                <li>Zugriff auf kritische Apps nur von compliant Geräten</li>
+                <li>Neue/unbekannte Geräte müssen erst „sauber“ werden</li>
+            </ul>
+             <p class="text-sm text-muted">Was Any Tec übernimmt: Policy-Design, Test-Ring (Pilotgruppe), Rollout in Stufen, Monitoring – damit du nicht aus Versehen dein Team aussperrst.</p>
+        </div>
+
+        <div id="compliance">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-full bg-accent text-white flex items-center justify-center text-sm">3</span>
+                Device Compliance – „kein Zugriff von unsicheren Geräten“
+            </h3>
+            <p class="mb-4 text-muted-foreground">
+                Das ist oft der Gamechanger: Selbst wenn ein Passwort gestohlen ist, kommt der Angreifer ohne ein „konformes“ Gerät nicht weit.
+            </p>
+            <ul class="grid sm:grid-cols-2 gap-3 mb-4">
+                <li class="bg-muted2/50 p-2 rounded text-sm">✓ Gerät verschlüsselt</li>
+                <li class="bg-muted2/50 p-2 rounded text-sm">✓ Screen Lock aktiv</li>
+                <li class="bg-muted2/50 p-2 rounded text-sm">✓ OS-Version aktuell</li>
+                <li class="bg-muted2/50 p-2 rounded text-sm">✓ Kein Jailbreak/Root</li>
+            </ul>
+             <p class="text-sm text-muted">Was Any Tec übernimmt: Gerätestrategie, Mindestanforderungen, Rollout, Richtlinien für BYOD vs. Firmengeräte – und die Umsetzung ohne Overhead.</p>
+        </div>
+
+      </div>
+
+      <h2 id="rollout" class="text-3xl font-bold mt-12 mb-6">Der pragmatische Rollout in 5 Schritten</h2>
+      <div class="space-y-4 mb-8">
+        <div class="flex gap-4">
+            <div class="font-bold text-accent min-w-[3ch]">01</div>
+            <div>
+                <strong class="block text-fg">Quick Audit (30–60 Min)</strong>
+                <span class="text-muted-foreground text-sm">Welche Accounts/Apps sind kritisch? Welche Gerätetypen gibt es? Any Tec erstellt daraus die Start-Matrix.</span>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <div class="font-bold text-accent min-w-[3ch]">02</div>
+            <div>
+                <strong class="block text-fg">MFA überall</strong>
+                <span class="text-muted-foreground text-sm">Pilotgruppe → dann alle. Admins zuerst. Notfallzugänge definieren.</span>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <div class="font-bold text-accent min-w-[3ch]">03</div>
+            <div>
+                <strong class="block text-fg">Conditional Access "MVP"</strong>
+                <span class="text-muted-foreground text-sm">Starte mit 3–5 Regeln: MFA für alle, strengere Admin-Regeln, Blockierung riskanter Logins.</span>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <div class="font-bold text-accent min-w-[3ch]">04</div>
+            <div>
+                <strong class="block text-fg">Device Compliance als "Gate"</strong>
+                <span class="text-muted-foreground text-sm">Baseline setzen. Geräte nachziehen (Warnen vor Blocken).</span>
+            </div>
+        </div>
+        <div class="flex gap-4">
+            <div class="font-bold text-accent min-w-[3ch]">05</div>
+            <div>
+                <strong class="block text-fg">Monitoring & Feintuning</strong>
+                <span class="text-muted-foreground text-sm">Nach 1–2 Wochen Ausnahmen prüfen und Policies nachschärfen.</span>
+            </div>
+        </div>
+      </div>
+
+      <h2 id="pitfalls" class="text-3xl font-bold mt-12 mb-6">Häufige Stolpersteine (und wie Any Tec sie verhindert)</h2>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-card/30 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-red-400 mb-2">„Wir sperren uns aus“</h4>
+            <p class="text-sm text-muted">Passiert ohne Pilot oder Notfall-User.<br/><span class="text-accent">→ Lösung: Stufen-Rollout + Break-Glass.</span></p>
+        </div>
+        <div class="bg-card/30 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-red-400 mb-2">„BYOD nervt“</h4>
+            <p class="text-sm text-muted">Privatgeräte im Firmennetz ohne Regeln.<br/><span class="text-accent">→ Lösung: Getrennte Policies Privat vs. Corporate.</span></p>
+        </div>
+        <div class="bg-card/30 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-red-400 mb-2">„Zu viele Ausnahmen“</h4>
+            <p class="text-sm text-muted">Jeder will eine Extrawurst.<br/><span class="text-accent">→ Lösung: Ausnahmen zeitlich begrenzen & begründen.</span></p>
+        </div>
+      </div>
+
+      <h2 id="benefit" class="text-3xl font-bold mt-12 mb-6">Was du am Ende bekommst</h2>
+      <p class="mb-6">Mit Zero Trust light erreichst du:</p>
+      <ul class="list-disc pl-6 mb-8 text-muted-foreground space-y-2">
+        <li><strong>Deutlich weniger Risiko</strong> durch Passwortdiebstahl/Phishing</li>
+        <li><strong>Bessere Kontrolle</strong> über Geräte- und Zugriffsstatus</li>
+        <li><strong>Weniger “Schatten-IT”</strong>, weil Standards klar sind</li>
+        <li><strong>Bessere Grundlage</strong>, um später zu skalieren (Standorte, Teams, Franchise)</li>
+      </ul>
+
+      <h2 id="conclusion" class="text-3xl font-bold mt-12 mb-6">Fazit</h2>
+      <p class="mb-6">
+        Zero Trust muss nicht groß anfangen. Für KMU ist der richtige Weg: klein starten, sauber umsetzen, konsequent betreiben.
+      </p>
+      
+      <div class="p-6 rounded-xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20">
+        <h4 class="font-bold text-lg mb-2">Unser Angebot</h4>
+        <p class="text-muted-foreground mb-4">
+            Genau dabei hilft Any Tec: Wir setzen Zero Trust light so um, dass es im Alltag funktioniert – und nicht als Admin-Baustelle endet.
+        </p>
+        <p class="font-medium text-accent">
+            🚀 Schnellstart: kurze Analyse, Pilot, Rollout, Stabilisierung – und du hast in kurzer Zeit ein Setup, das wirklich schützt.
+        </p>
+      </div>
+    `
   },
   {
     id: 5,
@@ -128,7 +564,133 @@ export const articles: Article[] = [
     category: 'Cloud',
     readTime: '8 Min',
     date: '10. Aug 2024',
-    toc: [{ id: 'intro', title: 'Intro' }], content: '<p>Content placeholder...</p>'
+    toc: [
+      { id: 'intro', title: 'Intro' },
+      { id: 'cloud-controlled', title: 'Was „Cloud gesteuert“ heißt' },
+      { id: 'local-resilient', title: 'Was „lokal resilient“ heißt' },
+      { id: 'scenarios', title: 'Typische Szenarien' },
+      { id: 'rules', title: 'Klare Regeln statt „Dazwischen“' },
+      { id: 'security', title: 'Sicherheit & Standards' },
+      { id: 'costs', title: 'Kosten & Betrieb' },
+      { id: 'conclusion', title: 'Fazit' }
+    ],
+    content: `
+      <p class="lead text-xl text-muted mb-8">
+        Ein gutes Hybrid-Setup ist nicht „halb Cloud, halb lokal“. Es ist ein Betriebsmodell: Die Cloud steuert Standards, Sicherheit und Verwaltung – der Standort bleibt gleichzeitig so aufgestellt, dass er auch bei Störungen weiterarbeiten kann.
+      </p>
+
+      <div class="bg-accent/5 border-l-4 border-accent p-6 mb-8 rounded-r-xl">
+        <p class="font-medium text-fg">
+          Gerade für Retail, Gastro, Studios, Ketten und Franchise ist das ideal: Du willst zentrale Kontrolle, aber du darfst am Standort nicht davon abhängig sein, dass immer alles perfekt ist.
+        </p>
+      </div>
+
+      <h2 id="intro" class="text-3xl font-bold mt-12 mb-6">Warum Hybrid für viele Unternehmen die realistischste Cloud-Strategie ist</h2>
+      <p class="mb-4">
+        „Alles in die Cloud“ klingt sauber – aber die Realität hat Anforderungen, die man nicht wegdiskutieren kann:
+      </p>
+      <ul class="list-disc pl-6 mb-6 text-muted-foreground space-y-2">
+        <li>Standorte brauchen stabile Abläufe (Kasse, Check-in, lokale Medien)</li>
+        <li>Internet ist nicht immer perfekt</li>
+        <li>Legacy-Systeme sind oft nicht sofort migrierbar</li>
+        <li>Du willst zentrale Standards, aber lokal keine IT-Feuerwehr spielen</li>
+      </ul>
+      <p class="mb-8 text-muted">
+        Hybrid ist deshalb oft der sweet spot: zentrale Cloud-Steuerung + lokale Funktionsfähigkeit.
+      </p>
+
+      <h2 id="cloud-controlled" class="text-3xl font-bold mt-12 mb-6">Was bedeutet „Cloud gesteuert“?</h2>
+      <p class="mb-6">Es heißt nicht, dass Daten überall liegen, sondern:</p>
+      
+      <div class="space-y-6 mb-8">
+        <div>
+            <h3 class="text-xl font-bold mb-2">1) Einheitliche Identität & Zugriff</h3>
+            <p class="text-muted-foreground">Nutzer, Rollen und Zugriffe werden zentral verwaltet. Das reduziert Wildwuchs und macht Standorte konsistent.</p>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">2) Zentrale Sicherheits-Standards</h3>
+            <p class="text-muted-foreground">Policies und Regeln werden zentral definiert – nicht pro Standort „nach Gefühl“.</p>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">3) Geräte und Rollouts einfacher machen</h3>
+            <p class="text-muted-foreground">Neue Geräte oder Standorte folgen wiederholbaren Standards statt Bastellösungen.</p>
+        </div>
+        <div>
+            <h3 class="text-xl font-bold mb-2">4) Zentrales Monitoring & Transparenz</h3>
+            <p class="text-muted-foreground">Du willst wissen, wenn etwas kippt – nicht erst, wenn Kunden warten. Any Tec setzt diese Steuerung ohne Overhead um.</p>
+        </div>
+      </div>
+
+      <h2 id="local-resilient" class="text-3xl font-bold mt-12 mb-6">Was bedeutet „lokal resilient“?</h2>
+      <p class="mb-4">
+        „Resilient“ heißt: Der Standort kann auch dann funktionieren, wenn nicht alles ideal läuft.
+      </p>
+      <ul class="list-check pl-6 mb-8 text-muted-foreground space-y-2">
+        <li><strong>Standort kann weiterarbeiten:</strong> Kritische Prozesse stehen nicht, nur weil eine Leitung Probleme hat.</li>
+        <li><strong>Bewusste lokale Komponenten:</strong> Alles Lokale hat einen Zweck (Latenz, Stabilität).</li>
+        <li><strong>Saubere Wiederherstellung:</strong> Es gibt einen Plan für den Ernstfall, keine Improvisation.</li>
+      </ul>
+
+      <h2 id="scenarios" class="text-3xl font-bold mt-12 mb-6">Typische Hybrid-Szenarien</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+         <div class="bg-card/50 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-accent mb-2">Retail / Kette</h4>
+            <p class="text-sm text-muted-foreground">Zentrale Steuerung von Standards & Access. Standort bleibt robust für Tagesgeschäft. Rollout per Blueprint.</p>
+         </div>
+         <div class="bg-card/50 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-accent mb-2">Gastro</h4>
+            <p class="text-sm text-muted-foreground">Zuverlässige Abläufe am Standort. Zentrale Updates & Sichtbarkeit. Weniger "Support-Panik".</p>
+         </div>
+         <div class="bg-card/50 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-accent mb-2">Studios / Spaces</h4>
+            <p class="text-sm text-muted-foreground">Viele Endgeräte + wechselnde Nutzer. Klare Access-Logik. Stabile Abläufe bei hoher Last.</p>
+         </div>
+         <div class="bg-card/50 p-4 rounded-xl border border-border">
+            <h4 class="font-bold text-accent mb-2">Remote / Hybrid Work</h4>
+            <p class="text-sm text-muted-foreground">Zentrale Zugriffssteuerung. Konsistentes Gerätemanagement. Weniger Risiko durch Endgeräte.</p>
+         </div>
+      </div>
+
+      <h2 id="rules" class="text-3xl font-bold mt-12 mb-6">Hybrid ist kein „Dazwischen“ – es braucht klare Regeln</h2>
+      <p class="mb-4">
+        Der häufigste Fehler ist ein Setup ohne klare Grenzen: „Ein bisschen hier, ein bisschen da“. Ein gutes Design klärt:
+      </p>
+      <ul class="list-disc pl-6 mb-8 text-muted-foreground space-y-1">
+        <li>Was wird zentral gesteuert?</li>
+        <li>Was muss lokal laufen?</li>
+        <li>Wie hängen die Teile zusammen?</li>
+        <li>Wie wird Support organisiert?</li>
+      </ul>
+
+      <h2 id="security" class="text-3xl font-bold mt-12 mb-6">Sicherheit: Hybrid kann stark sein</h2>
+      <p class="mb-4">
+        Cloud-gesteuerte Umgebungen bieten starke Werkzeuge, aber der Effekt entsteht erst durch Disziplin: klare Zugriffskonzepte, saubere Gerätestandards und reduzierter Ausnahmen-Wildwuchs.
+      </p>
+      <div class="bg-muted2/30 p-4 rounded-lg text-sm text-muted italic mb-8">
+        Wir verraten hier bewusst keine Konfigurationsdetails – aber der Unterschied zwischen „Hybrid“ und „stabilem Hybrid“ ist fast immer die Disziplin in Standards und Betrieb.
+      </div>
+
+      <h2 id="costs" class="text-3xl font-bold mt-12 mb-6">Kosten & Betrieb: Warum Hybrid oft wirtschaftlicher ist</h2>
+      <p class="mb-6">
+        Viele vergleichen nur Server- vs. Cloudpreis. Der echte Kostenblock ist der Betrieb (Updates, Störungen, Ausfall, Skalierung). Hybrid reduziert diese Kosten durch Standardisierung – weniger Sonderfälle, mehr Wiederholbarkeit.
+      </p>
+
+      <h2 id="conclusion" class="text-3xl font-bold mt-12 mb-6">Fazit: Cloud steuert – der Standort bleibt robust</h2>
+      <p class="mb-6">
+        Ein modernes Hybrid-Setup liefert das Beste aus zwei Welten: zentrale Kontrolle und Standort-Stabilität. Wenn du wachsen willst oder Verfügbarkeit kritisch ist, ist „cloud-gesteuert, lokal resilient“ oft das richtige Modell.
+      </p>
+      
+      <div class="p-6 rounded-xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20">
+        <h4 class="font-bold text-lg mb-2">Hybrid-Check</h4>
+        <p class="text-muted-foreground mb-4">
+            Any Tec unterstützt von der Architektur bis zum Betrieb. Wir bauen Hybrid so, dass es im Alltag funktioniert.
+        </p>
+        <p class="font-medium text-accent">
+            Wenn du willst, starten wir mit einem Check: Ziele, Standorte, Abläufe – und du bekommst eine klare Empfehlung.
+        </p>
+      </div>
+    `
   },
   {
     id: 6,

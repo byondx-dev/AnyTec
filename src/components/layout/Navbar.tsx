@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '../ui/Button';
 import { cn } from '@/utils/cn';
@@ -53,9 +53,7 @@ export const Navbar: React.FC = () => {
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <button className="text-muted hover:text-fg p-2">
-            <Search size={20} />
-          </button>
+
           <ThemeToggle />
           <Button onClick={() => navigate('/kontakt')}>Erstgespräch buchen</Button>
         </div>
