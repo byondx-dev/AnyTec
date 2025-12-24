@@ -1,113 +1,59 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Bookmark, Clock, Flame, Sparkles, ArrowRight, Tag } from 'lucide-react';
+import { Bookmark, Clock, Flame, Sparkles, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 import { cn } from '@/utils/cn';
 
-type Article = {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  readTime: string;
-  date: string;
-  badge?: string;
-};
-
-const articles: Article[] = [
-  {
-    id: 1,
-    title: 'Cloud-Blueprint für Franchise-Rollouts',
-    description: 'Wie du neue Standorte in Stunden statt Wochen an Microsoft 365 und deine Netzwerke anschließt.',
-    category: 'Cloud',
-    readTime: '7 Min',
-    date: '01. Okt 2024',
-    badge: 'Neu',
-  },
-  {
-    id: 2,
-    title: 'POS-Sicherheit: VLAN, Firewall & Payment',
-    description: 'Best Practices für getrennte Kassen-Netze und warum PCI-DSS nicht wehtun muss.',
-    category: 'Security',
-    readTime: '6 Min',
-    date: '18. Sep 2024',
-  },
-  {
-    id: 3,
-    title: 'WLAN in Retail-Flächen, das wirklich skaliert',
-    description: 'Von Heatmaps bis Band Steering: ein praxisnaher Guide für stores mit hoher Dichte.',
-    category: 'Retail',
-    readTime: '9 Min',
-    date: '05. Sep 2024',
-    badge: 'Guide',
-  },
-  {
-    id: 4,
-    title: 'Zero Trust light für KMU',
-    description: 'So startest du mit Conditional Access, MFA und Device Compliance ohne Overhead.',
-    category: 'Security',
-    readTime: '5 Min',
-    date: '22. Aug 2024',
-  },
-  {
-    id: 5,
-    title: 'Hybrid-Setup: Cloud gesteuert, lokal resilient',
-    description: 'Ein Architektur-Muster, das Cloud-Komfort mit lokaler Ausfallsicherheit kombiniert.',
-    category: 'Cloud',
-    readTime: '8 Min',
-    date: '10. Aug 2024',
-  },
-  {
-    id: 6,
-    title: 'Schnellstart: Neues Office in 48h live',
-    description: 'Checkliste und Toolkit für Netzwerk, Devices und Identitäten in Rekordzeit.',
-    category: 'How-To',
-    readTime: '4 Min',
-    date: '28. Jul 2024',
-  },
-];
+import { articles } from '@/data/articles';
+import { Article } from '@/data/articles';
 
 const categories = ['Alle', 'Cloud', 'Security', 'Retail', 'How-To'];
 
-const ArticleCard = ({ item, highlight }: { item: Article; highlight?: boolean }) => (
-  <motion.div
-    whileHover={{ y: -4 }}
-    className={cn(
-      'border border-border rounded-2xl p-6 bg-card/80 backdrop-blur-md transition-all duration-300',
-      highlight && 'lg:row-span-2 lg:col-span-2 relative overflow-hidden'
-    )}
-  >
-    {highlight && (
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-blue-500/10 pointer-events-none" />
-    )}
-    <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted mb-3">
-      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-muted2 text-fg/80">
-        <Tag size={14} /> {item.category}
-      </span>
-      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent">
-        <Clock size={14} /> {item.readTime}
-      </span>
-      {item.badge && (
-        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fg text-bg">
-          <Sparkles size={14} /> {item.badge}
-        </span>
+const ArticleCard = ({ item, highlight }: { item: Article; highlight?: boolean }) => {
+  const navigate = useNavigate();
+
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      onClick={() => navigate(`/artikel/${item.slug}`)}
+      className={cn(
+        'border border-border rounded-2xl p-6 bg-card/80 backdrop-blur-md transition-all duration-300 cursor-pointer group hover:border-accent/50',
+        highlight && 'lg:row-span-2 lg:col-span-2 relative overflow-hidden'
       )}
-    </div>
-    <h3 className={cn('text-2xl font-bold mb-3', highlight && 'text-3xl leading-tight')}>
-      {item.title}
-    </h3>
-    <p className="text-muted mb-6 leading-relaxed">{item.description}</p>
-    <div className="flex items-center gap-3 text-sm text-muted">
-      <span className="flex items-center gap-2">
-        <Bookmark size={16} className="text-accent" /> {item.date}
-      </span>
-      <span className="flex items-center gap-2">
-        <Flame size={16} className="text-orange-500" /> {item.readTime} Lesezeit
-      </span>
-    </div>
-  </motion.div>
-);
+    >
+      {highlight && (
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-blue-500/10 pointer-events-none" />
+      )}
+      <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted mb-3">
+        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-muted2 text-fg/80">
+          <Tag size={14} /> {item.category}
+        </span>
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent">
+          <Clock size={14} /> {item.readTime}
+        </span>
+        {item.badge && (
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fg text-bg">
+            <Sparkles size={14} /> {item.badge}
+          </span>
+        )}
+      </div>
+      <h3 className={cn('text-2xl font-bold mb-3 group-hover:text-accent transition-colors', highlight && 'text-3xl leading-tight')}>
+        {item.title}
+      </h3>
+      <p className="text-muted mb-6 leading-relaxed">{item.description}</p>
+      <div className="flex items-center gap-3 text-sm text-muted">
+        <span className="flex items-center gap-2">
+          <Bookmark size={16} className="text-accent" /> {item.date}
+        </span>
+        <span className="flex items-center gap-2">
+          <Flame size={16} className="text-orange-500" /> {item.readTime} Lesezeit
+        </span>
+      </div>
+    </motion.div>
+  )
+};
 
 const Articles: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('Alle');

@@ -7,10 +7,9 @@ export const Footer: React.FC = () => {
     <footer className="border-t border-border bg-bg py-16">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-fg text-bg flex items-center justify-center font-bold">A</div>
-            <span className="text-xl font-bold">Any Tec</span>
-          </div>
+          <Link to="/" className="text-xl font-bold tracking-tight animate-shine">
+            Any Tec
+          </Link>
           <div className="flex flex-wrap gap-8 text-sm text-muted">
             {NAV_LINKS.map((link) => (
               <Link key={link.name} to={link.to} className="hover:text-fg">

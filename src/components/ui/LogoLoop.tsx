@@ -291,7 +291,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
                     '[--logoloop-gap:32px]',
                     '[--logoloop-logoHeight:28px]',
                     '[--logoloop-fadeColorAuto:#ffffff]',
-                    'dark:[--logoloop-fadeColorAuto:#0b0b0b]', // Changed from hardcoded black #0b0b0b to match app theme if needed, but #0b0b0b is close to --bg in dark mode. The app uses #030712.
+                    'dark:[--logoloop-fadeColorAuto:#000000]', // Updated to match valid dark mode bg
                     scaleOnHover && 'py-[calc(var(--logoloop-logoHeight)*0.1)]',
                     className
                 ),

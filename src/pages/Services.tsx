@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Cloud, Server, Shield, Network, ArrowRight, CheckCircle2, Monitor, Truck, LayoutGrid, Wifi, Lock, Activity } from 'lucide-react';
+import { Server, Shield, ArrowRight, CheckCircle2, Monitor, Truck, LayoutGrid, Lock, Activity } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { SiCisco, SiUbiquiti, SiFortinet } from 'react-icons/si';
 import { MicrosoftSharePointLogo, MicrosoftOneDriveLogo, MicrosoftIntuneLogo } from '@/components/icons/MicrosoftCustomIcons';
 import { ChangingText } from '@/components/ui/ChangingText';
 import serverRoomImg from '@/assets/server_room.png';
-
+import carbonPattern from '@/assets/carbon-fibre.png';
 
 const SectionHeader = ({ title }: { title: string }) => (
     <div className="mb-16 md:mb-24">
@@ -205,7 +205,7 @@ const Services: React.FC = () => {
                     transition={{ duration: 0.7 }}
                     className="p-10 md:p-16 rounded-[48px] bg-emerald-50/50 dark:bg-[#0f1115] border border-emerald-100 dark:border-white/10 relative overflow-hidden shadow-2xl"
                 >
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5 dark:opacity-10" />
+                    <div className="absolute inset-0 opacity-5 dark:opacity-10" style={{ backgroundImage: `url(${carbonPattern})` }} />
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-400/10 dark:bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
 
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -352,7 +352,7 @@ const Services: React.FC = () => {
                                 className="relative w-full max-w-md aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10 dark:border-white/5 group"
                                 style={{ transformStyle: "preserve-3d" }}
                             >
-                                <img src={serverRoomImg} alt="Server Room" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <img src={serverRoomImg} alt="Server Room" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
 
                                 <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-z-10">

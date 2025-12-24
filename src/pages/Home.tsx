@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight, Store } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
-import { PixelVisual } from '@/components/visuals/PixelVisual';
+
 import { cn } from '@/utils/cn';
 import { ReadyToWorkSection } from '@/components/home/ReadyToWorkSection';
 import RotatingText from '@/components/text/RotatingText';
@@ -299,7 +299,7 @@ const Home: React.FC = () => {
                 hoverSpeed={30}
                 scaleOnHover
                 fadeOut
-                fadeOutColor={theme === 'light' ? "#ffffff" : "#030712"}
+                fadeOutColor={theme === 'light' ? "#ffffff" : "#000000"}
                 ariaLabel="Technology partners"
               />
             </div>

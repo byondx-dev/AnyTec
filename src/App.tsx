@@ -1,10 +1,21 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 import { Layout } from './components/layout/Layout';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import Articles from './pages/Articles';
-import Setups from './pages/Setups';
-import Services from './pages/Services';
+
+// Lazy load pages for better initial load performance
+const Home = lazy(() => import('./pages/Home'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Articles = lazy(() => import('./pages/Articles'));
+const ArticlePost = lazy(() => import('./pages/ArticlePost'));
+const Setups = lazy(() => import('./pages/Setups'));
+const Services = lazy(() => import('./pages/Services'));
+
+// Simple loading fallback
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-bg text-muted">
+    <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 const router = createBrowserRouter([
   {
@@ -13,23 +24,51 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: 'setups',
-        element: <Setups />,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Setups />
+          </Suspense>
+        ),
       },
       {
         path: 'services',
-        element: <Services />,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Services />
+          </Suspense>
+        ),
       },
       {
         path: 'artikel',
-        element: <Articles />,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Articles />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'artikel/:slug',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <ArticlePost />
+          </Suspense>
+        ),
       },
       {
         path: 'kontakt',
-        element: <Contact />,
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Contact />
+          </Suspense>
+        ),
       },
     ],
   },

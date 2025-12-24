@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Fingerprint } from 'lucide-react';
 import { cn } from '@/utils/cn';
@@ -36,6 +36,33 @@ const FingerprintButton = ({
             animate={{ scale: isPressed ? 1.1 : 1 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
+            {/* Text */}
+            <div className="h-6 flex items-center justify-center overflow-hidden">
+                <AnimatePresence mode="wait">
+                    {isPressed ? (
+                        <motion.span
+                            key="active"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -20, opacity: 0 }}
+                            className="text-sm font-bold text-accent tracking-widest uppercase"
+                        >
+                            {activeText}
+                        </motion.span>
+                    ) : (
+                        <motion.span
+                            key="idle"
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -20, opacity: 0 }}
+                            className="text-xs font-medium text-muted/70 tracking-widest uppercase group-hover:text-accent transition-colors"
+                        >
+                            {idleText}
+                        </motion.span>
+                    )}
+                </AnimatePresence>
+            </div>
+
             {/* Fingerprint Icon Container */}
             <div className="relative">
                 <motion.div
@@ -92,33 +119,6 @@ const FingerprintButton = ({
                         transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
                     />
                 )}
-            </div>
-
-            {/* Text */}
-            <div className="h-6 flex items-center justify-center overflow-hidden">
-                <AnimatePresence mode="wait">
-                    {isPressed ? (
-                        <motion.span
-                            key="active"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -20, opacity: 0 }}
-                            className="text-sm font-bold text-accent tracking-widest uppercase"
-                        >
-                            {activeText}
-                        </motion.span>
-                    ) : (
-                        <motion.span
-                            key="idle"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -20, opacity: 0 }}
-                            className="text-xs font-medium text-muted/70 tracking-widest uppercase group-hover:text-accent transition-colors"
-                        >
-                            {idleText}
-                        </motion.span>
-                    )}
-                </AnimatePresence>
             </div>
         </motion.button>
     );
