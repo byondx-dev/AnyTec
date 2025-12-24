@@ -1,6 +1,6 @@
 # Any Tec 
 
-A production-ready React marketing website for "Any Tec" IT Services.
+"Any Tec" IT Services.
 
 ## Tech Stack
 - **Framework:** React 18 + Vite
