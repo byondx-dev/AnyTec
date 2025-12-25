@@ -2,12 +2,16 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Share2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { articles } from '@/data/articles';
 
 const ArticlePost: React.FC = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
+    const { i18n } = useTranslation();
+    const lang = (i18n.language || 'en').startsWith('de') ? 'de' : 'en';
+
     const article = articles.find((a) => a.slug === slug);
 
     useEffect(() => {
@@ -17,8 +21,8 @@ const ArticlePost: React.FC = () => {
     if (!article) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center">
-                <h1 className="text-2xl font-bold mb-4">Artikel nicht gefunden</h1>
-                <Button onClick={() => navigate('/artikel')}>Zurück zur Übersicht</Button>
+                <h1 className="text-2xl font-bold mb-4">Artikel nicht gefunden / Article not found</h1>
+                <Button onClick={() => navigate('/artikel')}>Zurück / Back</Button>
             </div>
         );
     }
@@ -26,8 +30,8 @@ const ArticlePost: React.FC = () => {
     const handleShare = () => {
         if (navigator.share) {
             navigator.share({
-                title: article.title,
-                text: article.description,
+                title: article.title[lang],
+                text: article.description[lang],
                 url: window.location.href,
             }).catch(console.error);
         } else {
@@ -74,7 +78,7 @@ const ArticlePost: React.FC = () => {
                         className="group pl-0 hover:bg-transparent hover:text-accent"
                     >
                         <ArrowLeft className="mr-2 transition-transform group-hover:-translate-x-1" size={20} />
-                        Zurück zur Übersicht
+                        {lang === 'de' ? 'Zurück zur Übersicht' : 'Back to Articles'}
                     </Button>
                 </motion.div>
 
@@ -86,13 +90,13 @@ const ArticlePost: React.FC = () => {
                         className="flex flex-wrap items-center gap-4 text-sm text-muted mb-6"
                     >
                         <span className="px-3 py-1 rounded-full bg-accent/10 text-accent font-medium">
-                            {article.category}
+                            {article.category[lang]}
                         </span>
                         <span className="flex items-center gap-2">
-                            <Calendar size={16} /> {article.date}
+                            <Calendar size={16} /> {article.date[lang]}
                         </span>
                         <span className="flex items-center gap-2">
-                            <Clock size={16} /> {article.readTime} Lesezeit
+                            <Clock size={16} /> {article.readTime[lang]} {lang === 'de' ? 'Lesezeit' : 'Read time'}
                         </span>
                     </motion.div>
 
@@ -102,7 +106,7 @@ const ArticlePost: React.FC = () => {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-8"
                     >
-                        {article.title}
+                        {article.title[lang]}
                     </motion.h1>
 
                     <motion.div
@@ -112,7 +116,7 @@ const ArticlePost: React.FC = () => {
                         className="flex items-center gap-4"
                     >
                         <Button variant="secondary" size="sm" onClick={handleShare}>
-                            <Share2 size={16} className="mr-2" /> Teilen
+                            <Share2 size={16} className="mr-2" /> {lang === 'de' ? 'Teilen' : 'Share'}
                         </Button>
                     </motion.div>
                 </div>
@@ -124,9 +128,9 @@ const ArticlePost: React.FC = () => {
                     <aside className="lg:col-span-3 lg:block hidden">
                         <div className="sticky top-32 space-y-8">
                             <div>
-                                <h4 className="text-sm font-bold uppercase tracking-wider text-muted mb-4">Inhalt</h4>
+                                <h4 className="text-sm font-bold uppercase tracking-wider text-muted mb-4">{lang === 'de' ? 'Inhalt' : 'Contents'}</h4>
                                 <nav className="flex flex-col space-y-2 border-l border-border/50">
-                                    {article.toc?.map((item) => (
+                                    {article.toc && article.toc[lang] ? article.toc[lang].map((item) => (
                                         <button
                                             key={item.id}
                                             onClick={() => scrollToSection(item.id)}
@@ -134,7 +138,7 @@ const ArticlePost: React.FC = () => {
                                         >
                                             {item.title}
                                         </button>
-                                    ))}
+                                    )) : null}
                                 </nav>
                             </div>
                         </div>
@@ -147,7 +151,7 @@ const ArticlePost: React.FC = () => {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.3 }}
                             className="prose prose-lg dark:prose-invert prose-headings:text-fg prose-p:text-muted prose-a:text-accent prose-strong:text-fg max-w-none"
-                            dangerouslySetInnerHTML={{ __html: article.content || '' }}
+                            dangerouslySetInnerHTML={{ __html: article.content[lang] || '' }}
                         />
                     </div>
 

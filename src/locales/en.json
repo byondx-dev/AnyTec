@@ -1,0 +1,415 @@
+{
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "solutions": "Solutions",
+        "setups": "Setups",
+        "articles": "Articles",
+        "contact": "Contact",
+        "knowledgeHub": "Knowledge Hub"
+    },
+    "footer": {
+        "contact": "Contact",
+        "legal": "Legal",
+        "imprint": "Imprint",
+        "privacy": "Privacy",
+        "language": "Language"
+    },
+    "home": {
+        "hero": {
+            "titlePart1": "Any Tec",
+            "titlePart2": "takes care of",
+            "titlePart3": "Any",
+            "description": "Tailored IT infrastructure. Whether for individual locations/franchise chains or cloud operations. We professionally take care of Any Tec.",
+            "hold": "Click & Hold",
+            "active": "Woaoaoaaw"
+        },
+        "logos": {
+            "workingWith": "We work with",
+            "tools": "Tools"
+        },
+        "statement": {
+            "badge": "Our Services",
+            "title": "Cloud, On-Prem &",
+            "titleSuffix": "everything in between.",
+            "text": "We offer the full spectrum: From Azure and M365 to physical server racks on-site. Everything from a single source.",
+            "button": "View All Services"
+        },
+        "rotating": {
+            "prefix": "Any Tec for",
+            "description": "Industry flexible and quickly deployed – we deliver the right setup for every space."
+        },
+        "midCta": {
+            "badge": "Start Today",
+            "title": "Blah Blah Blah you don't want boring text.",
+            "titleSuffix": "Check out our offers directly",
+            "description": "Focus on your business while we ensure your background tech works smoothly.",
+            "card1": {
+                "title": "Ready to",
+                "subtitle": "Work",
+                "desc": "Ready-to-use IT setups.",
+                "button": "View"
+            },
+            "card2": {
+                "title": "Enterprise",
+                "subtitle": "Services",
+                "desc": "Individual Cloud & Network.",
+                "button": "Solutions"
+            }
+        },
+        "interactive": {
+            "title": "We use the :",
+            "titleSuffix": "Cloud, Hybrid or On-Prem.",
+            "steps": [
+                {
+                    "title": "Cloud Setup",
+                    "desc": "Centralized management for maximum flexibility."
+                },
+                {
+                    "title": "Hybrid Locations",
+                    "desc": "The best of both worlds for franchise systems."
+                },
+                {
+                    "title": "On-Prem Special Cases",
+                    "desc": "Secure local servers for data-sensitive areas."
+                }
+            ]
+        },
+        "comparison": {
+            "badge": "How it works",
+            "title": "The Any Tec",
+            "titleSuffix": "Difference",
+            "card1": {
+                "title": "Other Providers",
+                "desc": "Often fragmented solutions, different contacts for internet, POS, and cloud."
+            },
+            "card2": {
+                "title": "Classic IT Support",
+                "desc": "Usually reacts only when something breaks. High hourly rates, travel costs, and little proactivity."
+            },
+            "card3": {
+                "title": "Any Tec Blueprint",
+                "desc": "Holistic architecture. Proactive monitoring and scalable standard processes."
+            }
+        },
+        "faq": {
+            "title": "Frequent",
+            "titleSuffix": "Questions",
+            "subtitle": "Everything you need to know about starting with Any Tec.",
+            "button": "Question not listed? Contact us",
+            "items": [
+                {
+                    "q": "How quickly can we connect new locations?",
+                    "a": "Thanks to our blueprints, we can often prepare and ship network infrastructure for new locations within a few days. Plug & Play on site."
+                },
+                {
+                    "q": "Do you use cloud services like Microsoft Azure?",
+                    "a": "Yes, we rely on proven platforms like the Microsoft Cloud (incl. Azure Services) for maximum stability, security, and scalability."
+                },
+                {
+                    "q": "Do you offer support for POS systems?",
+                    "a": "We ensure the robust infrastructure that modern POS systems need (stable connection, VLANs) and work directly with providers in case of issues."
+                },
+                {
+                    "q": "What does Privacy-First mean?",
+                    "a": "We segment networks so that sensitive data (e.g., from customers or in Women-Only Spaces) is strictly separated from public guest Wi-Fi. Security comes first."
+                },
+                {
+                    "q": "Is there a minimum term?",
+                    "a": "We offer flexible models. One-time prices for project setups, monthly terms with fair notice periods for Managed Services."
+                },
+                {
+                    "q": "Do you also take over existing IT?",
+                    "a": "Yes, we analyze the current state and migrate step-by-step into a cleanly managed structure without disrupting your operations."
+                }
+            ]
+        },
+        "finalCta": {
+            "title": "Talk to us about your project",
+            "desc": "No waiting loops. Real experts. Immediate solutions.",
+            "button": "Book Initial Call"
+        }
+    },
+    "contact": {
+        "title": "Contact",
+        "subtitle": "Ready for the next level of your IT? Fill out the form and we'll get back to you within 24 hours.",
+        "badges": {
+            "response": "Response < 24h",
+            "call": "Non-binding Initial Call"
+        },
+        "direct": {
+            "title": "Direct Contact",
+            "email": "E-Mail",
+            "phone": "Phone",
+            "hours": "Mon-Fri, 09:00 - 18:00",
+            "office": "Office",
+            "address1": "Technologiepark 1",
+            "address2": "10115 Berlin"
+        },
+        "nextSteps": {
+            "title": "What happens next?",
+            "items": [
+                {
+                    "title": "Initial Call",
+                    "text": "We clarify your requirements in 15 mins."
+                },
+                {
+                    "title": "Concept",
+                    "text": "You receive a blueprint for your setup."
+                },
+                {
+                    "title": "Rollout",
+                    "text": "We deliver hardware and configure the cloud."
+                }
+            ]
+        }
+    },
+    "contactForm": {
+        "activeSetups": "Selected Setups:",
+        "selected": "Selected:",
+        "success": {
+            "title": "Message Sent!",
+            "desc": "Thank you for your request. Our team will get back to you as soon as possible.",
+            "button": "New Message"
+        },
+        "labels": {
+            "name": "Name",
+            "company": "Company",
+            "email": "E-Mail",
+            "phone": "Phone (Optional)",
+            "industry": "Industry",
+            "locations": "Number of Locations",
+            "message": "Message"
+        },
+        "placeholders": {
+            "name": "John Doe",
+            "company": "Company Ltd",
+            "email": "john@company.com",
+            "phone": "+1 ...",
+            "message": "Briefly tell us about your project..."
+        },
+        "options": {
+            "choose": "Please choose...",
+            "retail": "Retail",
+            "gastro": "Gastronomy / Cafe",
+            "office": "Office / Coworking",
+            "health": "Fitness / Yoga",
+            "other": "Other",
+            "loc1": "1 Location",
+            "loc2_5": "2-5 Locations",
+            "loc5_20": "5-20 Locations",
+            "loc20plus": "20+ Locations"
+        },
+        "privacy": "I agree to the processing of my data.",
+        "submit": "Send Request",
+        "submitting": "Sending..."
+    },
+    "services": {
+        "hero": {
+            "title": "IT & Cloud Ops for Enterprise Customers",
+            "titleSuffix": "Reimagined.",
+            "description": "From cloud to cable in the ground. We take care of tech so you can focus on your business."
+        },
+        "azure": {
+            "prefix": "I need",
+            "title": "Microsoft Azure &",
+            "titleSuffix": "Cloud Infrastructure",
+            "description": "We build your cloud foundation. Scalable, secure, and ready for the future. Whether Lift & Shift or Cloud-Native.",
+            "button": "Azure Consulting",
+            "items": {
+                "kubernetes": {
+                    "title": "Azure Kubernetes Service",
+                    "desc": "Enterprise-level container orchestration."
+                },
+                "terraform": {
+                    "title": "Terraform IaC",
+                    "desc": "Infrastructure as Code. Reproducible and versioned."
+                },
+                "cicd": {
+                    "title": "CI/CD Pipelines",
+                    "desc": "Automated deployments for faster releases."
+                },
+                "hybrid": {
+                    "title": "Hybrid Cloud",
+                    "desc": "Securely connect your datacenter to the cloud."
+                },
+                "identity": {
+                    "title": "Identity Management",
+                    "desc": "Secure access with Entra ID (Azure AD)."
+                },
+                "cost": {
+                    "title": "Cost Management",
+                    "desc": "We optimize your cloud spending sustainably."
+                }
+            }
+        },
+        "m365": {
+            "prefix": "I need",
+            "title": "Microsoft 365",
+            "titleSuffix": "Modern Work",
+            "description": "The complete Office suite, Teams telephony, and SharePoint. Perfectly configured for remote teams. We migrate your data securely and train your team.",
+            "features": [
+                "Exchange Online Migration",
+                "Intune Device Management (MDM)",
+                "Information Protection & Compliance"
+            ]
+        },
+        "network": {
+            "prefix": "I need",
+            "title": "Enterprise Networking",
+            "titleSuffix": "& Cyber Security",
+            "description": "From Next-Gen Firewall to AI-based Endpoint Protection. We secure your infrastructure holistically. Network, endpoints, and cloud.",
+            "tags": [
+                "Endpoint Protection",
+                "XDR",
+                "WiFi 6E",
+                "Zero Trust"
+            ],
+            "vendors": {
+                "network": "Network Security",
+                "endpoint": "Endpoint & XDR",
+                "cisco": "Cisco / Meraki",
+                "fortinet": "Fortinet",
+                "ubiquiti": "Ubiquiti",
+                "watchguard": "WatchGuard",
+                "crowdstrike": "CrowdStrike",
+                "sentinelone": "SentinelOne",
+                "paloalto": "Palo Alto",
+                "trendmicro": "Trend Micro"
+            }
+        },
+        "onprem": {
+            "title": "On-Prem Operations",
+            "server": {
+                "title": "Server Room Management",
+                "desc": "We take care of your racks. From clean cabling to hardware replacement. Order is security."
+            },
+            "moves": {
+                "title": "Office Moves & Rollouts",
+                "desc": "Office relocation or site closure? We dismantle, transport securely, and rebuild at the new location."
+            },
+            "lifecycle": {
+                "title": "Hardware Lifecycle",
+                "desc": "Procurement, installation, and professional disposal of old devices. Your inventory always up to date."
+            },
+            "card": {
+                "title": "Expert Hardware",
+                "desc": "Our team works directly on hardware. No outsourcing to subcontractors."
+            }
+        },
+        "support": {
+            "title": "Expert Support",
+            "description": "No waiting loops. Direct line to certified experts. We solve problems before they stop your business.",
+            "button": "Request Support",
+            "levels": {
+                "l1": {
+                    "level": "1st",
+                    "title": "User Helpdesk",
+                    "desc": "Quick help for daily problems. Forgot password, printer strike, or Outlook issues? We are there immediately."
+                },
+                "l2": {
+                    "level": "2nd",
+                    "title": "System Administration",
+                    "desc": "Deep troubleshooting, server maintenance, user management, and configuration changes."
+                },
+                "l3": {
+                    "level": "3rd",
+                    "title": "Expert Engineering",
+                    "desc": "Architecture issues, complex security incidents, and infrastructure design by Senior Engineers."
+                }
+            }
+        },
+        "cta": {
+            "title": "Ready for better IT?",
+            "button": "Start Now"
+        }
+    },
+    "setups": {
+        "title": "Setups",
+        "description": "Choose the setups that fit your space. Selection automatically appears in the contact form.",
+        "andMore": "and more...",
+        "showDetails": "Show Details",
+        "hideDetails": "Hide Details",
+        "customizable": "Each setup is 100% customizable.",
+        "categories": {
+            "alle": "All",
+            "gastro": "Gastro",
+            "retail": "Retail",
+            "wellness": "Wellness",
+            "workspace": "Workspace",
+            "entertainment": "Entertainment",
+            "salon": "Salon",
+            "ecommerce": "E-Commerce"
+        },
+        "items": {
+            "gastro": {
+                "name": "Gastro Setup",
+                "bullets": [
+                    "POS + VLAN",
+                    "Guest WiFi",
+                    "Cameras optional"
+                ],
+                "details": "Optimized for high frequency and reliability. We strictly separate POS systems from guest WiFi and seamlessly integrate digital kitchen monitors."
+            },
+            "retail": {
+                "name": "Retail Setup",
+                "bullets": [
+                    "Scanners & POS",
+                    "Central Updates",
+                    "Branch VPN"
+                ],
+                "details": "Securely connect all branches via VPN. Central updates for your scanners and POS run at night so daily business is not disturbed."
+            },
+            "wellness": {
+                "name": "Wellness Setup",
+                "bullets": [
+                    "Booking System",
+                    "Wearables-Ready",
+                    "Privacy Zones"
+                ],
+                "details": "Create a relaxed atmosphere without tech frustration. We ensure perfect coverage for smart check-ins and complete silence in privacy zones."
+            },
+            "workspace": {
+                "name": "Workspace Setup",
+                "bullets": [
+                    "Hotdesk WiFi",
+                    "Zero Trust light",
+                    "Guest Access"
+                ],
+                "details": "Flexible work needs flexible WiFi. Enterprise-level security, but simple enough for guests to log in independently."
+            },
+            "entertainment": {
+                "name": "Entertainment Setup",
+                "bullets": [
+                    "Ticketing Integration",
+                    "Public WiFi",
+                    "Redundancy"
+                ],
+                "details": "When thousands of people go online at once, nothing can wobble. High-performance WiFi and redundant internet lines for events."
+            },
+            "salon": {
+                "name": "Salon Setup",
+                "bullets": [
+                    "POS & Calendar",
+                    "WiFi Zones",
+                    "Remote Support"
+                ],
+                "details": "Stable internet for your booking system and tablet POS. Plus a separate network for your clients so they can surf during treatment."
+            },
+            "ecommerce": {
+                "name": "Online Store Setup",
+                "bullets": [
+                    "Headless-ready",
+                    "Shipping Connection",
+                    "Monitoring"
+                ],
+                "details": "The backend for your shop. We integrate warehouse systems, create interfaces to shipping providers, and monitor server performance 24/7."
+            }
+        },
+        "contact": {
+            "badge": "Contact",
+            "title": "Does a setup fit for you?",
+            "description": "Your selection will be sent with the form. Feel free to add details, we'll get back to you in <span class=\"font-semibold text-fg\"> &lt; 24h</span>."
+        }
+    }
+}

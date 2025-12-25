@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Bookmark, Clock, Flame, Sparkles, Tag } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 import { cn } from '@/utils/cn';
@@ -13,6 +14,8 @@ const categories = ['Alle', 'Cloud', 'Security', 'Retail', 'How-To'];
 
 const ArticleCard = ({ item, highlight }: { item: Article; highlight?: boolean }) => {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+  const lang = (i18n.language || 'en').startsWith('de') ? 'de' : 'en';
 
   return (
     <motion.div
@@ -28,27 +31,27 @@ const ArticleCard = ({ item, highlight }: { item: Article; highlight?: boolean }
       )}
       <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-muted mb-3">
         <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-muted2 text-fg/80">
-          <Tag size={14} /> {item.category}
+          <Tag size={14} /> {item.category[lang]}
         </span>
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent">
-          <Clock size={14} /> {item.readTime}
+          <Clock size={14} /> {item.readTime[lang]}
         </span>
-        {item.badge && (
+        {item.badge && item.badge[lang] && (
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fg text-bg">
-            <Sparkles size={14} /> {item.badge}
+            <Sparkles size={14} /> {item.badge[lang]}
           </span>
         )}
       </div>
       <h3 className={cn('text-2xl font-bold mb-3 group-hover:text-accent transition-colors', highlight && 'text-3xl leading-tight')}>
-        {item.title}
+        {item.title[lang]}
       </h3>
-      <p className="text-muted mb-6 leading-relaxed">{item.description}</p>
+      <p className="text-muted mb-6 leading-relaxed">{item.description[lang]}</p>
       <div className="flex items-center gap-3 text-sm text-muted">
         <span className="flex items-center gap-2">
-          <Bookmark size={16} className="text-accent" /> {item.date}
+          <Bookmark size={16} className="text-accent" /> {item.date[lang]}
         </span>
         <span className="flex items-center gap-2">
-          <Flame size={16} className="text-orange-500" /> {item.readTime} Lesezeit
+          <Flame size={16} className="text-orange-500" /> {item.readTime[lang]} Lesezeit
         </span>
       </div>
     </motion.div>
@@ -57,11 +60,16 @@ const ArticleCard = ({ item, highlight }: { item: Article; highlight?: boolean }
 
 const Articles: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('Alle');
+  const { t } = useTranslation();
 
   const filtered = useMemo(() => {
+    // Basic filtering on German category name for now ensuring backward compat with 'Alle'
     if (activeCategory === 'Alle') return articles;
-    return articles.filter((a) => a.category === activeCategory);
+    // Check both languages or just one. Since data has same values mostly, check en or de.
+    return articles.filter((a) => a.category.de === activeCategory || a.category.en === activeCategory);
   }, [activeCategory]);
+
+  // Note: We might want to translate 'Alle' button text later using t('nav.all') etc.
 
   return (
     <div className="min-h-screen">
@@ -72,7 +80,7 @@ const Articles: React.FC = () => {
         <div className="container mx-auto px-6 pt-28 pb-20 relative z-10">
           <Reveal>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur">
-              Wissenshub
+              {t('nav.knowledgeHub', 'Wissenshub')}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mt-6 mb-6">
               Artikel, Playbooks & Updates <span className="text-muted/40">für moderne IT.</span>

@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight, Store } from 'lucide-react';
@@ -79,11 +80,12 @@ const AnimateHeight = ({ isVisible, children }: { isVisible: boolean, children?:
 
 const InteractiveModule = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const { t } = useTranslation();
 
   const steps = [
-    { id: 0, title: "Cloud Setup", desc: "Zentralisiertes Management für maximale Flexibilität." },
-    { id: 1, title: "Hybrid Standorte", desc: "Das Beste aus beiden Welten für Franchise-Systeme." },
-    { id: 2, title: "On-Prem Spezialfälle", desc: "Sichere lokale Server für datensensible Bereiche." }
+    { id: 0, title: t('home.interactive.steps.0.title'), desc: t('home.interactive.steps.0.desc') },
+    { id: 1, title: t('home.interactive.steps.1.title'), desc: t('home.interactive.steps.1.desc') },
+    { id: 2, title: t('home.interactive.steps.2.title'), desc: t('home.interactive.steps.2.desc') }
   ];
 
   return (
@@ -95,7 +97,7 @@ const InteractiveModule = () => {
         {/* Left */}
         <div className="space-y-8">
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-            Wir nutzen die : <br /><span className="text-gray-500">Cloud, Hybrid oder On-Prem.</span>
+            {t('home.interactive.title')} <br /><span className="text-gray-500">{t('home.interactive.titleSuffix')}</span>
           </h2>
         </div>
 
@@ -202,6 +204,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
   const [isFingerprintPressed, setIsFingerprintPressed] = useState(false);
+  const { t } = useTranslation();
 
   // Custom colors for Light Mode to match white background
   const currentEffectOptions = useMemo(() => {
@@ -226,7 +229,7 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* 2. Hero Section - With Overflow Hidden */}
-      <section className="relative min-h-[85vh] lg:min-h-[92vh] flex items-center pt-12 lg:pt-20 overflow-hidden">
+      <section className="relative min-h-screen lg:min-h-[92vh] flex items-center pt-12 lg:pt-20 overflow-hidden">
         {/* Hyperspeed Background */}
         <motion.div
           className="absolute inset-0 z-0"
@@ -242,12 +245,12 @@ const Home: React.FC = () => {
           <div className="max-w-4xl relative z-20 flex flex-col items-center">
             <Reveal delay={0.1}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-8 text-balance -tracking-wide">
-                Any Tec <br /> kümmert sich um <br />Any <span className="text-muted/40">Tec.</span>
+                {t('home.hero.titlePart1')} <br /> {t('home.hero.titlePart2')} <br />{t('home.hero.titlePart3')} <span className="text-muted/40">Tec.</span>
               </h1>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="text-lg md:text-xl text-muted mb-10 max-w-2xl mx-auto leading-relaxed">
-                Maßgeschneiderte IT-Infrastruktur für Einzelstandorte und Franchise-Ketten. Skalierbar, sicher und sofort einsatzbereit.
+                {t('home.hero.description')}
               </p>
             </Reveal>
             <Reveal delay={0.3}>
@@ -256,8 +259,8 @@ const Home: React.FC = () => {
                 <div className="mt-2">
                   <FingerprintButton
                     onPressChange={setIsFingerprintPressed}
-                    idleText="Click & Hold"
-                    activeText="Woaoaoaaw"
+                    idleText={t('home.hero.hold')}
+                    activeText={t('home.hero.active')}
                   />
                 </div>
               </div>
@@ -284,7 +287,7 @@ const Home: React.FC = () => {
       {/* 2.5 Logo Loop Section */}
       <section className="py-10 border-b border-border/40 bg-background/50 backdrop-blur-sm overflow-hidden flex flex-col items-center gap-6 text-center">
         <div className="container mx-auto px-6">
-          <span className="text-sm font-semibold text-muted uppercase tracking-widest opacity-70">Wir arbeiten mit</span>
+          <span className="text-sm font-semibold text-muted uppercase tracking-widest opacity-70">{t('home.logos.workingWith')}</span>
         </div>
 
         <div className="w-full">
@@ -307,7 +310,7 @@ const Home: React.FC = () => {
         </div>
 
         <div className="container mx-auto px-6">
-          <span className="text-xs font-bold text-transparent select-none opacity-1">Tools</span>
+          <span className="text-xs font-bold text-transparent select-none opacity-1">{t('home.logos.tools')}</span>
         </div>
       </section>
 
@@ -336,17 +339,17 @@ const Home: React.FC = () => {
               <span className="font-bold text-gradient-accent text-xl">IT</span>
             </div>
             <div className="inline-block px-4 py-1.5 rounded-full border border-border bg-bg/50 backdrop-blur text-xs font-semibold text-muted mb-8 tracking-wide uppercase">
-              Unsere Services
+              {t('home.statement.badge')}
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-              Cloud, On-Prem & <br /><span className="text-muted/40">alles dazwischen.</span>
+              {t('home.statement.title')} <br /><span className="text-muted/40">{t('home.statement.titleSuffix')}</span>
             </h2>
             <p className="text-muted text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10">
-              Wir bieten das volle Spektrum: Von Azure und M365 bis zum physischen Server-Rack vor Ort. Alles aus einer Hand.
+              {t('home.statement.text')}
             </p>
             <div className="flex justify-center">
               <Button variant="ghost" size="lg" className="rounded-full px-8 border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent" onClick={() => navigate('/services')}>
-                Alle Services ansehen <ArrowRight className="ml-2 w-4 h-4" />
+                {t('home.statement.button')} <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
           </Reveal>
@@ -357,7 +360,7 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-6 text-center">
           <Reveal>
             <div className="flex flex-wrap items-baseline justify-center gap-3 text-3xl md:text-4xl font-bold leading-tight">
-              <span className="text-muted">Any Tec for</span>
+              <span className="text-muted">{t('home.rotating.prefix')}</span>
               <RotatingText
                 texts={[
                   'Gastro',
@@ -385,7 +388,7 @@ const Home: React.FC = () => {
               />
             </div>
             <p className="text-muted max-w-3xl mt-4 mx-auto">
-              Branchenflexibel und schnell einsatzbereit – wir liefern das passende Setup für jede Fläche.
+              {t('home.rotating.description')}
             </p>
           </Reveal>
         </div>
@@ -413,9 +416,9 @@ const Home: React.FC = () => {
 
         <div className="container mx-auto px-6 text-center max-w-3xl relative z-10">
           <Reveal>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-medium text-sm mb-8 border border-accent/20">Heute starten</span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">Bla Bla Bla du willst keinen langweiligen Text.<span className="text-muted/50">Sieh dir direkt unsere Angebote an</span></h2>
-            <p className="text-muted text-lg mb-10 max-w-2xl mx-auto">Konzentriere dich auf dein Geschäft, während wir sicherstellen, dass deine Technik im Hintergrund reibungslos funktioniert.</p>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-medium text-sm mb-8 border border-accent/20">{t('home.midCta.badge')}</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">{t('home.midCta.title')}<span className="text-muted/50">{t('home.midCta.titleSuffix')}</span></h2>
+            <p className="text-muted text-lg mb-10 max-w-2xl mx-auto">{t('home.midCta.description')}</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
               {/* Card 1: Setups */}
               <motion.div
@@ -437,12 +440,12 @@ const Home: React.FC = () => {
 
                 {/* Text */}
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold text-white mb-2 leading-none tracking-tight">Ready to<br />Work</h3>
-                  <p className="text-sm text-gray-400 font-medium mb-6">Betriebsfertige<br />IT-Setups.</p>
+                  <h3 className="text-3xl font-bold text-white mb-2 leading-none tracking-tight">{t('home.midCta.card1.title')}<br />{t('home.midCta.card1.subtitle')}</h3>
+                  <p className="text-sm text-gray-400 font-medium mb-6">{t('home.midCta.card1.desc')}</p>
 
                   {/* Button */}
                   <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-600 text-black font-bold text-sm shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 group-hover:scale-105 transition-all duration-300">
-                    Ansehen <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    {t('home.midCta.card1.button')} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </motion.div>
@@ -467,12 +470,12 @@ const Home: React.FC = () => {
 
                 {/* Text */}
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold text-white mb-2 leading-none tracking-tight">Enterprise<br />Services</h3>
-                  <p className="text-sm text-gray-400 font-medium mb-6">Individuelle<br />Cloud & Network.</p>
+                  <h3 className="text-3xl font-bold text-white mb-2 leading-none tracking-tight">{t('home.midCta.card2.title')}<br />{t('home.midCta.card2.subtitle')}</h3>
+                  <p className="text-sm text-gray-400 font-medium mb-6">{t('home.midCta.card2.desc')}</p>
 
                   {/* Button */}
                   <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 group-hover:scale-105 transition-all duration-300">
-                    Lösungen <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    {t('home.midCta.card2.button')} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </motion.div>
@@ -494,15 +497,15 @@ const Home: React.FC = () => {
           <Reveal>
             <div className="flex items-center justify-center gap-2 mb-12">
               <div className="w-8 h-8 rounded bg-accent/20 flex items-center justify-center text-accent"><Wifi size={16} /></div>
-              <span className="text-sm font-bold text-muted uppercase tracking-wider">So funktioniert es</span>
+              <span className="text-sm font-bold text-muted uppercase tracking-wider">{t('home.comparison.badge')}</span>
             </div>
-            <h2 className="text-center text-3xl md:text-4xl font-bold mb-20">Der Any Tec <span className="text-muted/40">Unterschied</span></h2>
+            <h2 className="text-center text-3xl md:text-4xl font-bold mb-20">{t('home.comparison.title')} <span className="text-muted/40">{t('home.comparison.titleSuffix')}</span></h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Other Providers */}
               <div className="p-10 rounded-3xl border border-dashed border-border/60 opacity-60 hover:opacity-100 transition-opacity duration-300">
-                <h3 className="font-bold text-xl mb-4">Andere Anbieter</h3>
-                <p className="text-sm text-muted mb-8 leading-relaxed">Oft fragmentierte Lösungen, verschiedene Ansprechpartner für Internet, Kasse und Cloud.</p>
+                <h3 className="font-bold text-xl mb-4">{t('home.comparison.card1.title')}</h3>
+                <p className="text-sm text-muted mb-8 leading-relaxed">{t('home.comparison.card1.desc')}</p>
                 <div className="flex justify-center opacity-40 grayscale">
                   <div className="grid grid-cols-2 gap-3">
                     <div className="w-10 h-10 border-2 border-fg/20 rounded-lg bg-fg/5"></div>
@@ -515,8 +518,8 @@ const Home: React.FC = () => {
 
               {/* Classic IT */}
               <div className="p-10 rounded-3xl border border-dashed border-border/60 opacity-80 hover:opacity-100 transition-opacity duration-300">
-                <h3 className="font-bold text-xl mb-4">Klassische IT-Betreuung</h3>
-                <p className="text-sm text-muted mb-8 leading-relaxed">Reagiert meist erst, wenn etwas kaputt ist. Hohe Stundensätze, Anfahrtskosten und wenig Proaktivität.</p>
+                <h3 className="font-bold text-xl mb-4">{t('home.comparison.card2.title')}</h3>
+                <p className="text-sm text-muted mb-8 leading-relaxed">{t('home.comparison.card2.desc')}</p>
                 <div className="flex justify-center opacity-60">
                   <div className="flex flex-col gap-3 items-center">
                     <div className="w-14 h-14 border-2 border-fg/30 rounded-xl flex items-center justify-center bg-surface"><Laptop size={24} /></div>
@@ -531,8 +534,8 @@ const Home: React.FC = () => {
                 <div className="absolute top-0 right-0 p-6 opacity-[0.03] text-accent group-hover:opacity-10 transition-opacity duration-500 scale-150 origin-top-right">
                   <Cpu size={120} />
                 </div>
-                <h3 className="font-bold text-xl mb-4 text-gradient-accent">Any Tec Blueprint</h3>
-                <p className="text-sm text-muted mb-8 leading-relaxed">Ganzheitliche Architektur. Proaktives Monitoring und skalierbare Standard-Prozesse.</p>
+                <h3 className="font-bold text-xl mb-4 text-gradient-accent">{t('home.comparison.card3.title')}</h3>
+                <p className="text-sm text-muted mb-8 leading-relaxed">{t('home.comparison.card3.desc')}</p>
 
                 {/* Visual Nodes */}
                 <div className="relative h-40 flex items-center justify-center">
@@ -587,28 +590,28 @@ const Home: React.FC = () => {
             <Reveal delay={0.2}>
               <div className="space-y-4">
                 <AccordionItem
-                  question="Wie schnell können wir neue Standorte anbinden?"
-                  answer="Dank unserer Blueprints können wir die Netzwerkinfrastruktur für neue Standorte oft innerhalb weniger Tage vorbereiten und versenden. Plug & Play vor Ort."
+                  question={t('home.faq.items.0.q')}
+                  answer={t('home.faq.items.0.a')}
                 />
                 <AccordionItem
-                  question="Nutzt ihr Cloud-Dienste wie Microsoft Azure?"
-                  answer="Ja, wir setzen auf bewährte Plattformen wie die Microsoft Cloud (inkl. Azure Services) für maximale Stabilität, Sicherheit und Skalierbarkeit."
+                  question={t('home.faq.items.1.q')}
+                  answer={t('home.faq.items.1.a')}
                 />
                 <AccordionItem
-                  question="Bietet ihr Support für Kassensysteme (POS)?"
-                  answer="Wir stellen die robuste Infrastruktur sicher, die moderne POS-Systeme benötigen (stabile Verbindung, VLANs), und arbeiten bei Problemen direkt mit den Anbietern zusammen."
+                  question={t('home.faq.items.2.q')}
+                  answer={t('home.faq.items.2.a')}
                 />
                 <AccordionItem
-                  question="Was bedeutet Privacy-First?"
-                  answer="Wir segmentieren Netzwerke so, dass sensible Daten (z.B. von Kunden oder in Women-Only Spaces) strikt vom öffentlichen Gast-WLAN getrennt sind. Sicherheit steht an erster Stelle."
+                  question={t('home.faq.items.3.q')}
+                  answer={t('home.faq.items.3.a')}
                 />
                 <AccordionItem
-                  question="Gibt es eine Mindestlaufzeit?"
-                  answer="Wir bieten flexible Modelle an. Für Projekt-Setups gibt es Einmalpreise, für Managed Services monatliche Laufzeiten mit fairen Kündigungsfristen."
+                  question={t('home.faq.items.4.q')}
+                  answer={t('home.faq.items.4.a')}
                 />
                 <AccordionItem
-                  question="Übernehmt ihr auch bestehende IT?"
-                  answer="Ja, wir analysieren den Ist-Zustand und migrieren schrittweise in eine sauber gemanagte Struktur, ohne deinen Betrieb zu stören."
+                  question={t('home.faq.items.5.q')}
+                  answer={t('home.faq.items.5.a')}
                 />
               </div>
             </Reveal>
@@ -629,10 +632,10 @@ const Home: React.FC = () => {
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <Reveal>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">Sprich mit uns über dein Projekt</h2>
-            <p className="text-gray-400 mb-12 text-lg md:text-xl">Keine Warteschleifen. Echte Experten. Sofortige Lösungen.</p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">{t('home.finalCta.title')}</h2>
+            <p className="text-gray-400 mb-12 text-lg md:text-xl">{t('home.finalCta.desc')}</p>
             <Button size="lg" className="h-16 px-10 text-lg bg-gradient-accent text-white hover:opacity-90 shadow-[0_0_40px_rgba(59,130,246,0.35)] transition-all hover:scale-105" onClick={() => navigate('/kontakt')}>
-              Erstgespräch buchen
+              {t('home.finalCta.button')}
             </Button>
           </Reveal>
         </div>

@@ -186,9 +186,11 @@ const ReadyCardItem = ({
               </div>
             ) : (
               <img
+                key={currentItem.src}
                 src={currentItem.src}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                loading="eager"
               />
             )}
 
@@ -437,11 +439,10 @@ export const ReadyToWorkSection: React.FC = () => {
   const { toggleSetup } = useSetupSelection();
   const { theme } = useTheme();
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);

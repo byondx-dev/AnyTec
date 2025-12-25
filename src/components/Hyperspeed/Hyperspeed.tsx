@@ -118,7 +118,7 @@ const LongRaceUniforms = {
 
 const turbulentUniforms = {
     uFreq: { value: new THREE.Vector4(4, 8, 8, 1) },
-    uAmp: { value: new THREE.Vector4(25, 5, 10, 10) }
+    uAmp: { value: new THREE.Vector4(2, 1, 1, 1) }
 };
 
 const deepUniforms = {
@@ -726,9 +726,7 @@ class CarLights {
             )
         });
 
-        material.onBeforeCompile = (shader) => {
-            console.log('CarLights Vertex Shader:', shader.vertexShader);
-            console.log('CarLights Fragment Shader:', shader.fragmentShader);
+        material.onBeforeCompile = (_shader) => {
         };
 
         const mesh = new THREE.Mesh(instanced, material);
@@ -810,9 +808,7 @@ class LightsSticks {
             )
         });
 
-        material.onBeforeCompile = (shader) => {
-            console.log('SideSticks Vertex Shader:', shader.vertexShader);
-            console.log('SideSticks Fragment Shader:', shader.fragmentShader);
+        material.onBeforeCompile = (_shader) => {
         };
 
         const mesh = new THREE.Mesh(instanced, material);
@@ -903,9 +899,7 @@ class Road {
             )
         });
 
-        material.onBeforeCompile = (shader) => {
-            console.log('Road/Island Vertex Shader:', shader.vertexShader);
-            console.log('Road/Island Fragment Shader:', shader.fragmentShader);
+        material.onBeforeCompile = (_shader) => {
         };
 
         const mesh = new THREE.Mesh(geometry, material);
@@ -933,8 +927,8 @@ function resizeRendererToDisplaySize(
     setSize: (width: number, height: number, updateStyle: boolean) => void
 ) {
     const canvas = renderer.domElement;
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+    const width = Math.max(canvas.clientWidth, 1);
+    const height = Math.max(canvas.clientHeight, 1);
     const needResize = canvas.width !== width || canvas.height !== height;
     if (needResize) {
         setSize(width, height, false);
@@ -978,13 +972,16 @@ class App {
             antialias: false,
             alpha: true
         });
-        this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
+
+        const initialWidth = Math.max(container.offsetWidth, 1);
+        const initialHeight = Math.max(container.offsetHeight, 1);
+        this.renderer.setSize(initialWidth, initialHeight, false);
         this.renderer.setPixelRatio(window.devicePixelRatio);
 
         this.composer = new EffectComposer(this.renderer);
         container.appendChild(this.renderer.domElement);
 
-        this.camera = new THREE.PerspectiveCamera(options.fov, container.offsetWidth / container.offsetHeight, 0.1, 10000);
+        this.camera = new THREE.PerspectiveCamera(options.fov, initialWidth / initialHeight, 0.1, 10000);
         this.camera.position.z = -5;
         this.camera.position.y = 8;
         this.camera.position.x = 0;
@@ -1037,12 +1034,13 @@ class App {
         this.onTouchEnd = this.onTouchEnd.bind(this);
         this.onContextMenu = this.onContextMenu.bind(this);
 
-        window.addEventListener('resize', this.onWindowResize.bind(this));
+        this.onWindowResize = this.onWindowResize.bind(this);
+        window.addEventListener('resize', this.onWindowResize);
     }
 
     onWindowResize() {
-        const width = this.container.offsetWidth;
-        const height = this.container.offsetHeight;
+        const width = Math.max(this.container.offsetWidth, 1);
+        const height = Math.max(this.container.offsetHeight, 1);
 
         this.renderer.setSize(width, height);
         this.camera.aspect = width / height;
@@ -1208,7 +1206,7 @@ class App {
             this.scene.clear();
         }
 
-        window.removeEventListener('resize', this.onWindowResize.bind(this));
+        window.removeEventListener('resize', this.onWindowResize);
         if (this.container) {
             this.container.removeEventListener('mousedown', this.onMouseDown);
             this.container.removeEventListener('mouseup', this.onMouseUp);

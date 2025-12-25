@@ -11,6 +11,7 @@ import { MicrosoftSharePointLogo, MicrosoftOneDriveLogo, MicrosoftIntuneLogo } f
 import { ChangingText } from '@/components/ui/ChangingText';
 import serverRoomImg from '@/assets/server_room.png';
 import carbonPattern from '@/assets/carbon-fibre.png';
+import { useTranslation } from 'react-i18next';
 
 const SectionHeader = ({ title }: { title: string }) => (
     <div className="mb-16 md:mb-24">
@@ -48,6 +49,7 @@ const SupportLevel = ({ level, title, desc, color }: { level: string, title: str
 const Services: React.FC = () => {
     const navigate = useNavigate();
     const containerRef = useRef(null);
+    const { t } = useTranslation();
 
     return (
         <div className="min-h-screen pt-32 pb-20 overflow-hidden" ref={containerRef}>
@@ -56,13 +58,13 @@ const Services: React.FC = () => {
             <section className="container mx-auto px-6 mb-32">
                 <Reveal>
                     <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8">
-                        IT Services <br />
+                        {t('services.hero.title')} <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">
-                            Reimagined.
+                            {t('services.hero.titleSuffix')}
                         </span>
                     </h1>
                     <p className="text-xl md:text-2xl text-muted max-w-2xl leading-relaxed mb-12">
-                        Von der Cloud bis zum Kabel im Boden. Wir kümmern uns um die Technik, damit du dich auf dein Business konzentrieren kannst.
+                        {t('services.hero.description')}
                     </p>
                 </Reveal>
             </section>
@@ -70,8 +72,8 @@ const Services: React.FC = () => {
             {/* 2. Azure Section (Aurora Effect) */}
             <section className="container mx-auto px-6 mb-40">
                 <ChangingText
-                    prefix="Ich brauche"
-                    words={['Cloud Networking', 'Containerumgebungen', 'Cloud Ingenieure', 'Kubernetes Cluster', 'Scalable Architekturen']}
+                    prefix={t('services.azure.prefix')}
+                    words={['Cloud Networking', 'Container Environments', 'Cloud Engineers', 'Kubernetes Cluster', 'Scalable Architectures']}
                 />
 
                 <motion.div
@@ -91,24 +93,24 @@ const Services: React.FC = () => {
                                 <VscAzure size={48} />
                             </div>
                             <h3 className="text-4xl md:text-5xl font-bold leading-tight text-slate-900 dark:text-white">
-                                Microsoft Azure & <br />Cloud Infrastructure
+                                {t('services.azure.title')} <br />{t('services.azure.titleSuffix')}
                             </h3>
                             <p className="text-xl text-slate-600 dark:text-muted leading-relaxed max-w-lg">
-                                Wir bauen deine Cloud-Foundation. Skalierbar, sicher und bereit für die Zukunft. Egal ob Lift & Shift oder Cloud-Native.
+                                {t('services.azure.description')}
                             </p>
                             <Button className="bg-blue-600 hover:bg-blue-500 text-white border-none shadow-lg shadow-blue-900/20">
-                                Azure Consulting
+                                {t('services.azure.button')}
                             </Button>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {[
-                                { title: 'Azure Kubernetes Service', desc: 'Container Orchestrierung auf Enterprise-Level.' },
-                                { title: 'Terraform IaC', desc: 'Infrastruktur als Code. Reproduzierbar und versioniert.' },
-                                { title: 'CI/CD Pipelines', desc: 'Automatisierte Deployments für schnellere Releases.' },
-                                { title: 'Hybrid Cloud', desc: 'Verbinde dein Rechenzentrum sicher mit der Cloud.' },
-                                { title: 'Identity Management', desc: 'Sichere Zugriffe mit Entra ID (Azure AD).' },
-                                { title: 'Cost Management', desc: 'Wir optimieren deine Cloud-Ausgaben nachhaltig.' }
+                                { title: t('services.azure.items.kubernetes.title'), desc: t('services.azure.items.kubernetes.desc') },
+                                { title: t('services.azure.items.terraform.title'), desc: t('services.azure.items.terraform.desc') },
+                                { title: t('services.azure.items.cicd.title'), desc: t('services.azure.items.cicd.desc') },
+                                { title: t('services.azure.items.hybrid.title'), desc: t('services.azure.items.hybrid.desc') },
+                                { title: t('services.azure.items.identity.title'), desc: t('services.azure.items.identity.desc') },
+                                { title: t('services.azure.items.cost.title'), desc: t('services.azure.items.cost.desc') }
                             ].map((item, i) => (
                                 <motion.div
                                     key={i}
@@ -127,8 +129,8 @@ const Services: React.FC = () => {
             {/* 3. M365 Modern Work Section */}
             <section className="container mx-auto px-6 mb-40">
                 <ChangingText
-                    prefix="Ich brauche"
-                    words={['Modern Workplace', 'Teams Telefonie', 'SharePoint Intranet', 'Device Management', 'Secure Collab']}
+                    prefix={t('services.m365.prefix')}
+                    words={['Modern Workplace', 'Teams Telephony', 'SharePoint Intranet', 'Device Management', 'Secure Collab']}
                     className="mb-12"
                 />
 
@@ -170,21 +172,17 @@ const Services: React.FC = () => {
                                 <LayoutGrid size={48} />
                             </div>
                             <h3 className="text-4xl md:text-5xl font-bold leading-tight text-slate-900 dark:text-white">
-                                Microsoft 365 <br />Modern Work
+                                {t('services.m365.title')} <br />{t('services.m365.titleSuffix')}
                             </h3>
                             <p className="text-xl text-slate-600 dark:text-muted leading-relaxed">
-                                Die komplette Office-Suite, Teams Telefonie und SharePoint. Perfekt konfiguriert für remote Teams. Wir migrieren deine Daten sicher und schulen dein Team.
+                                {t('services.m365.description')}
                             </p>
                             <ul className="space-y-4">
-                                <li className="flex items-center gap-3 text-lg font-medium text-slate-700 dark:text-gray-300">
-                                    <CheckCircle2 className="text-indigo-500 dark:text-indigo-400" /> Exchange Online Migration
-                                </li>
-                                <li className="flex items-center gap-3 text-lg font-medium text-slate-700 dark:text-gray-300">
-                                    <CheckCircle2 className="text-indigo-500 dark:text-indigo-400" /> Intune Device Management (MDM)
-                                </li>
-                                <li className="flex items-center gap-3 text-lg font-medium text-slate-700 dark:text-gray-300">
-                                    <CheckCircle2 className="text-indigo-500 dark:text-indigo-400" /> Information Protection & Compliance
-                                </li>
+                                {(t('services.m365.features', { returnObjects: true }) as string[]).map((feature, i) => (
+                                    <li key={i} className="flex items-center gap-3 text-lg font-medium text-slate-700 dark:text-gray-300">
+                                        <CheckCircle2 className="text-indigo-500 dark:text-indigo-400" /> {feature}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -194,7 +192,7 @@ const Services: React.FC = () => {
             {/* 4. Networking & Security Section (NEW) */}
             <section className="container mx-auto px-6 mb-40">
                 <ChangingText
-                    prefix="Ich brauche"
+                    prefix={t('services.network.prefix')}
                     words={['Firewall Security', 'Endpoint Protection', 'XDR / EDR', 'WLAN Voucher System', 'Zero Trust Architecture']}
                     className="mb-12"
                 />
@@ -214,59 +212,58 @@ const Services: React.FC = () => {
                                 <Shield size={48} />
                             </div>
                             <h3 className="text-4xl md:text-5xl font-bold leading-tight text-slate-900 dark:text-white">
-                                Enterprise Networking <br />& Cyber Security
+                                {t('services.network.title')} <br />{t('services.network.titleSuffix')}
                             </h3>
                             <p className="text-xl text-slate-600 dark:text-muted leading-relaxed">
-                                Von der Next-Gen Firewall bis zur KI-basierten Endpoint Protection. Wir sichern deine Infrastruktur ganzheitlich. Netzwerk, Endgeräte und Cloud.
+                                {t('services.network.description')}
                             </p>
 
                             <div className="flex flex-wrap gap-3">
-                                <span className="px-4 py-2 rounded-full bg-emerald-100 dark:bg-white/5 border border-emerald-200 dark:border-white/10 text-sm font-medium text-emerald-700 dark:text-emerald-400">Endpoint Protection</span>
-                                <span className="px-4 py-2 rounded-full bg-emerald-100 dark:bg-white/5 border border-emerald-200 dark:border-white/10 text-sm font-medium text-emerald-700 dark:text-emerald-400">XDR</span>
-                                <span className="px-4 py-2 rounded-full bg-emerald-100 dark:bg-white/5 border border-emerald-200 dark:border-white/10 text-sm font-medium text-emerald-700 dark:text-emerald-400">WiFi 6E</span>
-                                <span className="px-4 py-2 rounded-full bg-emerald-100 dark:bg-white/5 border border-emerald-200 dark:border-white/10 text-sm font-medium text-emerald-700 dark:text-emerald-400">Zero Trust</span>
+                                {(t('services.network.tags', { returnObjects: true }) as string[]).map((tag, i) => (
+                                    <span key={i} className="px-4 py-2 rounded-full bg-emerald-100 dark:bg-white/5 border border-emerald-200 dark:border-white/10 text-sm font-medium text-emerald-700 dark:text-emerald-400">{tag}</span>
+                                ))}
                             </div>
                         </div>
 
                         {/* Vendor Portfolio Grid */}
                         <div className="bg-white/60 dark:bg-white/5 rounded-[32px] p-8 border border-white/50 dark:border-white/5 backdrop-blur-sm">
-                            <h4 className="text-lg font-bold mb-4 text-slate-400 dark:text-white/50 uppercase tracking-wider">Network Security</h4>
+                            <h4 className="text-lg font-bold mb-4 text-slate-400 dark:text-white/50 uppercase tracking-wider">{t('services.network.vendors.network')}</h4>
                             <div className="grid grid-cols-2 gap-4 mb-8">
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <SiCisco size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#1BA0D7] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">Cisco / Meraki</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.cisco')}</span>
                                 </div>
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <SiFortinet size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#EE3124] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">Fortinet</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.fortinet')}</span>
                                 </div>
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <SiUbiquiti size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#0559C9] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">Ubiquiti</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.ubiquiti')}</span>
                                 </div>
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <Shield size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#F37021] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">WatchGuard</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.watchguard')}</span>
                                 </div>
                             </div>
 
-                            <h4 className="text-lg font-bold mb-4 text-slate-400 dark:text-white/50 uppercase tracking-wider">Endpoint & XDR</h4>
+                            <h4 className="text-lg font-bold mb-4 text-slate-400 dark:text-white/50 uppercase tracking-wider">{t('services.network.vendors.endpoint')}</h4>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <Shield size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#FC0000] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">CrowdStrike</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.crowdstrike')}</span>
                                 </div>
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <Activity size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#6726F3] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">SentinelOne</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.sentinelone')}</span>
                                 </div>
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <Server size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#FA582D] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">Palo Alto</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.paloalto')}</span>
                                 </div>
                                 <div className="p-4 rounded-2xl bg-white dark:bg-black/20 hover:bg-slate-50 dark:hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 text-center border border-slate-100 dark:border-white/5 shadow-sm dark:shadow-none group">
                                     <Lock size={32} className="text-slate-600 dark:text-gray-400 group-hover:text-[#D71921] transition-colors" />
-                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">Trend Micro</span>
+                                    <span className="font-semibold text-sm text-slate-700 dark:text-gray-200">{t('services.network.vendors.trendmicro')}</span>
                                 </div>
                             </div>
                         </div>
@@ -277,7 +274,7 @@ const Services: React.FC = () => {
             {/* 5. On-Prem Operations (Timeline / Process) */}
             <section className="bg-white/5 py-32 border-y border-white/5">
                 <div className="container mx-auto px-6">
-                    <SectionHeader title="On-Prem Operations" />
+                    <SectionHeader title={t('services.onprem.title')} />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-12">
@@ -292,9 +289,9 @@ const Services: React.FC = () => {
                                     <Server size={32} className="text-muted group-hover:text-accent transition-colors" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-bold mb-3">Serverraum Management</h3>
+                                    <h3 className="text-2xl font-bold mb-3">{t('services.onprem.server.title')}</h3>
                                     <p className="text-muted leading-relaxed">
-                                        Wir kümmern uns um deine Racks. Von der sauberen Verkabelung bis zum Austausch defekter Hardware. Ordnung ist Sicherheit.
+                                        {t('services.onprem.server.desc')}
                                     </p>
                                 </div>
                             </motion.div>
@@ -310,9 +307,9 @@ const Services: React.FC = () => {
                                     <Truck size={32} className="text-muted group-hover:text-accent transition-colors" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-bold mb-3">Office Moves & Rollouts</h3>
+                                    <h3 className="text-2xl font-bold mb-3">{t('services.onprem.moves.title')}</h3>
                                     <p className="text-muted leading-relaxed">
-                                        Büroumzug oder Standortauflösung? Wir bauen ab, transportieren sicher und bauen am neuen Standort wieder auf.
+                                        {t('services.onprem.moves.desc')}
                                     </p>
                                 </div>
                             </motion.div>
@@ -328,9 +325,9 @@ const Services: React.FC = () => {
                                     <Monitor size={32} className="text-muted group-hover:text-accent transition-colors" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-bold mb-3">Hardware Lifecycle</h3>
+                                    <h3 className="text-2xl font-bold mb-3">{t('services.onprem.lifecycle.title')}</h3>
                                     <p className="text-muted leading-relaxed">
-                                        Beschaffung, Installation und fachgerechte Entsorgung von Altgeräten. Dein Inventory immer auf dem neuesten Stand.
+                                        {t('services.onprem.lifecycle.desc')}
                                     </p>
                                 </div>
                             </motion.div>
@@ -358,9 +355,9 @@ const Services: React.FC = () => {
                                 <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-z-10">
                                     <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl">
                                         <h4 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                            <CheckCircle2 size={20} className="text-accent" /> Expert Hardware
+                                            <CheckCircle2 size={20} className="text-accent" /> {t('services.onprem.card.title')}
                                         </h4>
-                                        <p className="text-white/80 text-sm">Unser Team arbeitet direkt an der Hardware. Kein Outsourcing an Subunternehmer.</p>
+                                        <p className="text-white/80 text-sm">{t('services.onprem.card.desc')}</p>
                                     </div>
                                 </div>
                             </motion.div>
@@ -378,12 +375,12 @@ const Services: React.FC = () => {
             <section className="container mx-auto px-6 py-40">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
                     <div>
-                        <SectionHeader title="Expert Support" />
+                        <SectionHeader title={t('services.support.title')} />
                         <p className="text-xl text-muted mb-12">
-                            Keine Warteschleifen. Direkter Draht zu zertifizierten Experten. Wir lösen Probleme, bevor sie dein Geschäft stoppen.
+                            {t('services.support.description')}
                         </p>
                         <div className="flex gap-4">
-                            <Button size="lg" onClick={() => navigate('/kontakt')}>Support anfordern</Button>
+                            <Button size="lg" onClick={() => navigate('/kontakt')}>{t('services.support.button')}</Button>
                         </div>
                     </div>
 
@@ -391,22 +388,22 @@ const Services: React.FC = () => {
                         <div className="absolute top-0 bottom-0 left-[2.25rem] w-px bg-white/10 md:hidden" /> {/* Mobile Operations Line */}
 
                         <SupportLevel
-                            level="1st"
+                            level={t('services.support.levels.l1.level')}
                             color="bg-cyan-300 text-black"
-                            title="User Helpdesk"
-                            desc="Schnelle Hilfe bei Alltagsproblemen. Passwort vergessen, Drucker streikt oder Outlook zickt? Wir sind sofort da."
+                            title={t('services.support.levels.l1.title')}
+                            desc={t('services.support.levels.l1.desc')}
                         />
                         <SupportLevel
-                            level="2nd"
+                            level={t('services.support.levels.l2.level')}
                             color="bg-blue-500 text-white"
-                            title="System Administration"
-                            desc="Vertiefte Fehlersuche, Server-Wartung, User-Management und Konfigurationsänderungen."
+                            title={t('services.support.levels.l2.title')}
+                            desc={t('services.support.levels.l2.desc')}
                         />
                         <SupportLevel
-                            level="3rd"
+                            level={t('services.support.levels.l3.level')}
                             color="bg-indigo-600 text-white"
-                            title="Expert Engineering"
-                            desc="Architektur-Probleme, komplexe Sicherheitsvorfälle und Infrastruktur-Design durch Senior Engineers."
+                            title={t('services.support.levels.l3.title')}
+                            desc={t('services.support.levels.l3.desc')}
                         />
                     </div>
                 </div>
@@ -415,9 +412,9 @@ const Services: React.FC = () => {
             {/* Footer CTA */}
             <section className="container mx-auto px-6 mb-20 text-center">
                 <div className="p-16 rounded-[48px] bg-gradient-to-b from-accent/10 to-transparent border border-accent/20 relative overflow-hidden">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-8">Bereit für bessere IT?</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-8">{t('services.cta.title')}</h2>
                     <Button size="lg" className="h-16 px-12 text-lg" onClick={() => navigate('/kontakt')}>
-                        Jetzt Starten <ArrowRight className="ml-2" />
+                        {t('services.cta.button')} <ArrowRight className="ml-2" />
                     </Button>
                 </div>
             </section>
