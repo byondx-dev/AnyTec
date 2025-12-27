@@ -229,7 +229,7 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* 2. Hero Section - With Overflow Hidden */}
-      <section className="relative min-h-screen lg:min-h-[92vh] flex items-center pt-12 lg:pt-20 overflow-hidden">
+      <section className="relative min-h-[100svh] lg:min-h-[92vh] flex items-center pt-12 lg:pt-20 overflow-hidden">
         {/* Hyperspeed Background */}
         <motion.div
           className="absolute inset-0 z-0"
