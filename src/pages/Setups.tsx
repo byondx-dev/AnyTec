@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ChevronDown, Info } from 'lucide-react';
-import { ContactForm } from '@/components/forms/ContactForm';
+import { BookingBanner } from '@/components/forms/BookingBanner';
 
 import { Reveal } from '@/components/animations/Reveal';
 import { useSetupSelection } from '@/context/SetupSelectionContext';
 import { cn } from '@/utils/cn';
 import { useTranslation } from 'react-i18next';
+import { FAQSection } from '@/components/sections/FAQSection';
 
 type Setup = {
   name: string;
@@ -184,28 +185,24 @@ export const Setups: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <FAQSection />
+
+      <section className="py-24 bg-card/50 border-t border-border">
+        <div className="container mx-auto px-6 max-w-5xl">
           <Reveal>
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase">
+            <div className="text-center mb-16">
+              <span className="text-accent font-semibold tracking-wider uppercase text-sm mb-4 block">
                 {t('setups.contact.badge')}
-              </div>
-              <h2 className="text-3xl font-bold">{t('setups.contact.title')}</h2>
-              <p className="text-muted" dangerouslySetInnerHTML={{ __html: t('setups.contact.description') }}></p>
-              {selectedSetups.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {selectedSetups.map((item) => (
-                    <span key={item} className="px-3 py-1 rounded-full bg-card border border-border text-sm">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              )}
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                {t('setups.contact.title')}
+              </h2>
+              <p className="text-xl text-muted max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('setups.contact.description') }}></p>
             </div>
           </Reveal>
-          <Reveal delay={0.15}>
-            <ContactForm className="space-y-6 bg-card p-8 md:p-10 rounded-3xl border border-border shadow-soft" />
+
+          <Reveal delay={0.2}>
+            <BookingBanner />
           </Reveal>
         </div>
       </section>

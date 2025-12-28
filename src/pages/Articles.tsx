@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 import { cn } from '@/utils/cn';
+import { FAQSection } from '@/components/sections/FAQSection';
 
 import { articles } from '@/data/articles';
 import { Article } from '@/data/articles';
@@ -132,6 +133,8 @@ const Articles: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <FAQSection />
     </div>
   );
 };

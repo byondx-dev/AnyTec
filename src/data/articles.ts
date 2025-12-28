@@ -259,12 +259,120 @@ export const articles: Article[] = [
       `,
       en: `
         <p class="lead text-xl text-muted mb-8">
-          The Point of Sale (POS) system is the heart of retail and hospitality setups. If it fails, operations stop. If data leaks, it gets expensive: revenue loss, brand damage, and trouble with providers.
+          The point-of-sale system (POS) is the core of retail and many hospitality setups. If it fails, operations come to a halt. If data leaks, it becomes very expensive: loss of revenue, damage to reputation, and potential trouble with service providers and audits.
         </p>
+
         <div class="bg-accent/5 border-l-4 border-accent p-6 mb-8 rounded-r-xl">
-           <p class="font-medium text-fg">
-              <strong>English Content Pending:</strong> The detailed breakdown of VLANs and Firewall configurations is available in the German version.
-           </p>
+          <p class="font-medium text-fg">
+            That is why one rule applies without exceptions: <strong>Never, absolutely never, should the POS system be connected to the same Wi-Fi as guest Wi-Fi, Sonos speakers, smart TVs, or other “convenience devices.”</strong>
+          </p>
+        </div>
+
+        <h2 id="intro" class="text-3xl font-bold mt-12 mb-6">Intro: POS is Priority 1</h2>
+        <p class="mb-6">
+          This is exactly where many setups fail: everything is connected “somehow” – until one device is compromised and suddenly the path to the POS is open.
+        </p>
+        <p class="mb-6">
+          For this reason, Any Tec plans POS networks according to a clear principle: separate, minimize, monitor. You get a setup that works in day-to-day operations – not one that is only “secure on paper.”
+        </p>
+
+        <h2 id="segmentation" class="text-3xl font-bold mt-12 mb-6">Network Segmentation</h2>
+        <p class="mb-4">
+          The most important POS protection is not “a strong password,” but clean separation.
+        </p>
+        <h3 class="text-xl font-bold mb-2">Why segmentation is so effective</h3>
+        <p class="mb-4 text-muted-foreground">
+          If a device in the guest Wi-Fi is compromised (which does happen), it should not be able to reach the POS. Segmentation ensures that attacks do not move “laterally.”
+        </p>
+
+        <h3 class="text-xl font-bold mb-4">VLANs: Virtual Network Separation</h3>
+        <p class="mb-4">
+          We use VLANs (Virtual Local Area Networks) to strictly separate data traffic. Put simply, a VLAN is its own network within your infrastructure – with its own rules.
+        </p>
+        <div class="bg-card/50 p-6 rounded-xl border border-border mb-6">
+          <strong class="block mb-4 text-fg">A secure network design separates the following areas:</strong>
+          <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                  <span class="px-2 py-1 rounded bg-red-500/20 text-red-400 text-xs font-mono font-bold">POS/Payment</span>
+                  <span>Registers, payment terminals, POS servers</span>
+              </li>
+              <li class="flex items-center gap-3">
+                  <span class="px-2 py-1 rounded bg-blue-500/20 text-blue-400 text-xs font-mono font-bold">Staff</span>
+                  <span>Employee devices, back office</span>
+              </li>
+              <li class="flex items-center gap-3">
+                  <span class="px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs font-mono font-bold">Guest</span>
+                  <span>Customers / guests</span>
+              </li>
+              <li class="flex items-center gap-3">
+                  <span class="px-2 py-1 rounded bg-purple-500/20 text-purple-400 text-xs font-mono font-bold">IoT/Media</span>
+                  <span>Sonos, screens, cameras</span>
+              </li>
+              <li class="flex items-center gap-3">
+                  <span class="px-2 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-mono font-bold">Management</span>
+                  <span>Network devices (admins only)</span>
+              </li>
+          </ul>
+        </div>
+        <p class="text-sm text-muted">
+          Important: Segmentation is only truly effective when the Wi-Fi is also cleanly separated (separate SSIDs or enterprise Wi-Fi) and not just “everything under one name.”
+        </p>
+
+        <h2 id="firewall" class="text-3xl font-bold mt-12 mb-6">Firewall Rules</h2>
+        <p class="mb-6">
+          Segmentation without firewall rules is like doors without locks: nice, but ineffective.
+        </p>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+          <div>
+              <h3 class="text-xl font-bold mb-4">Core principle: Default deny</h3>
+              <p class="text-muted-foreground mb-4">
+                  For POS systems, the rule is: block everything by default and only allow what is truly necessary.
+              </p>
+              <ul class="space-y-2 text-sm">
+                  <li class="flex items-center gap-2 text-green-400"><span class="font-mono">POS → Cloud / Payment</span> ✓ Allowed (ports only)</li>
+                  <li class="flex items-center gap-2 text-green-400"><span class="font-mono">POS → Updates / DNS</span> ✓ Allowed (targeted)</li>
+                  <li class="flex items-center gap-2 text-red-400"><span class="font-mono">Guest → POS</span> ✗ BLOCK</li>
+                  <li class="flex items-center gap-2 text-red-400"><span class="font-mono">IoT → POS</span> ✗ BLOCK</li>
+              </ul>
+          </div>
+          <div>
+              <h3 class="text-xl font-bold mb-4">Why “any/any” is dangerous</h3>
+              <p class="text-muted-foreground">
+                  Many installations run “stable” because everything is open. That is convenient – until something breaks. A good POS setup is not the one that gets “online” the fastest, but the one that remains stable with a minimal attack surface.
+              </p>
+          </div>
+        </div>
+
+        <h2 id="payment" class="text-3xl font-bold mt-12 mb-6">Payment: Keeping it clean</h2>
+        <p class="mb-6">
+          Payment is its own risk universe. Without going too deep into details: you want payment data to have as few points of contact as possible with the rest of the network.
+        </p>
+        <div class="bg-muted2/30 p-6 rounded-xl border border-border/50">
+          <h4 class="font-bold mb-4">Practical guidelines</h4>
+          <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li><strong>Isolation:</strong> Payment terminals belong in the POS/Payment VLAN, not in the staff or guest Wi-Fi.</li>
+              <li><strong>Remote access:</strong> Remote access only via secure methods (not “TeamViewer on the register” as the standard).</li>
+              <li><strong>Maintenance:</strong> Updates and remote maintenance must be planned – “we’ll do it later” often ends in permanent exceptions.</li>
+          </ul>
+        </div>
+
+        <h2 id="conclusion" class="text-3xl font-bold mt-12 mb-6">Conclusion</h2>
+        <p class="mb-6">
+          POS security is not a luxury option. It is a fundamental requirement for operations.
+        </p>
+        <p class="mb-4 font-bold">If you take away only three things:</p>
+        <ul class="list-check pl-6 mb-8 text-muted-foreground space-y-2">
+          <li>Strictly separate POS / payment (VLANs + dedicated Wi-Fi networks)</li>
+          <li>Firewall: default deny (only allow what is necessary)</li>
+          <li>Clean payment isolation (no mixed networks, no improvised solutions)</li>
+        </ul>
+        
+        <div class="p-6 rounded-xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20">
+          <h4 class="font-bold text-lg mb-2">Ready-to-Work Setup</h4>
+          <p class="text-muted-foreground mb-4">
+              If you want, Any Tec builds this completely for you: network blueprint, VLANs, firewall rules, tests – and documentation structured so that it can be rolled out 1:1 at additional locations.
+          </p>
         </div>
       `
     }

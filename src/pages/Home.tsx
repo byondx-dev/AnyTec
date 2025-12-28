@@ -2,17 +2,18 @@ import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Check, Cloud, ShieldCheck, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight, Store } from 'lucide-react';
+import { Check, Cloud, ChevronDown, Cpu, Server, Laptop, Wifi, ArrowRight, Store } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/animations/Reveal';
 
-import { cn } from '@/utils/cn';
 import { ReadyToWorkSection } from '@/components/home/ReadyToWorkSection';
 import RotatingText from '@/components/text/RotatingText';
 import Hyperspeed from '@/components/Hyperspeed/Hyperspeed';
 import { hyperspeedPresets } from '@/components/Hyperspeed/hyperspeedPresets';
 import { useTheme } from '@/context/ThemeContext';
 import LogoLoop from '@/components/ui/LogoLoop';
+import ServiceHighlights from '@/components/home/ServiceHighlights';
+import { FAQSection } from '@/components/sections/FAQSection';
 import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiVite, SiPostgresql, SiDocker, SiLinux,
   SiPython, SiAtlassian,
@@ -67,136 +68,7 @@ const techLogos = [
 
 
 
-const AnimateHeight = ({ isVisible, children }: { isVisible: boolean, children?: React.ReactNode }) => (
-  <motion.div
-    initial={false}
-    animate={{ height: isVisible ? 'auto' : 0, opacity: isVisible ? 1 : 0 }}
-    transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-    className="overflow-hidden"
-  >
-    {children}
-  </motion.div>
-);
 
-const InteractiveModule = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const { t } = useTranslation();
-
-  const steps = [
-    { id: 0, title: t('home.interactive.steps.0.title'), desc: t('home.interactive.steps.0.desc') },
-    { id: 1, title: t('home.interactive.steps.1.title'), desc: t('home.interactive.steps.1.desc') },
-    { id: 2, title: t('home.interactive.steps.2.title'), desc: t('home.interactive.steps.2.desc') }
-  ];
-
-  return (
-    <div className="rounded-[40px] bg-[#0b0f19] text-white p-8 md:p-16 relative overflow-hidden border border-white/5 shadow-2xl isolate">
-      {/* Background Glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-accent/10 blur-[120px] rounded-full pointer-events-none -z-10" />
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center relative z-10">
-        {/* Left */}
-        <div className="space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-            {t('home.interactive.title')} <br /><span className="text-gray-500">{t('home.interactive.titleSuffix')}</span>
-          </h2>
-        </div>
-
-        {/* Center - Orbit Visual */}
-        <div className="flex justify-center py-12 lg:py-0">
-          <div className="relative w-64 h-64 flex items-center justify-center">
-            {/* Orbits */}
-            <div className="absolute inset-0 rounded-full border border-white/5 animate-spin-slow" />
-            <div className="absolute w-48 h-48 rounded-full border border-white/5 animate-[spin_16s_linear_infinite_reverse]" />
-            <div className="absolute w-32 h-32 rounded-full border border-white/5 animate-spin-slow" />
-
-            {/* Center AI Chip */}
-            <div className="w-20 h-20 rounded-2xl bg-[#0f1420] border border-white/10 flex items-center justify-center shadow-[0_0_40px_rgba(59,130,246,0.15)] relative z-10">
-              <span className="text-xl font-bold text-white">AI</span>
-            </div>
-
-            {/* Orbiting Icons */}
-            <motion.div className="absolute w-full h-full animate-[spin_20s_linear_infinite]">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0b0f19] p-2 rounded-full border border-white/10 text-accent shadow-lg shadow-accent/10"><Cloud size={14} /></div>
-            </motion.div>
-            <motion.div className="absolute w-full h-full animate-[spin_15s_linear_infinite_reverse]">
-              <div className="absolute top-1/2 -right-3 -translate-y-1/2 bg-[#0b0f19] p-2 rounded-full border border-white/10 text-blue-400 shadow-lg shadow-blue-400/10"><Server size={14} /></div>
-            </motion.div>
-            <motion.div className="absolute w-full h-full animate-[spin_25s_linear_infinite]">
-              <div className="absolute bottom-4 left-1/4 bg-[#0b0f19] p-2 rounded-full border border-white/10 text-purple-400 shadow-lg shadow-purple-400/10"><ShieldCheck size={14} /></div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Right - Steps */}
-        <div className="space-y-3">
-          {steps.map((step) => (
-            <button
-              key={step.id}
-              onClick={() => setActiveStep(step.id)}
-              className={cn(
-                "w-full text-left p-5 rounded-xl border transition-all duration-500 relative overflow-hidden group outline-none focus-visible:ring-2 focus-visible:ring-accent/50",
-                activeStep === step.id
-                  ? "bg-white/[0.03] border-accent/40 shadow-[0_0_20px_rgba(0,0,0,0.2)]"
-                  : "bg-transparent border-transparent hover:bg-white/[0.02]"
-              )}
-            >
-              {/* Active Indicator Bar */}
-              {activeStep === step.id && (
-                <motion.div
-                  layoutId="active-pill"
-                  className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-accent shadow-[0_0_10px_currentColor]"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-
-              <div className="flex items-center gap-4 mb-1">
-                <span className={cn(
-                  "text-[10px] font-mono px-1.5 py-0.5 rounded transition-colors duration-300",
-                  activeStep === step.id ? "bg-accent text-black font-bold" : "bg-white/5 text-gray-500"
-                )}>
-                  0{step.id + 1}
-                </span>
-                <span className={cn("font-medium transition-colors duration-300", activeStep === step.id ? "text-white" : "text-gray-500 group-hover:text-gray-300")}>
-                  {step.title}
-                </span>
-              </div>
-
-              <AnimateHeight isVisible={activeStep === step.id}>
-                <p className="text-sm text-gray-400 mt-2 pl-10 leading-relaxed">{step.desc}</p>
-              </AnimateHeight>
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const AccordionItem = ({ question, answer }: { question: string, answer: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="border-b border-border last:border-0">
-      <button
-        className="w-full py-6 flex items-center justify-between text-left group outline-none"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span className={cn("text-lg font-medium transition-colors duration-300 pr-8", isOpen ? "text-gradient-accent" : "text-fg group-hover:text-muted")}>{question}</span>
-        <div className={cn(
-          "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-          isOpen ? "bg-gradient-accent text-white rotate-180" : "bg-muted2 text-muted group-hover:bg-muted"
-        )}>
-          <ChevronDown size={16} />
-        </div>
-      </button>
-      <AnimateHeight isVisible={isOpen}>
-        <div className="pb-8 text-muted leading-relaxed max-w-2xl">
-          {answer}
-        </div>
-      </AnimateHeight>
-    </div>
-  );
-};
 
 // --- Main Page Component ---
 
@@ -313,6 +185,9 @@ const Home: React.FC = () => {
           <span className="text-xs font-bold text-transparent select-none opacity-1">{t('home.logos.tools')}</span>
         </div>
       </section>
+
+      {/* New Service Highlights Section */}
+      <ServiceHighlights />
 
       {/* 3. Statement Section */}
       {/* 3. Statement / Services Link Services */}
@@ -484,13 +359,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. Dark Interactive Module */}
-      <section className="py-20 container mx-auto px-6">
-        <Reveal width="100%">
-          <InteractiveModule />
-        </Reveal>
-      </section>
-
       {/* 7. Comparison Section */}
       <section className="py-32 bg-card/50">
         <div className="container mx-auto px-6">
@@ -572,52 +440,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* 8. FAQ */}
-      <section className="py-32 bg-bg">
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-16">
-          <Reveal>
-            <div className="sticky top-32">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Häufige <span className="text-muted/40">Fragen</span>
-              </h2>
-              <p className="text-muted mb-8">Alles was du über den Start mit Any Tec wissen musst.</p>
-              <Button variant="ghost" className="pl-0 hover:bg-transparent hover:text-accent" onClick={() => navigate('/kontakt')}>
-                Frage nicht dabei? Kontaktier uns <ArrowRight size={16} className="ml-2" />
-              </Button>
-            </div>
-          </Reveal>
-
-          <div className="lg:col-span-2">
-            <Reveal delay={0.2}>
-              <div className="space-y-4">
-                <AccordionItem
-                  question={t('home.faq.items.0.q')}
-                  answer={t('home.faq.items.0.a')}
-                />
-                <AccordionItem
-                  question={t('home.faq.items.1.q')}
-                  answer={t('home.faq.items.1.a')}
-                />
-                <AccordionItem
-                  question={t('home.faq.items.2.q')}
-                  answer={t('home.faq.items.2.a')}
-                />
-                <AccordionItem
-                  question={t('home.faq.items.3.q')}
-                  answer={t('home.faq.items.3.a')}
-                />
-                <AccordionItem
-                  question={t('home.faq.items.4.q')}
-                  answer={t('home.faq.items.4.a')}
-                />
-                <AccordionItem
-                  question={t('home.faq.items.5.q')}
-                  answer={t('home.faq.items.5.a')}
-                />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <FAQSection />
 
       {/* 9. Final CTA */}
       <section className="py-40 relative overflow-hidden bg-[#0b0f19] text-white">
@@ -634,7 +457,7 @@ const Home: React.FC = () => {
           <Reveal>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">{t('home.finalCta.title')}</h2>
             <p className="text-gray-400 mb-12 text-lg md:text-xl">{t('home.finalCta.desc')}</p>
-            <Button size="lg" className="h-16 px-10 text-lg bg-gradient-accent text-white hover:opacity-90 shadow-[0_0_40px_rgba(59,130,246,0.35)] transition-all hover:scale-105" onClick={() => navigate('/kontakt')}>
+            <Button size="lg" className="mx-auto h-16 px-10 text-lg bg-gradient-accent text-white hover:opacity-90 shadow-[0_0_40px_rgba(59,130,246,0.35)] transition-all hover:scale-105" onClick={() => navigate('/kontakt')}>
               {t('home.finalCta.button')}
             </Button>
           </Reveal>

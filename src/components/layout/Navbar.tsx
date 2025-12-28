@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ThemeToggle } from '../ui/ThemeToggle';
@@ -11,7 +11,6 @@ import { NAV_LINKS } from '@/config/navigation';
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
 
@@ -57,10 +56,9 @@ export const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center gap-4">
 
           <ThemeToggle />
-          <Button onClick={() => navigate('/kontakt')}>
+          <Button onClick={() => window.open('https://outlook.office.com/book/AnyTec@byondx.app/s/mA87sccjGUObd3uqL8ahWA2?ismsaljsauthenabled', '_blank')}>
             {t('footer.contact')}
           </Button>
-          {/* Or explicit "Book Call" translation if desired, reusing contact for now or adding new key */}
         </div>
 
         {/* Mobile Toggle */}
@@ -90,7 +88,7 @@ export const Navbar: React.FC = () => {
               ))}
               <div className="h-px bg-border my-2" />
               <Button className="w-full" onClick={() => {
-                navigate('/kontakt');
+                window.open('https://outlook.office.com/book/AnyTec@byondx.app/s/mA87sccjGUObd3uqL8ahWA2?ismsaljsauthenabled', '_blank');
                 setIsOpen(false);
               }}>{t('footer.contact')}</Button>
             </div>

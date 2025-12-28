@@ -13,6 +13,7 @@
         "legal": "Rechtliches",
         "imprint": "Impressum",
         "privacy": "Datenschutz",
+        "homeSupport": "Home Support",
         "language": "Sprache"
     },
     "home": {
@@ -20,7 +21,7 @@
             "titlePart1": "Any Tec",
             "titlePart2": "kümmert sich um",
             "titlePart3": "Any",
-            "description": "Maßgeschneiderte IT-Infrastruktur. Egal ob für Einzelnstandorte/Franchiseketten oder Cloud Operations. Wir kümmern uns professionell um Any Tec.",
+            "description": "Planung, Betrieb und Absicherung von IT-, Cloud- und Netzwerkumgebungen - strukturiert, zuverlässig und auf langfristigen Betrieb ausgelegt. Wir kümmern uns professionell um Any Tec.",
             "hold": "Drücken & Halten",
             "active": "Woaoaoaaw"
         },
@@ -75,52 +76,183 @@
                 }
             ]
         },
+        "cloudOps": {
+            "badge": "Cloud Excellence",
+            "title": "Cloud Operations",
+            "description": "Von der Azure Architektur bis zur M365 Administration. Wir managen Ihre Cloud-Infrastruktur skalierbar und sicher.",
+            "features": {
+                "azure": "Azure Architektur & Deployment",
+                "m365": "M365 & Teams Administration",
+                "security": "Cloud Security & Compliance",
+                "migration": "Nahtlose Migrationen"
+            },
+            "button": "Cloud Services entdecken"
+        },
+        "onPrem": {
+            "badge": "Infrastructure",
+            "title": "On-Premises",
+            "description": "Physische IT, die funktioniert. Wir kümmern uns um Server-Racks, Wartung, Networking und Hardware-Rollouts vor Ort.",
+            "features": {
+                "racks": "Server & Rack Wartung",
+                "network": "Enterprise Networking",
+                "maintenance": "Regelmäßige Maintenance",
+                "rollout": "Rollouts & Umzüge"
+            },
+            "button": "Infrastructure Services"
+        },
+        "hybrid": {
+            "badge": "Best of Both Worlds",
+            "title": "Hybrid Environments",
+            "description": "Verbinden Sie interne IT mit der Cloud. Azure Arc, AD-Verwaltung und hybride SaaS-Lösungen nahtlos integriert.",
+            "features": {
+                "arc": "Azure Arc Management",
+                "ad": "Active Directory & Hybrid Identity",
+                "saas": "Hybrid SaaS Hosting",
+                "integration": "Nahtlose Integration"
+            },
+            "button": "Hybrid Lösungen"
+        },
+        "aiOps": {
+            "badge": "Future Ready",
+            "title": "AI Operations",
+            "description": "Integrieren Sie KI in Ihre Geschäftsprozesse. Von lokalen LLMs über RAG-Pipelines bis hin zu autonomen Agenten. Wir machen Ihre IT intelligent.",
+            "features": {
+                "llm": "Local LLM Hosting",
+                "rag": "RAG Knowledge Base",
+                "agents": "Autonomous Agents",
+                "training": "Custom Model Training"
+            },
+            "button": "AI Solutions"
+        },
+        "devOps": {
+            "badge": "Development",
+            "title": "Dev Operations",
+            "description": "Optimieren Sie Ihren Entwicklungszyklus. Wir implementieren CI/CD Pipelines, Containerisierung und Infrastructure as Code.",
+            "features": {
+                "cicd": "CI/CD Automatisierung",
+                "container": "Docker & Kubernetes",
+                "iac": "Infrastructure as Code",
+                "monitoring": "Monitoring & Logging"
+            },
+            "button": "DevOps entdecken"
+        },
+        "itOps": {
+            "badge": "Support & Operations",
+            "title": "IT Operations",
+            "description": "Zuverlässiger Support für Ihr Tagesgeschäft. Vom Helpdesk über Gerätemanagement bis zur Netzwerküberwachung.",
+            "features": {
+                "desk": "24/7 Service Desk",
+                "mdm": "MDM & Geräteverwaltung",
+                "network": "Netzwerk Monitoring",
+                "updates": "Update Management"
+            },
+            "button": "IT-Support Services"
+        },
         "comparison": {
             "badge": "So funktioniert es",
             "title": "Der Any Tec",
             "titleSuffix": "Unterschied",
             "card1": {
-                "title": "Andere Anbieter",
-                "desc": "Oft fragmentierte Lösungen, verschiedene Ansprechpartner für Internet, Kasse und Cloud."
+                "title": "Veraltete Strukturen",
+                "desc": "Andere Anbieter setzen oft auf veraltete Technologien und Hardware. Fragmentierte Lösungen, die nicht den modernen Industriestandards entsprechen."
             },
             "card2": {
-                "title": "Klassische IT-Betreuung",
-                "desc": "Reagiert meist erst, wenn etwas kaputt ist. Hohe Stundensätze, Anfahrtskosten und wenig Proaktivität."
+                "title": "Reaktiver Support",
+                "desc": "Klassische IT wartet, bis etwas kaputt geht. Langsame Reaktionszeiten und keine ganzheitliche Betreuung Ihrer Enterprise-Umgebung."
             },
             "card3": {
-                "title": "Any Tec Blueprint",
-                "desc": "Ganzheitliche Architektur. Proaktives Monitoring und skalierbare Standard-Prozesse."
+                "title": "Any Tec Excellence",
+                "desc": "Wir decken alles ab: Von Enterprise Networking bis IT-Support. Neueste Technologien, proaktives Monitoring und professionelle Betreuung für jede Art von Technik."
             }
         },
         "faq": {
+            "badge": "Hilfe Center",
+            "showMore": "Mehr anzeigen",
+            "showLess": "Weniger anzeigen",
             "title": "Häufige",
             "titleSuffix": "Fragen",
-            "subtitle": "Alles was du über den Start mit Any Tec wissen musst.",
+            "desc": "Alles was du über den Start mit Any Tec wissen musst.",
             "button": "Frage nicht dabei? Kontaktier uns",
             "items": [
                 {
-                    "q": "Wie schnell können wir neue Standorte anbinden?",
-                    "a": "Dank unserer Blueprints können wir die Netzwerkinfrastruktur für neue Standorte oft innerhalb weniger Tage vorbereiten und versenden. Plug & Play vor Ort."
+                    "q": "Wie unterstützt Any Tec mittelständische und Enterprise-Unternehmen bei komplexen IT-Infrastrukturen?",
+                    "a": "Any Tec übernimmt die Planung, Implementierung, den Betrieb und die kontinuierliche Optimierung komplexer IT-Infrastrukturen. Dazu zählen Cloud-, Hybrid- und On-Premises-Umgebungen, die auf Geschäftsprozesse und Sicherheitsanforderungen abgestimmt sind."
                 },
                 {
-                    "q": "Nutzt ihr Cloud-Dienste wie Microsoft Azure?",
-                    "a": "Ja, wir setzen auf bewährte Plattformen wie die Microsoft Cloud (inkl. Azure Services) für maximale Stabilität, Sicherheit und Skalierbarkeit."
+                    "q": "Welche Cloud-Leistungen bietet Any Tec für Enterprise-Kunden an?",
+                    "a": "Any Tec bietet Leistungen von der Cloud-Architektur über Migration bis hin zum laufenden Betrieb und zur Wartung hybrider und cloudbasierter Umgebungen."
                 },
                 {
-                    "q": "Bietet ihr Support für Kassensysteme (POS)?",
-                    "a": "Wir stellen die robuste Infrastruktur sicher, die moderne POS-Systeme benötigen (stabile Verbindung, VLANs), und arbeiten bei Problemen direkt mit den Anbietern zusammen."
+                    "q": "Wie stellt Any Tec IT-Sicherheit und Datenschutz sicher?",
+                    "a": "Any Tec setzt auf strukturierte Sicherheitskonzepte, verschlüsselte Datenübertragung über Militär-Standard sowie kontrollierte Zugriffsmechanismen zum Schutz sensibler Daten."
                 },
                 {
-                    "q": "Was bedeutet Privacy-First?",
-                    "a": "Wir segmentieren Netzwerke so, dass sensible Daten (z.B. von Kunden oder in Women-Only Spaces) strikt vom öffentlichen Gast-WLAN getrennt sind. Sicherheit steht an erster Stelle."
+                    "q": "Unterstützt Any Tec Unternehmen bei Compliance, Audits und Zertifizierungen?",
+                    "a": "Any Tec begleitet Unternehmen bei der technischen Vorbereitung auf Audits, Zertifizierungen und regulatorische Anforderungen und stellt entsprechende Dokumentationen bereit."
                 },
                 {
-                    "q": "Gibt es eine Mindestlaufzeit?",
-                    "a": "Wir bieten flexible Modelle an. Für Projekt-Setups gibt es Einmalpreise, für Managed Services monatliche Laufzeiten mit fairen Kündigungsfristen."
+                    "q": "Wie ist der IT-Support für mittelständische und Enterprise-Kunden organisiert?",
+                    "a": "Der IT-Support erfolgt über klar definierte Service-Level-Vereinbarungen mit geregelten Reaktionszeiten und Eskalationsprozessen."
                 },
                 {
-                    "q": "Übernehmt ihr auch bestehende IT?",
-                    "a": "Ja, wir analysieren den Ist-Zustand und migrieren schrittweise in eine sauber gemanagte Struktur, ohne deinen Betrieb zu stören."
+                    "q": "Übernimmt Any Tec bestehende IT-Umgebungen von anderen Dienstleistern?",
+                    "a": "Bestehende IT-Strukturen werden analysiert, dokumentiert und strukturiert in den Betrieb von Any Tec überführt."
+                },
+                {
+                    "q": "Wie wird Ausfallsicherheit und Business Continuity gewährleistet?",
+                    "a": "Durch Redundanzen, kontinuierliches Monitoring, Backup-Strategien und getestete Wiederherstellungsprozesse wird ein stabiler IT-Betrieb sichergestellt."
+                },
+                {
+                    "q": "Sind die IT-Services von Any Tec skalierbar?",
+                    "a": "Die eingesetzten Lösungen sind modular aufgebaut und lassen sich an veränderte Anforderungen oder Unternehmenswachstum anpassen."
+                },
+                {
+                    "q": "Gibt es feste Ansprechpartner für Enterprise-Kunden?",
+                    "a": "Kunden erhalten feste Ansprechpartner, die für Koordination, Betrieb und Weiterentwicklung der IT zuständig sind."
+                },
+                {
+                    "q": "Wie werden neue Standorte oder Abteilungen in bestehende IT-Strukturen integriert?",
+                    "a": "Neue Standorte oder Abteilungen werden nach abgestimmten Prozessen in die bestehende IT integriert, ohne den laufenden Betrieb zu beeinträchtigen."
+                },
+                {
+                    "q": "Wie unterstützt Any Tec lokale Geschäfte und Franchise-Ketten bei der IT-Betreuung?",
+                    "a": "Any Tec stellt standardisierte, zentral verwaltete IT-Lösungen bereit, die für den täglichen Betrieb von Filialen und Verkaufsflächen ausgelegt sind."
+                },
+                {
+                    "q": "Eignet sich Any Tec für Unternehmen mit mehreren Standorten oder Filialen?",
+                    "a": "Die IT-Strukturen sind auf Multi-Standort-Betriebe ausgelegt und ermöglichen eine zentrale Verwaltung aller Standorte."
+                },
+                {
+                    "q": "Wie wird IT-Sicherheit in Filial- und Shop-Umgebungen umgesetzt?",
+                    "a": "Es werden gesicherte Netzwerke, verschlüsselte Verbindungen nach Militär-Standard sowie geregelte Zugriffskonzepte eingesetzt."
+                },
+                {
+                    "q": "Unterstützt Any Tec Kassensysteme, Online-Shops und Zahlungslösungen?",
+                    "a": "Any Tec integriert und betreibt Kassensysteme, Online-Shop-Infrastrukturen sowie angebundene Zahlungs- und Warenwirtschaftssysteme."
+                },
+                {
+                    "q": "Wie läuft der IT-Support im Tagesgeschäft ab?",
+                    "a": "Der Support ist auf schnelle Problemlösung ausgelegt und erfolgt über klar definierte Kommunikations- und Supportwege."
+                },
+                {
+                    "q": "Ist der IT-Betrieb auch ohne eigenes IT-Personal vor Ort möglich?",
+                    "a": "Die IT wird zentral betreut und überwacht, sodass kein eigenes technisches Personal vor Ort erforderlich ist."
+                },
+                {
+                    "q": "Wie werden neue Filialen, Shops oder Verkaufsflächen angebunden?",
+                    "a": "Neue Standorte werden nach standardisierten Abläufen sicher in bestehende IT-Strukturen integriert."
+                },
+                {
+                    "q": "Sind die IT-Kosten für Franchise- und Handelsbetriebe planbar?",
+                    "a": "Die Kostenstruktur ist transparent gestaltet und ermöglicht eine klare Budgetplanung pro Standort."
+                },
+                {
+                    "q": "Wie schützt Any Tec Kundendaten und Zahlungsinformationen?",
+                    "a": "Kundendaten werden durch verschlüsselte Übertragung, segmentierte Netzwerke und bewährte Sicherheitsmechanismen geschützt."
+                },
+                {
+                    "q": "Warum eignet sich Any Tec besonders für Handels-, Franchise- und E-Commerce-Unternehmen?",
+                    "a": "Any Tec kombiniert stabile IT-Strukturen, zentrale Verwaltung und klare Prozesse, sodass sich Betreiber auf ihr Kerngeschäft konzentrieren können."
                 }
             ]
         },
@@ -155,11 +287,11 @@
                 },
                 {
                     "title": "Konzept",
-                    "text": "Du erhältst einen Blueprint für dein Setup."
+                    "text": "Wir erstellen ein qualitatives Angebot, das du nicht ablehnen kannst."
                 },
                 {
-                    "title": "Rollout",
-                    "text": "Wir liefern Hardware und konfigurieren die Cloud."
+                    "title": "Ausführung",
+                    "text": "Wir führen den vereinbarten Service direkt und unkompliziert aus."
                 }
             ]
         }
@@ -278,23 +410,53 @@
                 "trendmicro": "Trend Micro"
             }
         },
+        "devOps": {
+            "prefix": "Ich brauche",
+            "title": "DevOps &",
+            "titleSuffix": "Modern Engineering",
+            "description": "Beschleunigen Sie Ihre Delivery-Pipeline mit automatisierter CI/CD, Infrastructure as Code und containerisierten Umgebungen. Skalieren Sie mit Vertrauen.",
+            "tools": {
+                "tools": "Engineering Stack",
+                "docker": "Containerisierung",
+                "kubernetes": "Orchestrierung",
+                "terraform": "IaC",
+                "ansible": "Automatisierung",
+                "github": "Source Control",
+                "gitlab": "CI/CD Pipeline",
+                "prometheus": "Monitoring",
+                "grafana": "Observability"
+            }
+        },
+        "itOps": {
+            "prefix": "Ich brauche",
+            "title": "IT Operations &",
+            "titleSuffix": "Support",
+            "description": "Umfassendes IT-Management für Ihre Mitarbeiter. Vom nahtlosen Onboarding bis zum 24/7 Helpdesk-Support und Hardware-Lifecycle-Management.",
+            "features": {
+                "cats": "Support Kategorien",
+                "desk": "Service Desk",
+                "hardware": "Hardware Mgmt",
+                "software": "Software Verteilung",
+                "onboarding": "User Onboarding"
+            }
+        },
         "onprem": {
-            "title": "On-Prem Operations",
-            "server": {
-                "title": "Serverraum Management",
-                "desc": "Wir kümmern uns um deine Racks. Von der sauberen Verkabelung bis zum Austausch defekter Hardware. Ordnung ist Sicherheit."
+            "prefix": "Ich brauche",
+            "title": "On-Premises",
+            "titleSuffix": "& Datacenter",
+            "description": "Wir kümmern uns um Ihre physische Infrastruktur. Von der sauberen Verkabelung im Serverraum bis zum Hardware Lifecycle Management und Büroumzügen.",
+            "features": {
+                "racks": "Serverraum Mgmt",
+                "cabling": "Strukturierte Verkabelung",
+                "power": "USV & Strom",
+                "access": "Zutrittskontrolle",
+                "cooling": "Kühlsysteme",
+                "monitoring": "Umgebungsmonitoring"
             },
-            "moves": {
-                "title": "Office Moves & Rollouts",
-                "desc": "Büroumzug oder Standortauflösung? Wir bauen ab, transportieren sicher und bauen am neuen Standort wieder auf."
-            },
-            "lifecycle": {
-                "title": "Hardware Lifecycle",
-                "desc": "Beschaffung, Installation und fachgerechte Entsorgung von Altgeräten. Dein Inventory immer auf dem neuesten Stand."
-            },
-            "card": {
-                "title": "Expert Hardware",
-                "desc": "Unser Team arbeitet direkt an der Hardware. Kein Outsourcing an Subunternehmer."
+            "stats": {
+                "uptime": "99.9% Uptime",
+                "response": "4h On-Site SLA",
+                "compliance": "ISO 27001"
             }
         },
         "support": {
@@ -410,6 +572,11 @@
             "badge": "Kontakt",
             "title": "Passt ein Setup für dich?",
             "description": "Deine Auswahl wird im Formular mitgeschickt. Ergänze gern Details, wir melden uns in <span class=\"font-semibold text-fg\"> &lt; 24h</span>."
+        },
+        "booking": {
+            "title": "Bereit für optimierte Ops?",
+            "subtitle": "Buche ein kostenloses Beratungsgespräch mit unseren Experten. Wir besprechen deine Anforderungen und finden die perfekte Lösung.",
+            "button": "Termin buchen"
         }
     }
 }

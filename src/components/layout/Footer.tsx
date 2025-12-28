@@ -30,11 +30,12 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-muted border-t border-border pt-8">
-          <p>© {new Date().getFullYear()} Any Tec. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Any Tec. All rights reserved. A ByondX Enterprise Company</p>
           <div className="flex flex-col md:flex-row items-center gap-6 mt-4 md:mt-0">
             <div className="flex gap-6">
               <a href="#" className="hover:text-fg">{t('footer.imprint')}</a>
               <a href="#" className="hover:text-fg">{t('footer.privacy')}</a>
+              <a href="https://anydesk.com/en/downloads/windows" target="_blank" rel="noopener noreferrer" className="hover:text-fg">{t('footer.homeSupport')}</a>
             </div>
 
             {/* Language Switcher */}

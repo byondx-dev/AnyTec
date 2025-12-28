@@ -13,14 +13,87 @@
         "legal": "Legal",
         "imprint": "Imprint",
         "privacy": "Privacy",
+        "homeSupport": "Home Support",
         "language": "Language"
     },
     "home": {
+        "cloudOps": {
+            "badge": "Cloud Excellence",
+            "title": "Cloud Operations",
+            "description": "From Azure architecture to M365 administration. We manage your cloud infrastructure securely and at scale.",
+            "features": {
+                "azure": "Azure Architecture & Deployment",
+                "m365": "M365 & Teams Administration",
+                "security": "Cloud Security & Compliance",
+                "migration": "Seamless Migrations"
+            },
+            "button": "Discover Cloud Services"
+        },
+        "onPrem": {
+            "badge": "Infrastructure",
+            "title": "On-Premises",
+            "description": "Physical IT that works. We handle server racks, maintenance, networking, and hardware rollouts on-site.",
+            "features": {
+                "racks": "Server & Rack Maintenance",
+                "network": "Enterprise Networking",
+                "maintenance": "Regular Maintenance",
+                "rollout": "Rollouts & Moves"
+            },
+            "button": "Infrastructure Services"
+        },
+        "hybrid": {
+            "badge": "Best of Both Worlds",
+            "title": "Hybrid Environments",
+            "description": "Connect internal IT with the cloud. Azure Arc, AD management, and hybrid SaaS solutions seamlessly integrated.",
+            "features": {
+                "arc": "Azure Arc Management",
+                "ad": "Active Directory & Hybrid Identity",
+                "saas": "Hybrid SaaS Hosting",
+                "integration": "Seamless Integration"
+            },
+            "button": "Hybrid Solutions"
+        },
+        "aiOps": {
+            "badge": "Future Ready",
+            "title": "AI Operations",
+            "description": "Integrate AI into your business processes. From local LLMs to RAG pipelines and autonomous agents. We make your IT intelligent.",
+            "features": {
+                "llm": "Local LLM Hosting",
+                "rag": "RAG Knowledge Base",
+                "agents": "Autonomous Agents",
+                "training": "Custom Model Training"
+            },
+            "button": "AI Solutions"
+        },
+        "devOps": {
+            "badge": "Development",
+            "title": "Dev Operations",
+            "description": "Streamline your development lifecycle. We implement CI/CD pipelines, containerization, and infrastructure as code.",
+            "features": {
+                "cicd": "CI/CD Automation",
+                "container": "Docker & Kubernetes",
+                "iac": "Infrastructure as Code",
+                "monitoring": "Monitoring & Logging"
+            },
+            "button": "Explore DevOps"
+        },
+        "itOps": {
+            "badge": "Support & Operations",
+            "title": "IT Operations",
+            "description": "Reliable support for your daily business. From helpdesk to device management and network monitoring.",
+            "features": {
+                "desk": "24/7 Service Desk",
+                "mdm": "MDM & Device Mgmt",
+                "network": "Network Monitoring",
+                "updates": "Update Management"
+            },
+            "button": "IT Support Services"
+        },
         "hero": {
             "titlePart1": "Any Tec",
             "titlePart2": "takes care of",
             "titlePart3": "Any",
-            "description": "Tailored IT infrastructure. Whether for individual locations/franchise chains or cloud operations. We professionally take care of Any Tec.",
+            "description": "Planning, operation, and protection of IT, cloud, and network environments – structured, reliable, and designed for long-term operation. We take care of Any Tec.",
             "hold": "Click & Hold",
             "active": "Woaoaoaaw"
         },
@@ -80,47 +153,106 @@
             "title": "The Any Tec",
             "titleSuffix": "Difference",
             "card1": {
-                "title": "Other Providers",
-                "desc": "Often fragmented solutions, different contacts for internet, POS, and cloud."
+                "title": "Outdated Structures",
+                "desc": "Other providers often rely on obsolete technology and hardware. Fragmented solutions that fail to meet modern industry standards."
             },
             "card2": {
-                "title": "Classic IT Support",
-                "desc": "Usually reacts only when something breaks. High hourly rates, travel costs, and little proactivity."
+                "title": "Reactive Support",
+                "desc": "Classic IT waits until something breaks. Slow response times and no holistic care for your enterprise environment."
             },
             "card3": {
-                "title": "Any Tec Blueprint",
-                "desc": "Holistic architecture. Proactive monitoring and scalable standard processes."
+                "title": "Any Tec Excellence",
+                "desc": "We cover everything: From enterprise networking to IT support. Latest technologies, proactive monitoring, and professional care for Any Tec."
             }
         },
         "faq": {
-            "title": "Frequent",
+            "badge": "Help Center",
+            "showMore": "Show more",
+            "showLess": "Show less",
+            "title": "Common",
             "titleSuffix": "Questions",
-            "subtitle": "Everything you need to know about starting with Any Tec.",
+            "desc": "Everything you need to know about starting with Any Tec.",
             "button": "Question not listed? Contact us",
             "items": [
                 {
-                    "q": "How quickly can we connect new locations?",
-                    "a": "Thanks to our blueprints, we can often prepare and ship network infrastructure for new locations within a few days. Plug & Play on site."
+                    "q": "How does Any Tec support medium-sized and enterprise companies with complex IT infrastructures?",
+                    "a": "Any Tec provides planning, implementation, operation, and continuous optimization of complex IT infrastructures. This includes cloud, hybrid, and on-premises environments aligned with business processes and security requirements."
                 },
                 {
-                    "q": "Do you use cloud services like Microsoft Azure?",
-                    "a": "Yes, we rely on proven platforms like the Microsoft Cloud (incl. Azure Services) for maximum stability, security, and scalability."
+                    "q": "Which cloud services does Any Tec offer for enterprise customers?",
+                    "a": "Any Tec provides services ranging from cloud architecture and migration to ongoing operation and maintenance of hybrid and cloud-based environments."
                 },
                 {
-                    "q": "Do you offer support for POS systems?",
-                    "a": "We ensure the robust infrastructure that modern POS systems need (stable connection, VLANs) and work directly with providers in case of issues."
+                    "q": "How does Any Tec ensure IT security and data protection?",
+                    "a": "Any Tec uses structured security concepts, encrypted data transmission based on military-grade standards, and controlled access mechanisms to protect sensitive data."
                 },
                 {
-                    "q": "What does Privacy-First mean?",
-                    "a": "We segment networks so that sensitive data (e.g., from customers or in Women-Only Spaces) is strictly separated from public guest Wi-Fi. Security comes first."
+                    "q": "Does Any Tec support companies with compliance, audits, and certifications?",
+                    "a": "Any Tec supports companies in the technical preparation for audits, certifications, and regulatory requirements and provides appropriate documentation."
                 },
                 {
-                    "q": "Is there a minimum term?",
-                    "a": "We offer flexible models. One-time prices for project setups, monthly terms with fair notice periods for Managed Services."
+                    "q": "How is IT support organized for medium-sized and enterprise customers?",
+                    "a": "IT support is provided through clearly defined service-level agreements with regulated response times and escalation processes."
                 },
                 {
-                    "q": "Do you also take over existing IT?",
-                    "a": "Yes, we analyze the current state and migrate step-by-step into a cleanly managed structure without disrupting your operations."
+                    "q": "Does Any Tec take over existing IT environments from other service providers?",
+                    "a": "Existing IT environments are analyzed, documented, and systematically transferred into Any Tec’s operational management."
+                },
+                {
+                    "q": "How are high availability and business continuity ensured?",
+                    "a": "Redundancy concepts, continuous monitoring, backup strategies, and tested recovery processes ensure stable IT operations."
+                },
+                {
+                    "q": "Are Any Tec’s IT services scalable?",
+                    "a": "The implemented solutions are modular and can be adapted to changing requirements or company growth."
+                },
+                {
+                    "q": "Are dedicated contacts available for enterprise customers?",
+                    "a": "Customers receive dedicated contacts responsible for coordination, operations, and further development of the IT environment."
+                },
+                {
+                    "q": "How are new locations or departments integrated into existing IT structures?",
+                    "a": "New locations or departments are integrated into existing IT structures through coordinated processes without disrupting ongoing operations."
+                },
+                {
+                    "q": "How does Any Tec support local businesses and franchise chains with IT services?",
+                    "a": "Any Tec provides standardized, centrally managed IT solutions designed for the daily operation of branches and retail locations."
+                },
+                {
+                    "q": "Is Any Tec suitable for companies with multiple locations or branches?",
+                    "a": "The IT structures are designed for multi-location operations and enable centralized management of all sites."
+                },
+                {
+                    "q": "How is IT security implemented in branch and shop environments?",
+                    "a": "Secured networks, encrypted connections based on military-grade standards, and controlled access concepts are used."
+                },
+                {
+                    "q": "Does Any Tec support POS systems, online shops, and payment solutions?",
+                    "a": "Any Tec integrates and operates POS systems, online shop infrastructures, and connected payment and inventory systems."
+                },
+                {
+                    "q": "How does IT support work in daily operations?",
+                    "a": "Support is focused on fast issue resolution and is provided through clearly defined communication and support channels."
+                },
+                {
+                    "q": "Is IT operation possible without on-site IT staff?",
+                    "a": "IT environments are centrally managed and monitored, eliminating the need for on-site technical staff."
+                },
+                {
+                    "q": "How are new branches, shops, or retail spaces connected?",
+                    "a": "New locations are securely integrated into existing IT structures using standardized procedures."
+                },
+                {
+                    "q": "Are IT costs predictable for franchise and retail businesses?",
+                    "a": "The cost structure is transparent and allows clear budget planning per location."
+                },
+                {
+                    "q": "How does Any Tec protect customer data and payment information?",
+                    "a": "Customer data is protected through encrypted transmission, segmented networks, and proven security mechanisms."
+                },
+                {
+                    "q": "Why is Any Tec particularly suitable for retail, franchise, and e-commerce businesses?",
+                    "a": "Any Tec combines stable IT infrastructures, centralized management, and clear processes, enabling operators to focus on their core business."
                 }
             ]
         },
@@ -155,11 +287,11 @@
                 },
                 {
                     "title": "Concept",
-                    "text": "You receive a blueprint for your setup."
+                    "text": "We create a high-quality offer that you cannot refuse."
                 },
                 {
-                    "title": "Rollout",
-                    "text": "We deliver hardware and configure the cloud."
+                    "title": "Execution",
+                    "text": "We execute the agreed service directly and without complications."
                 }
             ]
         }
@@ -278,23 +410,53 @@
                 "trendmicro": "Trend Micro"
             }
         },
+        "devOps": {
+            "prefix": "I need",
+            "title": "DevOps &",
+            "titleSuffix": "Modern Engineering",
+            "description": "Accelerate your delivery pipeline with automated CI/CD, Infrastructure as Code, and containerized environments. Scale with confidence.",
+            "tools": {
+                "tools": "Engineering Stack",
+                "docker": "Containerization",
+                "kubernetes": "Orchestration",
+                "terraform": "IaC",
+                "ansible": "Automation",
+                "github": "Source Control",
+                "gitlab": "CI/CD Pipeline",
+                "prometheus": "Monitoring",
+                "grafana": "Observability"
+            }
+        },
+        "itOps": {
+            "prefix": "I need",
+            "title": "IT Operations &",
+            "titleSuffix": "Support",
+            "description": "Comprehensive IT management for your workforce. From seamless onboarding to 24/7 helpdesk support and hardware lifecycle management.",
+            "features": {
+                "cats": "Support Categories",
+                "desk": "Service Desk",
+                "hardware": "Hardware Mgmt",
+                "software": "Software Deployment",
+                "onboarding": "User Onboarding"
+            }
+        },
         "onprem": {
-            "title": "On-Prem Operations",
-            "server": {
-                "title": "Server Room Management",
-                "desc": "We take care of your racks. From clean cabling to hardware replacement. Order is security."
+            "prefix": "I need",
+            "title": "On-Premises",
+            "titleSuffix": "& Datacenter",
+            "description": "We take care of your physical infrastructure. From clean cabling in the server room to hardware lifecycle management and office moves.",
+            "features": {
+                "racks": "Server Room Mgmt",
+                "cabling": "Structured Cabling",
+                "power": "UPS & Power",
+                "access": "Access Control",
+                "cooling": "Cooling Systems",
+                "monitoring": "Environment Monitoring"
             },
-            "moves": {
-                "title": "Office Moves & Rollouts",
-                "desc": "Office relocation or site closure? We dismantle, transport securely, and rebuild at the new location."
-            },
-            "lifecycle": {
-                "title": "Hardware Lifecycle",
-                "desc": "Procurement, installation, and professional disposal of old devices. Your inventory always up to date."
-            },
-            "card": {
-                "title": "Expert Hardware",
-                "desc": "Our team works directly on hardware. No outsourcing to subcontractors."
+            "stats": {
+                "uptime": "99.9% Uptime",
+                "response": "4h On-Site SLA",
+                "compliance": "ISO 27001"
             }
         },
         "support": {
