@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import {
     Cloud, Server, Network, ShieldCheck,
     Settings, Layers, RefreshCw, ArrowRight,
-    Brain, Bot, Workflow, Code, Terminal,
+    Brain, Bot, Workflow, Code,
     Activity, Headphones, Monitor, ShieldAlert,
     GitBranch, Container, Laptop
 } from 'lucide-react';
