@@ -63,7 +63,7 @@ export const FAQSection = () => {
                         <p className="text-lg text-muted mb-8 leading-relaxed">
                             {t('home.faq.desc')}
                         </p>
-                        <Button onClick={() => window.location.href = 'mailto:hello@anytec.biz'}>
+                        <Button onClick={() => window.location.href = 'mailto:hello@any-tec.com'}>
                             {t('home.faq.button')}
                         </Button>
                     </Reveal>

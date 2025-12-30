@@ -338,9 +338,9 @@
     },
     "services": {
         "hero": {
-            "title": "IT & Cloud Ops for Enterprise Customers",
+            "title": "Our Services for Enterprise Customers",
             "titleSuffix": "Reimagined.",
-            "description": "From cloud to cable in the ground. We take care of tech so you can focus on your business."
+            "description": "From cloud to cable in the ground. We take care of tech."
         },
         "azure": {
             "prefix": "I need",
